@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/e99543c0a3.js"></script>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <link href=" css/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div id="logo">
+        <p>
+            <a href="index.html"></a>
+            <img alt="logo" height="40.5" src="img/logo.png" width="251.5">
+        </p>
+    </div>
+
+    <form action="" class="search_field">
+        <input name="search" placeholder="Search..." type="text">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <div class="button_container">
+        <a class="btn login">Main</a>
+    </div>
+</header>
+<main>
+    <div class="login-box">
+        <p>If you have an account, please enter your email and password</p>
+        <h1>Log in</h1>
+        <div class="textbox">
+            <i class="fas fa-user"></i>
+            <input id="login" name="email" placeholder="Username" type="text">
+        </div>
+        <div class="textboxHint" id="login-hint"></div>
+        <div class="textbox">
+            <i class="fas fa-lock"></i>
+            <input id="pwd" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="textboxHint" id="pwd-hint"></div>
+
+        <button class="button_submit" onclick="validateAndLogIn()">Login in</button>
+    </div>
+
+    <div class="vl"></div>
+
+    <div class="signup-box">
+        <p>If you have don't have an account, please fill this form to create it</p>
+        <h1>Sign up</h1>
+        <div class="textbox">
+            <input id="first_name" name="firstName" placeholder="First name" type="text" value="">
+        </div>
+        <div class="textboxHint" id="reg-first-name-hint"></div>
+
+        <div class="textbox">
+            <input id="last_name" name="lastName" placeholder="Last name" type="text" value="">
+        </div>
+        <div class="textboxHint" id="reg-last-name-hint"></div>
+        <div class="textbox">
+            <input id="reg-login" name="email" placeholder="E-mail" type="text">
+        </div>
+        <div class="textboxHint" id="reg-login-hint"></div>
+
+        <div class="textbox">
+            <input id="reg-pwd" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="textboxHint" id="reg-password-hint"></div>
+
+        <div class="textbox">
+            <input id="reg-pwd-r" name="password_r" placeholder="Repeat password" type="password">
+        </div>
+        <div class="textboxHint" id="reg-password-r-hint"></div>
+
+        <button class="button_submit" onclick="validateAndSignUp()">Sign Up</button>
+    </div>
+</main>
+
+<footer>
+    <p class="foot">Karazin University 2020</p>
+</footer>
+</body>
+</html>
