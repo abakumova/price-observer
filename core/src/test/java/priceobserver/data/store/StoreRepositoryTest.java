@@ -28,7 +28,7 @@ public class StoreRepositoryTest {
     private StoreRepository storeRepository;
 
     @BeforeAll
-    static void setUp() throws Exception {
+    static void setUp() {
         store1 = new Store();
         store1.setName(STORE_NAME_1);
 
