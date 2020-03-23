@@ -3,11 +3,11 @@ package priceobserver.data.wishlist;
 import priceobserver.data.product.Product;
 import priceobserver.data.user.User;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -35,11 +35,12 @@ public class WishList {
      * ManyToOne because one WishList row represents a product added to wish list by a user.
      * If you need to review a full user's wish list just use a SELECT by user_id and is_deleted = false.
      */
-    @Column(name = "user_id", nullable = false)
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     public Long getId() {

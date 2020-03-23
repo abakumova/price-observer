@@ -3,11 +3,11 @@ package priceobserver.data.productprice;
 import priceobserver.data.product.Product;
 import priceobserver.data.store.Store;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -27,12 +27,12 @@ public class ProductPrice {
     @NotNull
     private Date date;
 
-    @Column(name = "product_id", nullable = false)
-    @ManyToOne
+    @ManyToOne()
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(name = "store_id", nullable = false)
     @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 
     public Long getId() {
