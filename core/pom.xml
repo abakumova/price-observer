@@ -11,9 +11,11 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        
         <junit-jupiter.version>5.6.1</junit-jupiter.version>
         <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
         <h2.version>1.4.200</h2.version>
+        <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
     </properties>
 
     <parent>
@@ -36,6 +38,15 @@
             <version>${spring-boot.version}</version>
         </dependency>
 
+<!--        I suppose there will be no problem with 8 version of connector,
+            cause I'm using 5.6 version of MySQL Server.-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -55,6 +66,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
