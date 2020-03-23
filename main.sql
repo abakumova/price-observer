@@ -4,8 +4,8 @@ USE price_observer;
 CREATE TABLE IF NOT EXISTS `product`
 (
     `id`              INT          NOT NULL AUTO_INCREMENT,
-    `name`            varchar(50)  NOT NULL,
-    `description`     varchar(255),
+    `name`            VARCHAR(50)  NOT NULL,
+    `description`     VARCHAR(255),
     `properties_id`   INT          NOT NULL,
     `model`           VARCHAR(255) NOT NULL,
     `manufacturer_id` INT          NOT NULL,
@@ -25,19 +25,19 @@ CREATE TABLE IF NOT EXISTS `product_properties`
 CREATE TABLE IF NOT EXISTS `manufacturer`
 (
     `id`      INT         NOT NULL AUTO_INCREMENT,
-    `name`    varchar(50) NOT NULL,
-    `country` varchar(70),
+    `name`    VARCHAR(50) NOT NULL,
+    `country` VARCHAR(70),
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `user`
 (
     `id`         INT         NOT NULL AUTO_INCREMENT,
-    `first_name` varchar(50) NOT NULL,
-    `last_name`  varchar(50) NOT NULL,
-    `email`      varchar(70) NOT NULL,
-    `birth`      varchar(35) NOT NULL,
-    `password`   varchar(50) NOT NULL,
+    `first_name` VARCHAR(50) NOT NULL,
+    `last_name`  VARCHAR(50) NOT NULL,
+    `email`      VARCHAR(70) NOT NULL,
+    `birth`      DATE        NOT NULL,
+    `password`   VARCHAR(50) NOT NULL,
     `role_id`    INT         NOT NULL,
     PRIMARY KEY (`id`)
 );
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `user`
 CREATE TABLE IF NOT EXISTS `user_role`
 (
     `id`   INT         NOT NULL AUTO_INCREMENT,
-    `name` varchar(50) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -62,14 +62,14 @@ CREATE TABLE IF NOT EXISTS `wish_list`
 CREATE TABLE IF NOT EXISTS `product_type`
 (
     `id`   INT         NOT NULL AUTO_INCREMENT,
-    `name` varchar(50) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `store`
 (
     `id`   INT         NOT NULL AUTO_INCREMENT,
-    `name` varchar(50) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
