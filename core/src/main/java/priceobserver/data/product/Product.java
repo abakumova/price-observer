@@ -36,7 +36,7 @@ public class Product {
     private String image;
 
     @ManyToOne
-    @JoinColumn(name = "product_properties_id", nullable = false)
+    @JoinColumn(name = "properties_id", nullable = false)
     private ProductProperties productProperties;
 
     @ManyToOne
