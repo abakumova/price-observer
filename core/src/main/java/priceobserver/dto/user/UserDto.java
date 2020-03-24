@@ -2,6 +2,7 @@ package priceobserver.dto.user;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class UserDto implements Serializable {
 
@@ -85,5 +86,41 @@ public class UserDto implements Serializable {
 
     public void setUserRole(UserRoleEnum userRole) {
         this.userRole = userRole;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", birth=" + birth +
+                ", encryptedPassword='" + encryptedPassword + '\'' +
+                ", password='" + password + '\'' +
+                ", version=" + version +
+                ", userRole=" + userRole +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDto userDto = (UserDto) o;
+        return id.equals(userDto.id) &&
+                firstName.equals(userDto.firstName) &&
+                lastName.equals(userDto.lastName) &&
+                email.equals(userDto.email) &&
+                birth.equals(userDto.birth) &&
+                encryptedPassword.equals(userDto.encryptedPassword) &&
+                Objects.equals(password, userDto.password) &&
+                version.equals(userDto.version) &&
+                userRole == userDto.userRole;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, birth, encryptedPassword, password, version, userRole);
     }
 }

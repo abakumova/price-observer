@@ -1,22 +1,10 @@
-package priceobserver.data.store;
+package priceobserver.dto.store;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@Entity
-@Table(name = "store")
-public class Store {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class StoreDto {
     private Long id;
 
-    @NotNull
     private String name;
 
     public Long getId() {
@@ -37,7 +25,7 @@ public class Store {
 
     @Override
     public String toString() {
-        return "Store{" +
+        return "StoreDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
@@ -47,9 +35,9 @@ public class Store {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Store store = (Store) o;
-        return id.equals(store.id) &&
-                name.equals(store.name);
+        StoreDto storeDto = (StoreDto) o;
+        return id.equals(storeDto.id) &&
+                name.equals(storeDto.name);
     }
 
     @Override
