@@ -1,11 +1,13 @@
 package priceobserver.dto.user;
 
+import org.springframework.stereotype.Component;
 import priceobserver.data.user.User;
 import priceobserver.data.user.UserBuilder;
 import priceobserver.data.userrole.UserRole;
 
 import java.sql.Date;
 
+@Component
 public class UserDtoConverterImpl implements UserDtoConverter {
 
     @Override
