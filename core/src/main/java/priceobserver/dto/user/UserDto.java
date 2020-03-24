@@ -4,13 +4,40 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class UserDto implements Serializable {
-    //TODO add other User Entity fields to this.
+
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private LocalDate birth;
+    private String encryptedPassword;
+    private String password;
+    private Integer version;
     private UserRoleEnum userRole;
+
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
     public Long getId() {
         return id;

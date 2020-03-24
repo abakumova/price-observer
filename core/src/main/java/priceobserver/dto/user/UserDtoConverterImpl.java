@@ -1,7 +1,11 @@
 package priceobserver.dto.user;
 
 import priceobserver.data.user.User;
+import priceobserver.data.user.UserBuilder;
+import priceobserver.data.userrole.UserRole;
 import priceobserver.dto.DtoConverter;
+
+import java.sql.Date;
 
 public class UserDtoConverterImpl implements DtoConverter<UserDto, User> {
 
@@ -13,11 +17,30 @@ public class UserDtoConverterImpl implements DtoConverter<UserDto, User> {
                                          .withEmail(userEntity.getEmail())
                                          .withBirth(userEntity.getBirth().toLocalDate())
                                          .withUserRole(userEntity.getUserRole().getName())
+                                         .withEncryptedPassword(userEntity.getEncryptedPassword())
+                                         .withPassword(userEntity.getPassword())
+                                         .withVersion(userEntity.getVersion())
                                          .build();
     }
 
     @Override
     public User convertToEntity(UserDto userDto) {
-        return null;
+        return UserBuilder.anUser().withId(userDto.getId())
+                                   .withFirstName(userDto.getFirstName())
+                                   .withLastName(userDto.getLastName())
+                                   .withEmail(userDto.getEmail())
+                                   .withBirth(Date.valueOf(userDto.getBirth()))
+                                   .withUserRole(getUserRole(userDto.getUserRole()))
+                                   .withEncryptedPassword(userDto.getEncryptedPassword())
+                                   .withPassword(userDto.getPassword())
+                                   .withVersion(userDto.getVersion())
+                                   .build();
+    }
+
+    private UserRole getUserRole(UserRoleEnum userRoleEnum) {
+        UserRole userRole = new UserRole();
+        userRole.setId((long) userRoleEnum.ordinal());
+        userRole.setName(userRoleEnum.getRole());
+        return userRole;
     }
 }
