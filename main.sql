@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `user`
 
 CREATE TABLE IF NOT EXISTS `user_role`
 (
-    `id`   INT         NOT NULL AUTO_INCREMENT,
+    `id`   TINYINT         NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`)
 );

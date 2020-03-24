@@ -13,16 +13,16 @@ public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Byte id;
 
     @NotNull
     private String name;
 
-    public Long getId() {
+    public Byte getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Byte id) {
         this.id = id;
     }
 

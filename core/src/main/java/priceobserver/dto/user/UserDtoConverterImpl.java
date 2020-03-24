@@ -40,7 +40,7 @@ public class UserDtoConverterImpl implements UserDtoConverter {
 
     private UserRole getUserRole(UserRoleEnum userRoleEnum) {
         UserRole userRole = new UserRole();
-        userRole.setId((long) userRoleEnum.ordinal());
+        userRole.setId(userRoleEnum.getId());
         userRole.setName(userRoleEnum.getRole());
         return userRole;
     }
