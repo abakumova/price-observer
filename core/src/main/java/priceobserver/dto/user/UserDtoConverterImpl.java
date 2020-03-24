@@ -3,11 +3,10 @@ package priceobserver.dto.user;
 import priceobserver.data.user.User;
 import priceobserver.data.user.UserBuilder;
 import priceobserver.data.userrole.UserRole;
-import priceobserver.dto.DtoConverter;
 
 import java.sql.Date;
 
-public class UserDtoConverterImpl implements DtoConverter<UserDto, User> {
+public class UserDtoConverterImpl implements UserDtoConverter {
 
     @Override
     public UserDto convertToDto(User userEntity) {
