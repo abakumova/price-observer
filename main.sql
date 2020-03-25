@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `user`
     `email`      VARCHAR(70) NOT NULL,
     `birth`      DATE        NOT NULL,
     `password`   VARCHAR(50) NOT NULL,
-    `role_id`    INT         NOT NULL,
+    `role_id`    TINYINT     NOT NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -106,4 +106,3 @@ ALTER TABLE `product_price`
 
 ALTER TABLE `product_price`
     ADD CONSTRAINT `product_price_fk1` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`);
-
