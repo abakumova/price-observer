@@ -1,9 +1,11 @@
 package priceobserver.dto.manufacturer;
 
+import org.springframework.stereotype.Component;
 import priceobserver.data.manufacturer.Manufacturer;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
+@Component
 public class ManufacturerDtoConverterImpl implements ManufacturerDtoConverter {
     @Override
     public ManufacturerDto convertToDto(Manufacturer entity) {
