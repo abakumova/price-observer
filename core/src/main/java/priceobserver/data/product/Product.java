@@ -11,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "product")
@@ -34,6 +36,8 @@ public class Product {
      * Describes a url to the image for current product.
      */
     private String image;
+    @Version
+    private Integer version;
 
     @ManyToOne
     @JoinColumn(name = "properties_id", nullable = false)
@@ -119,6 +123,14 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -128,9 +140,32 @@ public class Product {
                 ", model='" + model + '\'' +
                 ", year=" + year +
                 ", image='" + image + '\'' +
+                ", version='" + version + '\'' +
                 ", productProperties=" + productProperties +
                 ", productType=" + productType +
                 ", manufacturer=" + manufacturer +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(description, product.description) &&
+                Objects.equals(model, product.model) &&
+                Objects.equals(year, product.year) &&
+                Objects.equals(image, product.image) &&
+                Objects.equals(version, product.version) &&
+                Objects.equals(productProperties, product.productProperties) &&
+                Objects.equals(productType, product.productType) &&
+                Objects.equals(manufacturer, product.manufacturer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, model, year, image, version, productProperties, productType, manufacturer);
     }
 }
