@@ -15,6 +15,7 @@ import javax.persistence.Version;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user")
@@ -124,5 +125,41 @@ public class User {
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", birth=" + birth +
+                ", encryptedPassword='" + encryptedPassword + '\'' +
+                ", password='" + password + '\'' +
+                ", version=" + version +
+                ", userRole=" + userRole +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id) &&
+                firstName.equals(user.firstName) &&
+                lastName.equals(user.lastName) &&
+                email.equals(user.email) &&
+                birth.equals(user.birth) &&
+                encryptedPassword.equals(user.encryptedPassword) &&
+                Objects.equals(password, user.password) &&
+                version.equals(user.version) &&
+                userRole.equals(user.userRole);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, birth, encryptedPassword, password, version, userRole);
     }
 }

@@ -69,6 +69,8 @@ class UserDtoConverterImplTest {
     void shouldConvertToDto() {
         UserDto userConvertedToDto = userDtoConverter.convertToDto(userEntity);
 
+        assertEquals(userDto, userConvertedToDto);
+
         assertEquals(USER_ID, userConvertedToDto.getId());
         assertEquals(FIRST_NAME, userConvertedToDto.getFirstName());
         assertEquals(LAST_NAME, userConvertedToDto.getLastName());
@@ -84,6 +86,8 @@ class UserDtoConverterImplTest {
     @Test
     void shouldConvertToEntity() {
         User userDtoConvertedToEntity = userDtoConverter.convertToEntity(userDto);
+
+        assertEquals(userEntity, userDtoConvertedToEntity);
 
         assertEquals(USER_ID, userDtoConvertedToEntity.getId());
         assertEquals(FIRST_NAME, userDtoConvertedToEntity.getFirstName());
