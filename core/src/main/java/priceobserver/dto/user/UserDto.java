@@ -108,14 +108,14 @@ public class UserDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDto userDto = (UserDto) o;
-        return id.equals(userDto.id) &&
-                firstName.equals(userDto.firstName) &&
-                lastName.equals(userDto.lastName) &&
-                email.equals(userDto.email) &&
-                birth.equals(userDto.birth) &&
-                encryptedPassword.equals(userDto.encryptedPassword) &&
+        return Objects.equals(id, userDto.id) &&
+                Objects.equals(firstName, userDto.firstName) &&
+                Objects.equals(lastName, userDto.lastName) &&
+                Objects.equals(email, userDto.email) &&
+                Objects.equals(birth, userDto.birth) &&
+                Objects.equals(encryptedPassword, userDto.encryptedPassword) &&
                 Objects.equals(password, userDto.password) &&
-                version.equals(userDto.version) &&
+                Objects.equals(version, userDto.version) &&
                 userRole == userDto.userRole;
     }
 

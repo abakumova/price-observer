@@ -48,8 +48,8 @@ public class Store {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Store store = (Store) o;
-        return id.equals(store.id) &&
-                name.equals(store.name);
+        return Objects.equals(id, store.id) &&
+                Objects.equals(name, store.name);
     }
 
     @Override

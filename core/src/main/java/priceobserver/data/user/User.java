@@ -147,15 +147,15 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) &&
-                firstName.equals(user.firstName) &&
-                lastName.equals(user.lastName) &&
-                email.equals(user.email) &&
-                birth.equals(user.birth) &&
-                encryptedPassword.equals(user.encryptedPassword) &&
+        return Objects.equals(id, user.id) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(birth, user.birth) &&
+                Objects.equals(encryptedPassword, user.encryptedPassword) &&
                 Objects.equals(password, user.password) &&
-                version.equals(user.version) &&
-                userRole.equals(user.userRole);
+                Objects.equals(version, user.version) &&
+                Objects.equals(userRole, user.userRole);
     }
 
     @Override

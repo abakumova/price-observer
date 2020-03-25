@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "product_properties")
@@ -52,5 +53,20 @@ public class ProductProperties {
                 ", properties='" + properties + '\'' +
                 ", version=" + version +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductProperties that = (ProductProperties) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(properties, that.properties) &&
+                Objects.equals(version, that.version);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, properties, version);
     }
 }

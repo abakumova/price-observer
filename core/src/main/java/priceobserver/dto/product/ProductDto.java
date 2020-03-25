@@ -1,5 +1,7 @@
 package priceobserver.dto.product;
 
-public class ProductDto {
+import java.io.Serializable;
+
+public class ProductDto implements Serializable {
     //TODO finish it, lazy
 }
