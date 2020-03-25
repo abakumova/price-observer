@@ -1,8 +1,9 @@
 package priceobserver.dto.productproperties;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ProductPropertiesDto {
+public class ProductPropertiesDto implements Serializable {
 
     private Long id;
     private String properties;
