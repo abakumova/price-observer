@@ -1,40 +1,19 @@
-package priceobserver.data.productprice;
+package priceobserver.dto.productprice;
 
-import priceobserver.data.product.Product;
-import priceobserver.data.store.Store;
+import priceobserver.dto.product.ProductDto;
+import priceobserver.dto.store.StoreDto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-@Table(name = "product_price")
-public class ProductPrice {
+public class ProductPriceDto implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @NotNull
     private Float price;
-
-    @NotNull
-    private Date date;
-
-    @ManyToOne()
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-
-    @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+    private LocalDate date;
+    private ProductDto product;
+    private StoreDto store;
 
     public Long getId() {
         return id;
@@ -52,33 +31,33 @@ public class ProductPrice {
         this.price = price;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Product getProduct() {
+    public ProductDto getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ProductDto product) {
         this.product = product;
     }
 
-    public Store getStore() {
+    public StoreDto getStore() {
         return store;
     }
 
-    public void setStore(Store store) {
+    public void setStore(StoreDto store) {
         this.store = store;
     }
 
     @Override
     public String toString() {
-        return "ProductPrice{" +
+        return "ProductPriceDto{" +
                 "id=" + id +
                 ", price=" + price +
                 ", date=" + date +
@@ -91,7 +70,7 @@ public class ProductPrice {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductPrice that = (ProductPrice) o;
+        ProductPriceDto that = (ProductPriceDto) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(price, that.price) &&
                 Objects.equals(date, that.date) &&
