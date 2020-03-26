@@ -106,3 +106,24 @@ ALTER TABLE `product_price`
 
 ALTER TABLE `product_price`
     ADD CONSTRAINT `product_price_fk1` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`);
+
+/* Prevent inserting more than 3 user roles (user, admin and god) into the user_role table. */
+
+DELIMITER $$
+CREATE TRIGGER before_insert_trigger
+    BEFORE INSERT
+    ON user_role
+    FOR EACH ROW
+
+BEGIN
+
+    DECLARE id_check tinyint;
+    SELECT COUNT(`user_role`.`id`) FROM `price_observer`.`user_role` INTO id_check;
+
+    IF id_check + 1 > 3 THEN
+        signal sqlstate '45000' set message_text = 'You can not insert more than 3 rows';
+    END IF;
+END;
+$$
+
+DELIMITER ;
