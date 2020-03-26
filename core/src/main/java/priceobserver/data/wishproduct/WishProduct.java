@@ -1,23 +1,16 @@
-package priceobserver.data.wishlist;
+package priceobserver.data.wishproduct;
 
 import priceobserver.data.product.Product;
 import priceobserver.data.user.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "wish_list")
-public class WishList {
+@Table(name = "wish_product")
+public class WishProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -107,13 +100,13 @@ public class WishList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WishList wishList = (WishList) o;
-        return Objects.equals(id, wishList.id) &&
-                Objects.equals(isDeleted, wishList.isDeleted) &&
-                Objects.equals(dateAdded, wishList.dateAdded) &&
-                Objects.equals(version, wishList.version) &&
-                Objects.equals(user, wishList.user) &&
-                Objects.equals(product, wishList.product);
+        WishProduct wishProduct = (WishProduct) o;
+        return Objects.equals(id, wishProduct.id) &&
+                Objects.equals(isDeleted, wishProduct.isDeleted) &&
+                Objects.equals(dateAdded, wishProduct.dateAdded) &&
+                Objects.equals(version, wishProduct.version) &&
+                Objects.equals(user, wishProduct.user) &&
+                Objects.equals(product, wishProduct.product);
     }
 
     @Override
