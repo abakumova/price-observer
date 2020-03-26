@@ -27,13 +27,11 @@ class ProductDtoConverterImplTest {
 
     @Test
     void shouldConvertToDto() {
-        ProductDto entityConvertedToDto = productDtoConverter.convertToDto(productEntity);
-        assertEquals(productDto, entityConvertedToDto);
+        assertEquals(productDto, productDtoConverter.convertToDto(productEntity));
     }
 
     @Test
     void shouldConvertToEntity() {
-        Product dtoConvertedToEntity = productDtoConverter.convertToEntity(productDto);
-        assertEquals(productEntity, dtoConvertedToEntity);
+        assertEquals(productEntity, productDtoConverter.convertToEntity(productDto));
     }
 }

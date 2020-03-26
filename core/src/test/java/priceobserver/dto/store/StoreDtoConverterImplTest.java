@@ -27,14 +27,11 @@ class StoreDtoConverterImplTest {
 
     @Test
     void shouldConvertToDto() {
-        StoreDto storeConvertedToDto = storeDtoConverter.convertToDto(storeEntity);
-        assertEquals(storeDto, storeConvertedToDto);
+        assertEquals(storeDto, storeDtoConverter.convertToDto(storeEntity));
     }
 
     @Test
     void shouldConvertToEntity() {
-        Store storeDtoConvertedToEntity = storeDtoConverter.convertToEntity(storeDto);
-
-        assertEquals(storeEntity, storeDtoConvertedToEntity);
+        assertEquals(storeEntity, storeDtoConverter.convertToEntity(storeDto));
     }
 }
