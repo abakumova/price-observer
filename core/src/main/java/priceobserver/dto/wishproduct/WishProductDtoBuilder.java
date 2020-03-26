@@ -1,9 +1,9 @@
 package priceobserver.dto.wishproduct;
 
-import priceobserver.dto.product.ProductDto;
-import priceobserver.dto.user.UserDto;
+import priceobserver.dto.product.*;
+import priceobserver.dto.user.*;
 
-import java.time.LocalDate;
+import java.time.*;
 
 public final class WishProductDtoBuilder {
 
@@ -16,7 +16,7 @@ public final class WishProductDtoBuilder {
     private WishProductDtoBuilder() {
     }
 
-    public static WishProductDtoBuilder aWishListDto() {
+    public static WishProductDtoBuilder aWishProductDto() {
         return new WishProductDtoBuilder();
     }
 

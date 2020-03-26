@@ -1,12 +1,12 @@
 package priceobserver.data.wishproduct;
 
-import priceobserver.data.product.Product;
-import priceobserver.data.user.User;
+import priceobserver.data.product.*;
+import priceobserver.data.user.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.sql.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "wish_product")

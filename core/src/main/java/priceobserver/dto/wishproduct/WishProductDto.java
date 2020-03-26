@@ -1,11 +1,11 @@
 package priceobserver.dto.wishproduct;
 
-import priceobserver.dto.product.ProductDto;
-import priceobserver.dto.user.UserDto;
+import priceobserver.dto.product.*;
+import priceobserver.dto.user.*;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Objects;
+import java.io.*;
+import java.time.*;
+import java.util.*;
 
 public class WishProductDto implements Serializable {
 
@@ -66,7 +66,7 @@ public class WishProductDto implements Serializable {
 
     @Override
     public String toString() {
-        return "WishListDto{" +
+        return "WishProductDto{" +
                 "id=" + id +
                 ", isDeleted=" + isDeleted +
                 ", dateAdded=" + dateAdded +

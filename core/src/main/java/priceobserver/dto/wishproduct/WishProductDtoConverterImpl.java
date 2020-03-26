@@ -1,13 +1,12 @@
 package priceobserver.dto.wishproduct;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import priceobserver.data.wishproduct.WishProduct;
-import priceobserver.data.wishproduct.WishProductBuilder;
-import priceobserver.dto.product.ProductDtoConverter;
-import priceobserver.dto.user.UserDtoConverter;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import priceobserver.data.wishproduct.*;
+import priceobserver.dto.product.*;
+import priceobserver.dto.user.*;
 
-import java.sql.Date;
+import java.sql.*;
 
 @Component
 public class WishProductDtoConverterImpl implements WishProductDtoConverter {
@@ -23,7 +22,7 @@ public class WishProductDtoConverterImpl implements WishProductDtoConverter {
 
     @Override
     public WishProductDto convertToDto(WishProduct entity) {
-        return WishProductDtoBuilder.aWishListDto()
+        return WishProductDtoBuilder.aWishProductDto()
                 .withId(entity.getId())
                 .withDateAdded(entity.getDateAdded().toLocalDate())
                 .withVersion(entity.getVersion())
@@ -34,7 +33,7 @@ public class WishProductDtoConverterImpl implements WishProductDtoConverter {
 
     @Override
     public WishProduct convertToEntity(WishProductDto dto) {
-        return WishProductBuilder.aWishList()
+        return WishProductBuilder.aWishProduct()
                 .withId(dto.getId())
                 .withDateAdded(Date.valueOf(dto.getDateAdded()))
                 .withVersion(dto.getVersion())
