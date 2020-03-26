@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "wish_list")
@@ -102,57 +103,21 @@ public class WishList {
                 '}';
     }
 
-    /*
-     * Generated with Builder Generator plugin https://plugins.jetbrains.com/plugin/6585-builder-generator
-     * Just testing it, looks better than Lombok, cause we don't need to specify any external library.
-     */
-    public static final class WishListBuilder {
-        private Long id;
-        private Boolean isDeleted;
-        private Date dateAdded;
-        private User user;
-        private Product product;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WishList wishList = (WishList) o;
+        return Objects.equals(id, wishList.id) &&
+                Objects.equals(isDeleted, wishList.isDeleted) &&
+                Objects.equals(dateAdded, wishList.dateAdded) &&
+                Objects.equals(version, wishList.version) &&
+                Objects.equals(user, wishList.user) &&
+                Objects.equals(product, wishList.product);
+    }
 
-        private WishListBuilder() {
-        }
-
-        public static WishListBuilder aWishList() {
-            return new WishListBuilder();
-        }
-
-        public WishListBuilder withId(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public WishListBuilder withIsDeleted(Boolean isDeleted) {
-            this.isDeleted = isDeleted;
-            return this;
-        }
-
-        public WishListBuilder withDateAdded(Date dateAdded) {
-            this.dateAdded = dateAdded;
-            return this;
-        }
-
-        public WishListBuilder withUser(User user) {
-            this.user = user;
-            return this;
-        }
-
-        public WishListBuilder withProduct(Product product) {
-            this.product = product;
-            return this;
-        }
-
-        public WishList build() {
-            WishList wishList = new WishList();
-            wishList.setId(id);
-            wishList.setDateAdded(dateAdded);
-            wishList.setUser(user);
-            wishList.setProduct(product);
-            wishList.isDeleted = this.isDeleted;
-            return wishList;
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, isDeleted, dateAdded, version, user, product);
     }
 }

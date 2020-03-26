@@ -38,13 +38,13 @@ CREATE TABLE IF NOT EXISTS `user`
     `email`      VARCHAR(70) NOT NULL,
     `birth`      DATE        NOT NULL,
     `password`   VARCHAR(50) NOT NULL,
-    `role_id`    INT         NOT NULL,
+    `role_id`    TINYINT     NOT NULL,
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `user_role`
 (
-    `id`   INT         NOT NULL AUTO_INCREMENT,
+    `id`   TINYINT         NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`)
 );
@@ -106,6 +106,8 @@ ALTER TABLE `product_price`
 
 ALTER TABLE `product_price`
     ADD CONSTRAINT `product_price_fk1` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`);
+
+/* Prevent inserting more than 3 user roles (user, admin and god) into the user_role table. */
 
 DELIMITER $$
 CREATE TRIGGER before_insert_trigger

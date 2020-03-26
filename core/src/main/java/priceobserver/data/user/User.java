@@ -15,6 +15,7 @@ import javax.persistence.Version;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user")
@@ -126,86 +127,39 @@ public class User {
         this.userRole = userRole;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", birth=" + birth +
+                ", encryptedPassword='" + encryptedPassword + '\'' +
+                ", password='" + password + '\'' +
+                ", version=" + version +
+                ", userRole=" + userRole +
+                '}';
+    }
 
-    /*
-     * Generated with Builder Generator plugin https://plugins.jetbrains.com/plugin/6585-builder-generator
-     * Just testing it, looks better than Lombok, cause we don't need to specify any external library.
-     */
-    public static final class UserBuilder {
-        private Long id;
-        private String firstName;
-        private String lastName;
-        private String email;
-        private Date birth;
-        private String encryptedPassword;
-        private String password;
-        private Integer version;
-        private UserRole userRole;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(birth, user.birth) &&
+                Objects.equals(encryptedPassword, user.encryptedPassword) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(version, user.version) &&
+                Objects.equals(userRole, user.userRole);
+    }
 
-        private UserBuilder() {
-        }
-
-        public static UserBuilder anUser() {
-            return new UserBuilder();
-        }
-
-        public UserBuilder withId(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public UserBuilder withFirstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public UserBuilder withLastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-        public UserBuilder withEmail(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public UserBuilder withBirth(Date birth) {
-            this.birth = birth;
-            return this;
-        }
-
-        public UserBuilder withEncryptedPassword(String encryptedPassword) {
-            this.encryptedPassword = encryptedPassword;
-            return this;
-        }
-
-        public UserBuilder withPassword(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public UserBuilder withVersion(Integer version) {
-            this.version = version;
-            return this;
-        }
-
-        public UserBuilder withUserRole(UserRole userRole) {
-            this.userRole = userRole;
-            return this;
-        }
-
-        public User build() {
-            User user = new User();
-            user.setId(id);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setEmail(email);
-            user.setBirth(birth);
-            user.setEncryptedPassword(encryptedPassword);
-            user.setPassword(password);
-            user.setVersion(version);
-            user.setUserRole(userRole);
-            return user;
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, birth, encryptedPassword, password, version, userRole);
     }
 }

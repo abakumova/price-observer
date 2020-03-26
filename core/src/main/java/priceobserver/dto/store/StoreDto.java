@@ -1,22 +1,11 @@
-package priceobserver.data.producttype;
+package priceobserver.dto.store;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "product_type")
-public class ProductType {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class StoreDto implements Serializable {
     private Long id;
 
-    @NotNull
     private String name;
 
     public Long getId() {
@@ -37,7 +26,7 @@ public class ProductType {
 
     @Override
     public String toString() {
-        return "ProductType{" +
+        return "StoreDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
@@ -47,9 +36,9 @@ public class ProductType {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductType that = (ProductType) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name);
+        StoreDto storeDto = (StoreDto) o;
+        return Objects.equals(id, storeDto.id) &&
+                Objects.equals(name, storeDto.name);
     }
 
     @Override

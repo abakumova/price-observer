@@ -1,37 +1,14 @@
-package priceobserver.data.manufacturer;
+package priceobserver.dto.manufacturer;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "manufacturer")
-public class Manufacturer {
+public class ManufacturerDto implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @NotNull
     private String name;
-
     private String country;
-
-    @Version
     private Integer version;
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     public Long getId() {
         return id;
@@ -57,9 +34,17 @@ public class Manufacturer {
         this.country = country;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     @Override
     public String toString() {
-        return "Manufacturer{" +
+        return "ManufacturerDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
@@ -71,7 +56,7 @@ public class Manufacturer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Manufacturer that = (Manufacturer) o;
+        ManufacturerDto that = (ManufacturerDto) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(country, that.country) &&

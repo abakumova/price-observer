@@ -1,34 +1,13 @@
-package priceobserver.data.productproperties;
+package priceobserver.dto.productproperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "product_properties")
-public class ProductProperties {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class ProductPropertiesDto implements Serializable {
+
     private Long id;
-
-    @NotNull
     private String properties;
-
-    @Version
     private Integer version;
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     public Long getId() {
         return id;
@@ -46,12 +25,20 @@ public class ProductProperties {
         this.properties = properties;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     @Override
     public String toString() {
-        return "ProductProperties{" +
+        return "ProductPropertiesDto{" +
                 "id=" + id +
                 ", properties='" + properties + '\'' +
-                ", version=" + version +
+                ", version='" + version + '\'' +
                 '}';
     }
 
@@ -59,7 +46,7 @@ public class ProductProperties {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductProperties that = (ProductProperties) o;
+        ProductPropertiesDto that = (ProductPropertiesDto) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(properties, that.properties) &&
                 Objects.equals(version, that.version);
