@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link href="../css/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="wrapper">
+        <div class="row">
+            <div class="logo">
+                <p>
+                    <a href="index.html"></a>
+                    <img alt="logo" class="logo-picture" height="40.5" src="../img/logo.png" width="251.5">
+                </p>
+            </div>
+            <form action="" class="search-field">
+                <input name="search" placeholder="Search..." type="text">
+                <button type="submit"><em class="fa fa-search"></em></button>
+            </form>
+            <div class="button-container">
+                <a class="btn login">Log in</a> <!-- LogIn Profile  -->
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div>
+        <div>
+            <div>
+                <img alt="Profile photo"
+                     class="profile-photo"
+                     src="https://cdn.shopify.com/s/files/1/1061/1924/files/Smliing_Emoji_Icon.png?13752525173949329807">
+            </div>
+            <form action="" class="upload-form" enctype="multipart/form-data" method="post">
+                Select image to upload:
+                <input class="profileUploadChoose" id="fileToUpload" name="fileToUpload" type="file">
+                <input class="upload-button-picture" name="submit" type="submit" value="Upload Image">
+            </form>
+        </div>
+        <div>
+            <form action="updateProfileController" class="profile-form" method="post">
+                <h1>Profile</h1>
+                <div>
+                    <div class="field">
+                        <label>First name</label>
+                        <input name="firstName" placeholder="First name" required type="text" value="first_name">
+                    </div>
+                    <div class="field">
+                        <label>Last name</label>
+                        <input name="lastName" placeholder="Last name" required type="text" value="last_name">
+                    </div>
+                    <div class="field">
+                        <label>E-mail </label>
+                        <input id="email" name="email" placeholder="E-mail" required type="text" value="email">
+                    </div>
+                    <div class="field">
+                        <label>Birth Day </label>
+                        <input id="birth" name="birth" placeholder="BirthDay" required type="text" value="01/01/2020">
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <input id="password" name="password" placeholder="Password" required type="password"
+                               value="password">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="vl"></div>
+    <form class="wish-list">
+        <h1>Wish list</h1>
+        <div class="textbox">
+            <p>IPhone 10 </p>
+            <p>IPhone 11 </p>
+        </div>
+    </form>
+</main>
+<footer>
+    <p class="footer">Karazin University 2020</p>
+</footer>
+</body>
+</html>
