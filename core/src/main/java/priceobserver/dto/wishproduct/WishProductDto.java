@@ -1,11 +1,11 @@
 package priceobserver.dto.wishproduct;
 
-import priceobserver.dto.product.*;
-import priceobserver.dto.user.*;
+import priceobserver.dto.product.ProductDto;
+import priceobserver.dto.user.UserDto;
 
-import java.io.*;
-import java.time.*;
-import java.util.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class WishProductDto implements Serializable {
 

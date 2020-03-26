@@ -1,12 +1,13 @@
 package priceobserver.dto.wishproduct;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import priceobserver.data.wishproduct.*;
-import priceobserver.dto.product.*;
-import priceobserver.dto.user.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import priceobserver.data.wishproduct.WishProduct;
+import priceobserver.data.wishproduct.WishProductBuilder;
+import priceobserver.dto.product.ProductDtoConverter;
+import priceobserver.dto.user.UserDtoConverter;
 
-import java.sql.*;
+import java.sql.Date;
 
 @Component
 public class WishProductDtoConverterImpl implements WishProductDtoConverter {

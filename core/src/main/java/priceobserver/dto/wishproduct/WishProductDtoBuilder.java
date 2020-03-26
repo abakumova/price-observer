@@ -1,9 +1,9 @@
 package priceobserver.dto.wishproduct;
 
-import priceobserver.dto.product.*;
-import priceobserver.dto.user.*;
+import priceobserver.dto.product.ProductDto;
+import priceobserver.dto.user.UserDto;
 
-import java.time.*;
+import java.time.LocalDate;
 
 public final class WishProductDtoBuilder {
 

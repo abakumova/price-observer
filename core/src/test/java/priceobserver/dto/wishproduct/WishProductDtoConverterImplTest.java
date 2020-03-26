@@ -1,12 +1,13 @@
 package priceobserver.dto.wishproduct;
 
-import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.context.*;
-import priceobserver.data.wishproduct.*;
-import priceobserver.dto.testutils.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import priceobserver.data.wishproduct.WishProduct;
+import priceobserver.dto.testutils.DtoTestPreparationHelper;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class WishProductDtoConverterImplTest {

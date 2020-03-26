@@ -1,9 +1,9 @@
 package priceobserver.data.wishproduct;
 
-import priceobserver.data.product.*;
-import priceobserver.data.user.*;
+import priceobserver.data.product.Product;
+import priceobserver.data.user.User;
 
-import java.sql.*;
+import java.sql.Date;
 
 public final class WishProductBuilder {
 
