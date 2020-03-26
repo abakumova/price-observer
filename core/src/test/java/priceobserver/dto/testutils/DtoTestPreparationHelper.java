@@ -1,25 +1,41 @@
 package priceobserver.dto.testutils;
 
-import priceobserver.data.manufacturer.*;
-import priceobserver.data.product.*;
-import priceobserver.data.productprice.*;
-import priceobserver.data.productproperties.*;
-import priceobserver.data.producttype.*;
-import priceobserver.data.store.*;
-import priceobserver.data.user.*;
-import priceobserver.data.userrole.*;
-import priceobserver.data.wishproduct.*;
-import priceobserver.dto.manufacturer.*;
-import priceobserver.dto.product.*;
-import priceobserver.dto.productprice.*;
-import priceobserver.dto.productproperties.*;
-import priceobserver.dto.producttype.*;
-import priceobserver.dto.store.*;
-import priceobserver.dto.user.*;
-import priceobserver.dto.wishproduct.*;
+import priceobserver.data.manufacturer.Manufacturer;
+import priceobserver.data.manufacturer.ManufacturerBuilder;
+import priceobserver.data.product.Product;
+import priceobserver.data.product.ProductBuilder;
+import priceobserver.data.productprice.ProductPrice;
+import priceobserver.data.productprice.ProductPriceBuilder;
+import priceobserver.data.productproperties.ProductProperties;
+import priceobserver.data.productproperties.ProductPropertiesBuilder;
+import priceobserver.data.producttype.ProductType;
+import priceobserver.data.producttype.ProductTypeBuilder;
+import priceobserver.data.store.Store;
+import priceobserver.data.store.StoreBuilder;
+import priceobserver.data.user.User;
+import priceobserver.data.user.UserBuilder;
+import priceobserver.data.userrole.UserRole;
+import priceobserver.data.wishproduct.WishProduct;
+import priceobserver.data.wishproduct.WishProductBuilder;
+import priceobserver.dto.manufacturer.ManufacturerDto;
+import priceobserver.dto.manufacturer.ManufacturerDtoBuilder;
+import priceobserver.dto.product.ProductDto;
+import priceobserver.dto.product.ProductDtoBuilder;
+import priceobserver.dto.productprice.ProductPriceDto;
+import priceobserver.dto.productprice.ProductPriceDtoBuilder;
+import priceobserver.dto.productproperties.ProductPropertiesDto;
+import priceobserver.dto.productproperties.ProductPropertiesDtoBuilder;
+import priceobserver.dto.producttype.ProductTypeDto;
+import priceobserver.dto.producttype.ProductTypeDtoBuilder;
+import priceobserver.dto.store.StoreDto;
+import priceobserver.dto.store.StoreDtoBuilder;
+import priceobserver.dto.user.UserDto;
+import priceobserver.dto.user.UserDtoBuilder;
+import priceobserver.dto.wishproduct.WishProductDto;
+import priceobserver.dto.wishproduct.WishProductDtoBuilder;
 
-import java.sql.*;
-import java.time.*;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public final class DtoTestPreparationHelper {
 

@@ -1,12 +1,19 @@
 package priceobserver.data.wishproduct;
 
-import priceobserver.data.product.*;
-import priceobserver.data.user.*;
+import priceobserver.data.product.Product;
+import priceobserver.data.user.User;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
-import java.util.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "wish_product")
@@ -26,7 +33,7 @@ public class WishProduct {
     private Integer version;
 
     /**
-     * ManyToOne because one WishList row represents a product added to wish list by a user.
+     * ManyToOne because one WishProduct row represents a product added to wish list by a user.
      * If you need to review a full user's wish list just use a SELECT by user_id and is_deleted = false.
      */
     @ManyToOne
@@ -87,7 +94,7 @@ public class WishProduct {
 
     @Override
     public String toString() {
-        return "WishList{" +
+        return "WishProduct{" +
                 "id=" + id +
                 ", isDeleted=" + isDeleted +
                 ", dateAdded=" + dateAdded +
