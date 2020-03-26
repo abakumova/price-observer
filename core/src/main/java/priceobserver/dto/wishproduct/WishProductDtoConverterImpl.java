@@ -1,29 +1,29 @@
-package priceobserver.dto.wishlist;
+package priceobserver.dto.wishproduct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import priceobserver.data.wishlist.WishList;
-import priceobserver.data.wishlist.WishListBuilder;
+import priceobserver.data.wishproduct.WishProduct;
+import priceobserver.data.wishproduct.WishProductBuilder;
 import priceobserver.dto.product.ProductDtoConverter;
 import priceobserver.dto.user.UserDtoConverter;
 
 import java.sql.Date;
 
 @Component
-public class WishListDtoConverterImpl implements WishListDtoConverter {
+public class WishProductDtoConverterImpl implements WishProductDtoConverter {
 
     private UserDtoConverter userDtoConverter;
     private ProductDtoConverter productDtoConverter;
 
     @Autowired
-    public WishListDtoConverterImpl(UserDtoConverter userDtoConverter, ProductDtoConverter productDtoConverter) {
+    public WishProductDtoConverterImpl(UserDtoConverter userDtoConverter, ProductDtoConverter productDtoConverter) {
         this.userDtoConverter = userDtoConverter;
         this.productDtoConverter = productDtoConverter;
     }
 
     @Override
-    public WishListDto convertToDto(WishList entity) {
-        return WishListDtoBuilder.aWishListDto()
+    public WishProductDto convertToDto(WishProduct entity) {
+        return WishProductDtoBuilder.aWishProductDto()
                 .withId(entity.getId())
                 .withDateAdded(entity.getDateAdded().toLocalDate())
                 .withVersion(entity.getVersion())
@@ -33,8 +33,8 @@ public class WishListDtoConverterImpl implements WishListDtoConverter {
     }
 
     @Override
-    public WishList convertToEntity(WishListDto dto) {
-        return WishListBuilder.aWishList()
+    public WishProduct convertToEntity(WishProductDto dto) {
+        return WishProductBuilder.aWishProduct()
                 .withId(dto.getId())
                 .withDateAdded(Date.valueOf(dto.getDateAdded()))
                 .withVersion(dto.getVersion())

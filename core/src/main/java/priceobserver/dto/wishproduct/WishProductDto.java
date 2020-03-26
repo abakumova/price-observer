@@ -1,4 +1,4 @@
-package priceobserver.dto.wishlist;
+package priceobserver.dto.wishproduct;
 
 import priceobserver.dto.product.ProductDto;
 import priceobserver.dto.user.UserDto;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class WishListDto implements Serializable {
+public class WishProductDto implements Serializable {
 
     private Long id;
     private Boolean isDeleted;
@@ -66,7 +66,7 @@ public class WishListDto implements Serializable {
 
     @Override
     public String toString() {
-        return "WishListDto{" +
+        return "WishProductDto{" +
                 "id=" + id +
                 ", isDeleted=" + isDeleted +
                 ", dateAdded=" + dateAdded +
@@ -80,7 +80,7 @@ public class WishListDto implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WishListDto that = (WishListDto) o;
+        WishProductDto that = (WishProductDto) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(isDeleted, that.isDeleted) &&
                 Objects.equals(dateAdded, that.dateAdded) &&

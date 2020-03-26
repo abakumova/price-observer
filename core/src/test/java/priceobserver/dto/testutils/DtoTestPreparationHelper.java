@@ -15,8 +15,8 @@ import priceobserver.data.store.StoreBuilder;
 import priceobserver.data.user.User;
 import priceobserver.data.user.UserBuilder;
 import priceobserver.data.userrole.UserRole;
-import priceobserver.data.wishlist.WishList;
-import priceobserver.data.wishlist.WishListBuilder;
+import priceobserver.data.wishproduct.WishProduct;
+import priceobserver.data.wishproduct.WishProductBuilder;
 import priceobserver.dto.manufacturer.ManufacturerDto;
 import priceobserver.dto.manufacturer.ManufacturerDtoBuilder;
 import priceobserver.dto.product.ProductDto;
@@ -31,8 +31,8 @@ import priceobserver.dto.store.StoreDto;
 import priceobserver.dto.store.StoreDtoBuilder;
 import priceobserver.dto.user.UserDto;
 import priceobserver.dto.user.UserDtoBuilder;
-import priceobserver.dto.wishlist.WishListDto;
-import priceobserver.dto.wishlist.WishListDtoBuilder;
+import priceobserver.dto.wishproduct.WishProductDto;
+import priceobserver.dto.wishproduct.WishProductDtoBuilder;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -74,9 +74,9 @@ public final class DtoTestPreparationHelper {
     private static final Long PRODUCT_PRICE_ID = 45L;
     private static final Float PRODUCT_PRICE_VALUE = 123.50F;
 
-    // Wish list fields
-    private static final Long WISH_LIST_ID = 50L;
-    private static final Integer WISH_LIST_VERSION = 11;
+    // Wish product fields
+    private static final Long WISH_PRODUCT_ID = 50L;
+    private static final Integer WISH_PRODUCT_VERSION = 11;
 
     //User fields
     private static final Long USER_ID = 1L;
@@ -203,20 +203,20 @@ public final class DtoTestPreparationHelper {
                 .build();
     }
 
-    public static WishListDto getPreparedWishListDto() {
-        return WishListDtoBuilder.aWishListDto()
-                .withId(WISH_LIST_ID)
-                .withVersion(WISH_LIST_VERSION)
+    public static WishProductDto getPreparedWishProductDto() {
+        return WishProductDtoBuilder.aWishProductDto()
+                .withId(WISH_PRODUCT_ID)
+                .withVersion(WISH_PRODUCT_VERSION)
                 .withDateAdded(DATE_NOW)
                 .withProduct(getPreparedProductDto())
                 .withUser(getPreparedUserDto())
                 .build();
     }
 
-    public static WishList getPreparedWishListEntity() {
-        return WishListBuilder.aWishList()
-                .withId(WISH_LIST_ID)
-                .withVersion(WISH_LIST_VERSION)
+    public static WishProduct getPreparedWishProductEntity() {
+        return WishProductBuilder.aWishProduct()
+                .withId(WISH_PRODUCT_ID)
+                .withVersion(WISH_PRODUCT_VERSION)
                 .withDateAdded(Date.valueOf(DATE_NOW))
                 .withProduct(getPreparedProductEntity())
                 .withUser(getPreparedUserEntity())

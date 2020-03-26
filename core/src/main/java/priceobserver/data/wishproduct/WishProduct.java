@@ -1,4 +1,4 @@
-package priceobserver.data.wishlist;
+package priceobserver.data.wishproduct;
 
 import priceobserver.data.product.Product;
 import priceobserver.data.user.User;
@@ -16,8 +16,8 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "wish_list")
-public class WishList {
+@Table(name = "wish_product")
+public class WishProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +33,7 @@ public class WishList {
     private Integer version;
 
     /**
-     * ManyToOne because one WishList row represents a product added to wish list by a user.
+     * ManyToOne because one WishProduct row represents a product added to wish list by a user.
      * If you need to review a full user's wish list just use a SELECT by user_id and is_deleted = false.
      */
     @ManyToOne
@@ -94,7 +94,7 @@ public class WishList {
 
     @Override
     public String toString() {
-        return "WishList{" +
+        return "WishProduct{" +
                 "id=" + id +
                 ", isDeleted=" + isDeleted +
                 ", dateAdded=" + dateAdded +
@@ -107,13 +107,13 @@ public class WishList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WishList wishList = (WishList) o;
-        return Objects.equals(id, wishList.id) &&
-                Objects.equals(isDeleted, wishList.isDeleted) &&
-                Objects.equals(dateAdded, wishList.dateAdded) &&
-                Objects.equals(version, wishList.version) &&
-                Objects.equals(user, wishList.user) &&
-                Objects.equals(product, wishList.product);
+        WishProduct wishProduct = (WishProduct) o;
+        return Objects.equals(id, wishProduct.id) &&
+                Objects.equals(isDeleted, wishProduct.isDeleted) &&
+                Objects.equals(dateAdded, wishProduct.dateAdded) &&
+                Objects.equals(version, wishProduct.version) &&
+                Objects.equals(user, wishProduct.user) &&
+                Objects.equals(product, wishProduct.product);
     }
 
     @Override
