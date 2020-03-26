@@ -7,7 +7,7 @@ public class ProductPropertiesDto implements Serializable {
 
     private Long id;
     private String properties;
-    private String version;
+    private Integer version;
 
     public Long getId() {
         return id;
@@ -25,11 +25,11 @@ public class ProductPropertiesDto implements Serializable {
         this.properties = properties;
     }
 
-    public String getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(Integer version) {
         this.version = version;
     }
 

@@ -3,7 +3,7 @@ package priceobserver.dto.productproperties;
 public final class ProductPropertiesDtoBuilder {
     private Long id;
     private String properties;
-    private String version;
+    private Integer version;
 
     private ProductPropertiesDtoBuilder() {
     }
@@ -22,7 +22,7 @@ public final class ProductPropertiesDtoBuilder {
         return this;
     }
 
-    public ProductPropertiesDtoBuilder withVersion(String version) {
+    public ProductPropertiesDtoBuilder withVersion(Integer version) {
         this.version = version;
         return this;
     }

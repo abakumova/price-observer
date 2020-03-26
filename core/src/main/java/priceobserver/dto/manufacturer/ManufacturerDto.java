@@ -8,7 +8,7 @@ public class ManufacturerDto implements Serializable {
     private Long id;
     private String name;
     private String country;
-    private Long version;
+    private Integer version;
 
     public Long getId() {
         return id;
@@ -34,11 +34,11 @@ public class ManufacturerDto implements Serializable {
         this.country = country;
     }
 
-    public Long getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(Integer version) {
         this.version = version;
     }
 

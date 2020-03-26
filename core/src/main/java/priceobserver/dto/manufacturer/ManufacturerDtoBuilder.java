@@ -4,7 +4,7 @@ public final class ManufacturerDtoBuilder {
     private Long id;
     private String name;
     private String country;
-    private Long version;
+    private Integer version;
 
     private ManufacturerDtoBuilder() {
     }
@@ -28,7 +28,7 @@ public final class ManufacturerDtoBuilder {
         return this;
     }
 
-    public ManufacturerDtoBuilder withVersion(Long version) {
+    public ManufacturerDtoBuilder withVersion(Integer version) {
         this.version = version;
         return this;
     }
