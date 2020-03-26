@@ -12,6 +12,11 @@ import priceobserver.data.producttype.ProductType;
 import priceobserver.data.producttype.ProductTypeBuilder;
 import priceobserver.data.store.Store;
 import priceobserver.data.store.StoreBuilder;
+import priceobserver.data.user.User;
+import priceobserver.data.user.UserBuilder;
+import priceobserver.data.userrole.UserRole;
+import priceobserver.data.wishlist.WishList;
+import priceobserver.data.wishlist.WishListBuilder;
 import priceobserver.dto.manufacturer.ManufacturerDto;
 import priceobserver.dto.manufacturer.ManufacturerDtoBuilder;
 import priceobserver.dto.product.ProductDto;
@@ -24,11 +29,18 @@ import priceobserver.dto.producttype.ProductTypeDto;
 import priceobserver.dto.producttype.ProductTypeDtoBuilder;
 import priceobserver.dto.store.StoreDto;
 import priceobserver.dto.store.StoreDtoBuilder;
+import priceobserver.dto.user.UserDto;
+import priceobserver.dto.user.UserDtoBuilder;
+import priceobserver.dto.wishlist.WishListDto;
+import priceobserver.dto.wishlist.WishListDtoBuilder;
 
 import java.sql.Date;
 import java.time.LocalDate;
 
 public final class DtoTestPreparationHelper {
+
+    //General fields
+    private static final LocalDate DATE_NOW = LocalDate.now();
 
     // Product fields.
     private static final Long PRODUCT_ID = 12L;
@@ -61,7 +73,23 @@ public final class DtoTestPreparationHelper {
     // Product price fields
     private static final Long PRODUCT_PRICE_ID = 45L;
     private static final Float PRODUCT_PRICE_VALUE = 123.50F;
-    private static final LocalDate DATE_NOW = LocalDate.now();
+
+    // Wish list fields
+    private static final Long WISH_LIST_ID = 50L;
+    private static final Integer WISH_LIST_VERSION = 11;
+
+    //User fields
+    private static final Long USER_ID = 1L;
+    private static final String FIRST_NAME = "First name";
+    private static final String LAST_NAME = "Last name";
+    private static final String EMAIL = "email@email.email";
+    private static final String ENCRYPTED_PASSWORD = "Encrypted password";
+    private static final String PASSWORD = "Password";
+    private static final String USER_ROLE_AS_STRING = "user";
+    private static final LocalDate BIRTH = LocalDate.now();
+    private static final Integer VERSION = 1;
+    private static final UserRole USER_ROLE = new UserRole();
+    private static final Byte ROLE_ID = (byte) 2;
 
     public static Product getPreparedProductEntity() {
         return ProductBuilder.aProduct()
@@ -172,6 +200,57 @@ public final class DtoTestPreparationHelper {
                 .withDate(DATE_NOW)
                 .withProduct(getPreparedProductDto())
                 .withStore(getPreparedStoreDto())
+                .build();
+    }
+
+    public static WishListDto getPreparedWishListDto() {
+        return WishListDtoBuilder.aWishListDto()
+                .withId(WISH_LIST_ID)
+                .withVersion(WISH_LIST_VERSION)
+                .withDateAdded(DATE_NOW)
+                .withProduct(getPreparedProductDto())
+                .withUser(getPreparedUserDto())
+                .build();
+    }
+
+    public static WishList getPreparedWishListEntity() {
+        return WishListBuilder.aWishList()
+                .withId(WISH_LIST_ID)
+                .withVersion(WISH_LIST_VERSION)
+                .withDateAdded(Date.valueOf(DATE_NOW))
+                .withProduct(getPreparedProductEntity())
+                .withUser(getPreparedUserEntity())
+                .build();
+    }
+
+    public static UserDto getPreparedUserDto() {
+        return UserDtoBuilder.anUserDto()
+                .withId(USER_ID)
+                .withFirstName(FIRST_NAME)
+                .withLastName(LAST_NAME)
+                .withEmail(EMAIL)
+                .withEncryptedPassword(ENCRYPTED_PASSWORD)
+                .withPassword(PASSWORD)
+                .withBirth(BIRTH)
+                .withVersion(VERSION)
+                .withUserRole(USER_ROLE_AS_STRING)
+                .build();
+    }
+
+    public static User getPreparedUserEntity() {
+        USER_ROLE.setName(USER_ROLE_AS_STRING);
+        USER_ROLE.setId(ROLE_ID);
+
+        return UserBuilder.anUser()
+                .withId(USER_ID)
+                .withFirstName(FIRST_NAME)
+                .withLastName(LAST_NAME)
+                .withEmail(EMAIL)
+                .withEncryptedPassword(ENCRYPTED_PASSWORD)
+                .withPassword(PASSWORD)
+                .withBirth(Date.valueOf(BIRTH))
+                .withVersion(VERSION)
+                .withUserRole(USER_ROLE)
                 .build();
     }
 }

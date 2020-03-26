@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "wish_list")
@@ -100,5 +101,23 @@ public class WishList {
                 ", user=" + user +
                 ", product=" + product +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WishList wishList = (WishList) o;
+        return Objects.equals(id, wishList.id) &&
+                Objects.equals(isDeleted, wishList.isDeleted) &&
+                Objects.equals(dateAdded, wishList.dateAdded) &&
+                Objects.equals(version, wishList.version) &&
+                Objects.equals(user, wishList.user) &&
+                Objects.equals(product, wishList.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, isDeleted, dateAdded, version, user, product);
     }
 }
