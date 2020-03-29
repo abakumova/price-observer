@@ -1,6 +1,6 @@
 package priceobserver.data.product;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -28,6 +28,7 @@ class ProductRepositoryTest {
     private static final String PRODUCT_NAME_1 = "Product 1";
     private static final String PRODUCT_NAME_2 = "Product 2";
     private static final String PRODUCT_NAME_3 = "Product 3";
+    private static final String UPDATED_NAME = "Updated_name";
 
     private static Product product1;
     private static Product product2;
@@ -36,6 +37,7 @@ class ProductRepositoryTest {
     private static Manufacturer manufacturer;
     private static ProductProperties productProperties;
     private static ProductType productType;
+    private static List<Product> products;
 
     @Autowired
     private ProductRepository productRepository;
@@ -47,27 +49,20 @@ class ProductRepositoryTest {
     private ProductPropertiesRepository productPropertiesRepository;
 
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeEach
+    void setUp() {
         manufacturer = getPreparedManufacturerEntity();
-
         productProperties = getPreparedProductPropertiesEntity();
-
         productType = getPreparedProductTypeEntity();
 
         product1 = getPreparedProductEntity();
         product2 = getPreparedProductEntity();
         product3 = getPreparedProductEntity();
-
         product1.setName(PRODUCT_NAME_1);
-
         product2.setName(PRODUCT_NAME_2);
-
         product3.setName(PRODUCT_NAME_3);
-    }
+        products = Arrays.asList(product1, product2, product3);
 
-    @Test
-    void shouldSaveListOfProductsIntoDb() {
         manufacturerRepository.save(manufacturer);
         productTypeRepository.save(productType);
         productPropertiesRepository.save(productProperties);
@@ -87,9 +82,14 @@ class ProductRepositoryTest {
                 product.setProductType(persistedProductType.get());
                 product.setProductProperties(persistedProductProperties.get());
             }
+        } else {
+            throw new RuntimeException();
         }
+    }
 
-        productRepository.saveAll(Arrays.asList(product1, product2, product3));
+    @Test
+    void shouldSaveListOfProductsIntoDb() {
+        productRepository.saveAll(products);
 
         assertEquals(3, productRepository.count());
 
@@ -97,5 +97,34 @@ class ProductRepositoryTest {
         assertTrue(persistedProducts.stream().anyMatch(p -> p.getName().equals(PRODUCT_NAME_1)));
         assertTrue(persistedProducts.stream().anyMatch(p -> p.getName().equals(PRODUCT_NAME_2)));
         assertTrue(persistedProducts.stream().anyMatch(p -> p.getName().equals(PRODUCT_NAME_3)));
+    }
+
+    @Test
+    void shouldRemoveProduct() {
+        productRepository.saveAll(products);
+
+        assertEquals(products.size(), productRepository.count());
+
+        Optional<Product> product = productRepository.findFirstByName(PRODUCT_NAME_2);
+        if (!product.isPresent()) {
+            throw new RuntimeException();
+        }
+
+        productRepository.delete(product.get());
+        assertEquals(products.size() - 1, productRepository.count());
+    }
+
+    @Test
+    void shouldUpdateProduct() {
+        Product persistedProduct = productRepository.save(product1);
+
+        assertEquals(1, productRepository.count());
+
+        Long id = persistedProduct.getId();
+        persistedProduct.setName(UPDATED_NAME);
+
+        persistedProduct = productRepository.save(persistedProduct);
+
+        assertEquals(UPDATED_NAME, persistedProduct.getName());
     }
 }

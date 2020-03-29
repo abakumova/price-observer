@@ -2,6 +2,8 @@ package priceobserver.data.product;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface ProductRepository extends CrudRepository<Product, Long> {
+import java.util.Optional;
 
+public interface ProductRepository extends CrudRepository<Product, Long> {
+    Optional<Product> findFirstByName(String name);
 }
