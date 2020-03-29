@@ -4,12 +4,14 @@ import priceobserver.data.manufacturer.Manufacturer;
 import priceobserver.data.productproperties.ProductProperties;
 import priceobserver.data.producttype.ProductType;
 
+import java.time.Year;
+
 public final class ProductBuilder {
     private Long id;
     private String name;
     private String description;
     private String model;
-    private Integer year;
+    private Year year;
     private String image;
     private Integer version;
     private ProductProperties productProperties;
@@ -43,7 +45,7 @@ public final class ProductBuilder {
         return this;
     }
 
-    public ProductBuilder withYear(Integer year) {
+    public ProductBuilder withYear(Year year) {
         this.year = year;
         return this;
     }

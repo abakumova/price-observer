@@ -5,6 +5,7 @@ import priceobserver.dto.productproperties.ProductPropertiesDto;
 import priceobserver.dto.producttype.ProductTypeDto;
 
 import java.io.Serializable;
+import java.time.Year;
 import java.util.Objects;
 
 public class ProductDto implements Serializable {
@@ -13,7 +14,7 @@ public class ProductDto implements Serializable {
     private String name;
     private String description;
     private String model;
-    private Integer year;
+    private Year year;
     private String image;
     private Integer version;
     private ProductPropertiesDto productProperties;
@@ -52,11 +53,11 @@ public class ProductDto implements Serializable {
         this.model = model;
     }
 
-    public Integer getYear() {
+    public Year getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(Year year) {
         this.year = year;
     }
 

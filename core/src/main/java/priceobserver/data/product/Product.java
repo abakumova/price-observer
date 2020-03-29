@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.time.Year;
 import java.util.Objects;
 
 @Entity
@@ -38,8 +39,7 @@ public class Product {
     @Size(max = 255)
     private String model;
 
-    @Positive
-    private Integer year;
+    private Year year;
 
     /**
      * Describes a url to the image for current product.
@@ -95,11 +95,11 @@ public class Product {
         this.model = model;
     }
 
-    public Integer getYear() {
+    public Year getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(Year year) {
         this.year = year;
     }
 

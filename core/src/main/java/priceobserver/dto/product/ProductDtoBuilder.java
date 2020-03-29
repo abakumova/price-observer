@@ -4,12 +4,14 @@ import priceobserver.dto.manufacturer.ManufacturerDto;
 import priceobserver.dto.productproperties.ProductPropertiesDto;
 import priceobserver.dto.producttype.ProductTypeDto;
 
+import java.time.Year;
+
 public final class ProductDtoBuilder {
     private Long id;
     private String name;
     private String description;
     private String model;
-    private Integer year;
+    private Year year;
     private String image;
     private Integer version;
     private ProductPropertiesDto productProperties;
@@ -43,7 +45,7 @@ public final class ProductDtoBuilder {
         return this;
     }
 
-    public ProductDtoBuilder withYear(Integer year) {
+    public ProductDtoBuilder withYear(Year year) {
         this.year = year;
         return this;
     }
