@@ -31,6 +31,7 @@ import priceobserver.dto.store.StoreDto;
 import priceobserver.dto.store.StoreDtoBuilder;
 import priceobserver.dto.user.UserDto;
 import priceobserver.dto.user.UserDtoBuilder;
+import priceobserver.dto.user.UserRoleEnum;
 import priceobserver.dto.wishproduct.WishProductDto;
 import priceobserver.dto.wishproduct.WishProductDtoBuilder;
 
@@ -234,7 +235,7 @@ public final class DtoTestPreparationHelper {
                 .withPassword(PASSWORD)
                 .withBirth(BIRTH)
                 .withVersion(VERSION)
-                .withUserRole(USER_ROLE_AS_STRING)
+                .withUserRole(UserRoleEnum.USER)
                 .build();
     }
 

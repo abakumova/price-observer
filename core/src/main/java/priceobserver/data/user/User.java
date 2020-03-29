@@ -61,6 +61,8 @@ public class User {
     @Version
     private Integer version;
 
+    private String profileImage;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
@@ -138,6 +140,14 @@ public class User {
         this.userRole = userRole;
     }
 
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -146,8 +156,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", birth=" + birth +
-                ", encryptedPassword='" + encryptedPassword + '\'' +
-                ", password='" + password + '\'' +
                 ", version=" + version +
                 ", userRole=" + userRole +
                 '}';
@@ -163,14 +171,12 @@ public class User {
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(birth, user.birth) &&
-                Objects.equals(encryptedPassword, user.encryptedPassword) &&
-                Objects.equals(password, user.password) &&
                 Objects.equals(version, user.version) &&
                 Objects.equals(userRole, user.userRole);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, birth, encryptedPassword, password, version, userRole);
+        return Objects.hash(id, firstName, lastName, email, birth, version, userRole);
     }
 }

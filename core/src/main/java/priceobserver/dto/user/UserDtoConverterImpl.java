@@ -17,10 +17,11 @@ public class UserDtoConverterImpl implements UserDtoConverter {
                 .withLastName(userEntity.getLastName())
                 .withEmail(userEntity.getEmail())
                 .withBirth(userEntity.getBirth().toLocalDate())
-                .withUserRole(userEntity.getUserRole().getName())
+                .withUserRole(UserRoleEnum.valueOf(userEntity.getUserRole().getName().toUpperCase()))
                 .withEncryptedPassword(userEntity.getEncryptedPassword())
                 .withPassword(userEntity.getPassword())
                 .withVersion(userEntity.getVersion())
+                .withProfileImage(userEntity.getProfileImage())
                 .build();
     }
 
@@ -35,6 +36,7 @@ public class UserDtoConverterImpl implements UserDtoConverter {
                 .withEncryptedPassword(userDto.getEncryptedPassword())
                 .withPassword(userDto.getPassword())
                 .withVersion(userDto.getVersion())
+                .withProfileImage(userDto.getProfileImage())
                 .build();
     }
 

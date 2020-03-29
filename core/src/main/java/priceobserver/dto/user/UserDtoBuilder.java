@@ -3,7 +3,6 @@ package priceobserver.dto.user;
 import java.time.LocalDate;
 
 public final class UserDtoBuilder {
-
     private Long id;
     private String firstName;
     private String lastName;
@@ -12,6 +11,7 @@ public final class UserDtoBuilder {
     private String encryptedPassword;
     private String password;
     private Integer version;
+    private String profileImage;
     private UserRoleEnum userRole;
 
     private UserDtoBuilder() {
@@ -61,13 +61,13 @@ public final class UserDtoBuilder {
         return this;
     }
 
-    public UserDtoBuilder withUserRole(UserRoleEnum userRole) {
-        this.userRole = userRole;
+    public UserDtoBuilder withProfileImage(String profileImage) {
+        this.profileImage = profileImage;
         return this;
     }
 
-    public UserDtoBuilder withUserRole(String userRole) {
-        this.userRole = UserRoleEnum.valueOf(userRole.toUpperCase());
+    public UserDtoBuilder withUserRole(UserRoleEnum userRole) {
+        this.userRole = userRole;
         return this;
     }
 
@@ -81,6 +81,7 @@ public final class UserDtoBuilder {
         userDto.setEncryptedPassword(encryptedPassword);
         userDto.setPassword(password);
         userDto.setVersion(version);
+        userDto.setProfileImage(profileImage);
         userDto.setUserRole(userRole);
         return userDto;
     }
