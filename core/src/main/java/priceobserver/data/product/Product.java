@@ -44,7 +44,6 @@ public class Product {
     /**
      * Describes a url to the image for current product.
      */
-    @Size(max = 255)
     private String image;
     @Version
     private Integer version;
