@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS `product`
     `properties_id`   INT          NOT NULL,
     `model`           VARCHAR(255) NOT NULL,
     `manufacturer_id` INT          NOT NULL,
-    `year`            INT,
-    `image`           VARCHAR(255),
+    `year`            YEAR,
+    `image`           TEXT,
     `product_type_id` INT          NOT NULL,
     PRIMARY KEY (`id`)
 );
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `product`
 CREATE TABLE IF NOT EXISTS `product_properties`
 (
     `id`         INT NOT NULL AUTO_INCREMENT,
-    `properties` VARCHAR(255),
+    `properties` TEXT, # A json presentation of product properties
     PRIMARY KEY (`id`)
 );
 

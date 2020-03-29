@@ -36,6 +36,7 @@ import priceobserver.dto.wishproduct.WishProductDtoBuilder;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Year;
 
 public final class DtoTestPreparationHelper {
 
@@ -45,7 +46,7 @@ public final class DtoTestPreparationHelper {
     // Product fields.
     private static final Long PRODUCT_ID = 12L;
     private static final Integer PRODUCT_VERSION = 2;
-    private static final Integer PRODUCT_YEAR = 2004;
+    private static final Year PRODUCT_YEAR = Year.of(2004);
     private static final String PRODUCT_NAME = "Super-duper product name";
     private static final String PRODUCT_DESCRIPTION = "Super-duper product description";
     private static final String PRODUCT_MODEL = "Super-duper product model";
@@ -100,9 +101,9 @@ public final class DtoTestPreparationHelper {
                 .withYear(PRODUCT_YEAR)
                 .withModel(PRODUCT_MODEL)
                 .withImage(PRODUCT_IMAGE_URL)
-                .withManufacturer(getPreparedManufacturer())
-                .withProductProperties(getPreparedProductProperties())
-                .withProductType(getPreparedProductType())
+                .withManufacturer(getPreparedManufacturerEntity())
+                .withProductProperties(getPreparedProductPropertiesEntity())
+                .withProductType(getPreparedProductTypeEntity())
                 .build();
     }
 
@@ -145,7 +146,7 @@ public final class DtoTestPreparationHelper {
                 .build();
     }
 
-    public static Manufacturer getPreparedManufacturer() {
+    public static Manufacturer getPreparedManufacturerEntity() {
         return ManufacturerBuilder.aManufacturer()
                 .withId(MANUFACTURER_ID)
                 .withName(MANUFACTURER_NAME)
@@ -154,7 +155,7 @@ public final class DtoTestPreparationHelper {
                 .build();
     }
 
-    public static ProductProperties getPreparedProductProperties() {
+    public static ProductProperties getPreparedProductPropertiesEntity() {
         return ProductPropertiesBuilder.aProductProperties()
                 .withId(PRODUCT_PROPERTIES_ID)
                 .withProperties(PRODUCT_PROPERTIES_JSON)
@@ -162,7 +163,7 @@ public final class DtoTestPreparationHelper {
                 .build();
     }
 
-    public static ProductType getPreparedProductType() {
+    public static ProductType getPreparedProductTypeEntity() {
         return ProductTypeBuilder.aProductType()
                 .withId(PRODUCT_TYPE_ID)
                 .withName(PRODUCT_TYPE_NAME)

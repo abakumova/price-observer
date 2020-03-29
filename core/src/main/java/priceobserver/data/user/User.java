@@ -13,7 +13,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -22,23 +26,29 @@ import java.util.Objects;
 public class User {
 
     @Id
+    @Positive
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+    @NotBlank
+    @Max(50)
     private String firstName;
 
-    @NotNull
+    @NotBlank
+    @Max(50)
     private String lastName;
 
     @Email
-    @NotNull
+    @NotBlank
+    @Max(70)
     private String email;
 
     @NotNull
+    @PastOrPresent
     private Date birth;
 
-    @NotNull
+    @NotBlank
+    @Max(50)
     @Column(name = "password")
     private String encryptedPassword;
 
@@ -51,6 +61,7 @@ public class User {
     @Version
     private Integer version;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private UserRole userRole;
