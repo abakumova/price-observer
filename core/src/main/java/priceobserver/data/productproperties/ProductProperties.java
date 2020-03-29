@@ -1,22 +1,27 @@
 package priceobserver.data.productproperties;
 
+import priceobserver.validation.ValidJson;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
 @Table(name = "product_properties")
 public class ProductProperties {
     @Id
+    @Min(1)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+    @NotBlank
+    @ValidJson
     private String properties;
 
     @Version

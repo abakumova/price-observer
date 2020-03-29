@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `product`
 CREATE TABLE IF NOT EXISTS `product_properties`
 (
     `id`         INT NOT NULL AUTO_INCREMENT,
-    `properties` VARCHAR(255),
+    `properties` TEXT, # A json presentation of product properties
     PRIMARY KEY (`id`)
 );
 

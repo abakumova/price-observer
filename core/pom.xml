@@ -16,6 +16,7 @@
         <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
         <h2.version>1.4.200</h2.version>
         <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
+        <json.version>20190722</json.version>
     </properties>
 
     <parent>
@@ -72,6 +73,11 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json.version}</version>
         </dependency>
     </dependencies>
 
