@@ -66,8 +66,8 @@ public final class UserDtoBuilder {
         return this;
     }
 
-    public UserDtoBuilder withUserRole(UserRoleEnum userRole) {
-        this.userRole = userRole;
+    public UserDtoBuilder withUserRole(String userRole) {
+        this.userRole = UserRoleEnum.valueOf(userRole.toUpperCase());
         return this;
     }
 

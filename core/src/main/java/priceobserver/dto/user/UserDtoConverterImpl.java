@@ -17,7 +17,7 @@ public class UserDtoConverterImpl implements UserDtoConverter {
                 .withLastName(userEntity.getLastName())
                 .withEmail(userEntity.getEmail())
                 .withBirth(userEntity.getBirth().toLocalDate())
-                .withUserRole(UserRoleEnum.valueOf(userEntity.getUserRole().getName().toUpperCase()))
+                .withUserRole(userEntity.getUserRole().getName())
                 .withEncryptedPassword(userEntity.getEncryptedPassword())
                 .withPassword(userEntity.getPassword())
                 .withVersion(userEntity.getVersion())
