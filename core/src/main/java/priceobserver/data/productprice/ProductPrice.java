@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -19,19 +22,24 @@ import java.util.Objects;
 public class ProductPrice {
 
     @Id
+    @Positive
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
+    @PositiveOrZero
     private Float price;
 
     @NotNull
+    @PastOrPresent
     private Date date;
 
-    @ManyToOne()
+    @NotNull
+    @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;

@@ -12,7 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
@@ -20,33 +23,43 @@ import java.util.Objects;
 public class Product {
 
     @Id
+    @Positive
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
+
+    @NotBlank
+    @Size(max = 50)
     private String name;
 
+    @Size(max = 255)
     private String description;
 
-    @NotNull
+    @NotBlank
+    @Size(max = 255)
     private String model;
 
+    @Positive
     private Integer year;
 
     /**
      * Describes a url to the image for current product.
      */
+    @Size(max = 255)
     private String image;
     @Version
     private Integer version;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "properties_id", nullable = false)
     private ProductProperties productProperties;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "product_type_id", nullable = false)
     private ProductType productType;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "manufacturer_id", nullable = false)
     private Manufacturer manufacturer;

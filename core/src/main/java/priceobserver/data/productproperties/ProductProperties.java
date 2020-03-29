@@ -8,15 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.util.Objects;
 
 @Entity
 @Table(name = "product_properties")
 public class ProductProperties {
     @Id
-    @Min(1)
+    @Positive
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

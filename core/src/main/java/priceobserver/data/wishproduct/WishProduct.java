@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -20,6 +22,7 @@ import java.util.Objects;
 public class WishProduct {
 
     @Id
+    @Positive
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -27,6 +30,7 @@ public class WishProduct {
     private Boolean isDeleted;
 
     @NotNull
+    @PastOrPresent
     private Date dateAdded;
 
     @Version
@@ -36,10 +40,12 @@ public class WishProduct {
      * ManyToOne because one WishProduct row represents a product added to wish list by a user.
      * If you need to review a full user's wish list just use a SELECT by user_id and is_deleted = false.
      */
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;

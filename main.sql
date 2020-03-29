@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `product`
     `model`           VARCHAR(255) NOT NULL,
     `manufacturer_id` INT          NOT NULL,
     `year`            INT,
-    `image`           VARCHAR(255),
+    `image`           TEXT,
     `product_type_id` INT          NOT NULL,
     PRIMARY KEY (`id`)
 );
