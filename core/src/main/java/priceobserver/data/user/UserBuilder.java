@@ -13,6 +13,7 @@ public final class UserBuilder {
     private String encryptedPassword;
     private String password;
     private Integer version;
+    private String profileImage;
     private UserRole userRole;
 
     private UserBuilder() {
@@ -62,6 +63,11 @@ public final class UserBuilder {
         return this;
     }
 
+    public UserBuilder withProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+        return this;
+    }
+
     public UserBuilder withUserRole(UserRole userRole) {
         this.userRole = userRole;
         return this;
@@ -77,6 +83,7 @@ public final class UserBuilder {
         user.setEncryptedPassword(encryptedPassword);
         user.setPassword(password);
         user.setVersion(version);
+        user.setProfileImage(profileImage);
         user.setUserRole(userRole);
         return user;
     }

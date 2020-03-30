@@ -32,13 +32,14 @@ CREATE TABLE IF NOT EXISTS `manufacturer`
 
 CREATE TABLE IF NOT EXISTS `user`
 (
-    `id`         INT         NOT NULL AUTO_INCREMENT,
-    `first_name` VARCHAR(50) NOT NULL,
-    `last_name`  VARCHAR(50) NOT NULL,
-    `email`      VARCHAR(70) NOT NULL,
-    `birth`      DATE        NOT NULL,
-    `password`   VARCHAR(50) NOT NULL,
-    `role_id`    TINYINT     NOT NULL,
+    `id`            INT         NOT NULL AUTO_INCREMENT,
+    `first_name`    VARCHAR(50) NOT NULL,
+    `last_name`     VARCHAR(50) NOT NULL,
+    `email`         VARCHAR(70) NOT NULL,
+    `birth`         DATE        NOT NULL,
+    `password`      VARCHAR(50) NOT NULL,
+    `role_id`       TINYINT     NOT NULL,
+    `profile_image` TEXT, #A link to the profile image (local storage).
     PRIMARY KEY (`id`)
 );
 

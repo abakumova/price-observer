@@ -14,6 +14,7 @@ public class UserDto implements Serializable {
     private String encryptedPassword;
     private String password;
     private Integer version;
+    private String profileImage;
     private UserRoleEnum userRole;
 
     public String getEncryptedPassword() {
@@ -88,6 +89,14 @@ public class UserDto implements Serializable {
         this.userRole = userRole;
     }
 
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
     @Override
     public String toString() {
         return "UserDto{" +
@@ -96,9 +105,8 @@ public class UserDto implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", birth=" + birth +
-                ", encryptedPassword='" + encryptedPassword + '\'' +
-                ", password='" + password + '\'' +
                 ", version=" + version +
+                ", profileImage='" + profileImage + '\'' +
                 ", userRole=" + userRole +
                 '}';
     }
@@ -113,14 +121,13 @@ public class UserDto implements Serializable {
                 Objects.equals(lastName, userDto.lastName) &&
                 Objects.equals(email, userDto.email) &&
                 Objects.equals(birth, userDto.birth) &&
-                Objects.equals(encryptedPassword, userDto.encryptedPassword) &&
-                Objects.equals(password, userDto.password) &&
                 Objects.equals(version, userDto.version) &&
+                Objects.equals(profileImage, userDto.profileImage) &&
                 userRole == userDto.userRole;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, birth, encryptedPassword, password, version, userRole);
+        return Objects.hash(id, firstName, lastName, email, birth, version, profileImage, userRole);
     }
 }
