@@ -122,11 +122,12 @@ public class UserDto implements Serializable {
                 Objects.equals(email, userDto.email) &&
                 Objects.equals(birth, userDto.birth) &&
                 Objects.equals(version, userDto.version) &&
+                Objects.equals(profileImage, userDto.profileImage) &&
                 userRole == userDto.userRole;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, birth, version, userRole);
+        return Objects.hash(id, firstName, lastName, email, birth, version, profileImage, userRole);
     }
 }

@@ -173,11 +173,12 @@ public class User {
                 Objects.equals(email, user.email) &&
                 Objects.equals(birth, user.birth) &&
                 Objects.equals(version, user.version) &&
+                Objects.equals(profileImage, user.profileImage) &&
                 Objects.equals(userRole, user.userRole);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, birth, version, userRole);
+        return Objects.hash(id, firstName, lastName, email, birth, version, profileImage, userRole);
     }
 }
