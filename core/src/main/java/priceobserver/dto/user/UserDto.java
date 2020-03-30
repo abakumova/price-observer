@@ -106,6 +106,7 @@ public class UserDto implements Serializable {
                 ", email='" + email + '\'' +
                 ", birth=" + birth +
                 ", version=" + version +
+                ", profileImage='" + profileImage + '\'' +
                 ", userRole=" + userRole +
                 '}';
     }

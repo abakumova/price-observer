@@ -157,6 +157,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", birth=" + birth +
                 ", version=" + version +
+                ", profileImage='" + profileImage + '\'' +
                 ", userRole=" + userRole +
                 '}';
     }
