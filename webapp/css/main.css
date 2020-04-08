@@ -3,7 +3,8 @@ html, body {
     width: 100%;
     padding: 0;
     margin: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif !important;
+    --main-color: #04805c !important;
 }
 
 body {
@@ -11,7 +12,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    color: #04805c;
 }
 
 header {
@@ -30,11 +30,6 @@ header {
     height: 90px;
     display: flex;
     flex-wrap: wrap;
-}
-
-main {
-    flex-grow: 1;
-    background-color: #ffffff;
 }
 
 .logo {
@@ -63,7 +58,7 @@ main {
     font-weight: bold;
 }
 
-.login {
+.header-button {
     position: fixed;
     top: 10px;
     right: 150px;
@@ -80,8 +75,7 @@ form.search-field input[type=text] {
     padding: 10px;
     font-size: 17px;
     color: white;
-    font-family: 'Montserrat', sans-serif;
-    border: 0px solid #8fd3f4;
+    border: 0 solid #8fd3f4;
     float: left;
     background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
 }
@@ -89,7 +83,6 @@ form.search-field input[type=text] {
 form.search-field input.active {
     background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
     color: white;
-    font-family: 'Montserrat', sans-serif;
     border: none;
 }
 
@@ -111,7 +104,7 @@ form.search-field button {
 }
 
 form.search-field button:hover {
-    background: #269983;
+    background: var(--main-color);
 }
 
 form.search-field::after {
@@ -120,44 +113,20 @@ form.search-field::after {
     display: table;
 }
 
-.image-container {
-    box-sizing: inherit;
-    position: relative;
-    background-size: cover;
-    background-position: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    max-height: 500px;
-    clear: both;
-    margin-bottom: 0;
-    margin-left: inherit;
-    margin-right: inherit;
-    width: inherit;
-    max-width: inherit;
-    margin-top: 0;
-    background-image: url("../img/slider.jpg");
-}
-
-.motto {
-    text-align: center;
-    font-size: 45px;
-    font-weight: bold;
-    margin: 30px 0 0;
-    padding: 0;
+main {
+    flex-grow: 1;
+    background-color: white;
 }
 
 .footer {
-    border-top: 2px solid #04805c;
+    border-top: 2px solid var(--main-color);
     padding-top: 5px;
     flex-shrink: 0;
     height: 20px;
     text-align: center;
+    color: var(--main-color);
 }
 
-/*LOGIN PAGE*/
 .vl {
     border-left: 2px solid #04805c;
     height: 623px;
@@ -167,363 +136,10 @@ form.search-field::after {
     top: 90px;
 }
 
-.login-box {
-    position: absolute;
-    left: 10%;
-    margin-left: -3px;
-}
-
-.login-box p {
-    top: 100px;
-}
-
-.login-box h1 {
-    top: 110px;
-    float: left;
-    font-size: 40px;
-    border-bottom: 6px solid #04805c;
-    margin-bottom: 50px;
-    padding: 13px 0;
-}
-
-.login-box button {
-    position: absolute;
-    left: 25%;
-    margin-left: -3px;
-}
-
-.signup-box {
-    position: absolute;
-    left: 60%;
-    margin-left: -3px;
-}
-
-.signup-box p {
-    top: 100px;
-}
-
-.signup-box h1 {
-    top: 110px;
-    float: left;
-    font-size: 40px;
-    border-bottom: 6px solid #04805c;
-    margin-bottom: 50px;
-    padding: 13px 0;
-}
-
-.signup-box button {
-    position: absolute;
-    left: 35%;
-    margin-left: -3px;
-}
-
-.textbox {
-    width: 100%;
-    overflow: hidden;
-    font-size: 20px;
-    padding: 8px 0;
-    margin: 8px 0;
-}
-
-.textbox input {
-    font-family: 'Montserrat', sans-serif;
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 18px;
-    width: 90%;
-    float: left;
-    margin: 0 10px;
-    border-bottom: 2px solid #04805c;
-}
-
-.textbox-hint input {
-    font-family: 'Montserrat', sans-serif;
-    outline: none;
-    background: none;
-    font-size: 18px;
-    width: 60%;
-    float: left;
-    margin: 0 10px;
-    border: 2px solid #a0090a;
-}
-
-.button-submit {
-    font-family: 'Montserrat', sans-serif;
-    width: 115px;
-    height: 35px;
-    background: none;
-    border: 2px solid #04805c;
-    color: #04805c;
-    font-size: 18px;
-    cursor: pointer;
-    align-content: center;
-    margin: 30px 30px 30px 400px;
-}
-
-/*SEARCH RESULT*/
 .error-message {
+    color: var(--main-color);
     margin-left: 120px;
     top: 250px;
     font-size: 40px;;
     padding: 15px 0;
-}
-
-.main-result {
-    overflow-y: scroll;
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /*grid-template-rows: repeat(2, 1fr);*/
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-}
-
-.border {
-    width: 300px;
-    margin: 0 auto 50px;
-    background: white;
-    padding: 20px;
-    border: 1px solid #F1E7E8;
-}
-
-.wrap {
-    height: 100%;
-    position: relative;
-}
-
-.product-wrap {
-    position: relative;
-}
-
-.product-wrap:after {
-    content: '';
-    background: rgba(10, 202, 110, 0.3);
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    opacity: 0;
-    transform: scale(.3);
-    transition: .3s ease-in-out;
-}
-
-.border:hover .product-wrap:after {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.product-wrap a {
-    display: block;
-    text-decoration: none;
-}
-
-.product-wrap img {
-    display: block;
-    width: 100%;
-}
-
-.product-button {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    transition: .3s ease-in-out;
-}
-
-.border:hover .product-button {
-    opacity: 1;
-}
-
-.product-button a {
-    text-decoration: none;
-    display: block;
-    border: 1px solid white;
-    white-space: nowrap;
-    text-transform: uppercase;
-    padding: .5em 1em;
-    font-size: 14px;
-    line-height: 1.6;
-    outline: none;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    color: white;
-    min-width: 160px;
-    margin: 5px auto;
-    transition: .3s ease-in-out;
-}
-
-.product-button a:hover {
-    background: white;
-    color: black;
-}
-
-.border:hover {
-    border-color: #04805c;
-}
-
-.product-info {
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 15px;
-    text-align: center;
-}
-
-.product-title {
-    font-size: 18px;
-}
-
-.price {
-    font-weight: bold;
-}
-
-/*This one is a button. If you hover on the button, it will change color */
-/*.product-button a:last-child:hover {*/
-/*    background: #c00;*/
-/*    color: red;*/
-/*}*/
-
-/*This one is p tags. */
-/*.product-info div:last-child p {
-/*    color: red;*/
-/*}*/
-
-/*http://jsfiddle.net/Symphony/7Lzg5s31/1/ simple example*/
-/*here I have a question - how can we connect first and second styles (P.S. + ~ > don't work)*/
-.product-button a:last-child:hover > .product-info div:last-child p {
-    /*background: #c00;*/
-    display: block;
-}
-
-/*This style is for hiding Price History*/
-.history {
-    display: none;
-}
-
-/*PROFILE*/
-.profile-photo {
-    position: absolute;
-    top: 100px;
-    left: 50px;
-    width: 250px;
-    height: 250px;
-    border: 1px solid #CCC;
-    background-color: #FFF;
-    padding: 4px;
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
-}
-
-.upload-form {
-    margin-top: 280px;
-    margin-left: 50px;
-    width: 150px;
-}
-
-.upload-button-picture {
-    width: 180px;
-    background: none;
-    border: 2px solid #04805c;
-    padding: 6px;
-    font-size: 25px;
-    cursor: pointer;
-    margin: 20px 29px;
-    text-decoration: none;
-    text-decoration-color: #04805c;
-    color: #04805c;
-}
-
-.profile-form {
-    position: absolute;
-    top: 90px;
-    left: 350px;
-    color: #04805c;
-    margin: 5px;
-    font-size: 25px;
-}
-
-.profile-form h1 {
-    top: 110px;
-    float: left;
-    font-size: 40px;
-    border-bottom: 6px solid #04805c;
-    margin-bottom: 50px;
-    padding: 13px 0;
-}
-
-.profile-form input {
-    font-family: 'Montserrat', sans-serif;
-    padding: 8px 0;
-    margin: 8px 0;
-    font-size: 18px;
-    border: none;
-    outline: none;
-    background: none;
-    border-bottom: 1px solid #04805c;
-    left: 450px;
-}
-
-.field {
-    clear: both;
-    text-align: justify-all;
-    line-height: 25px;
-}
-
-.wish-list {
-    position: absolute;
-    left: 60%;
-    margin-left: -3px;
-    top: 90px;
-}
-
-.wish-list h1 {
-    border-bottom: 6px solid #04805c;
-    float: left;
-    font-size: 40px;
-    margin-bottom: 40px;
-    padding: 13px 0;
-}
-
-/*PRODUCT PAGE*/
-.product-photo {
-    height: 600px;
-    width: 500px;
-    position: absolute;
-    top: 100px;
-    left: 70px;
-    border: 1px solid #CCC;
-    background-color: #FFF;
-    padding: 4px;
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
-}
-
-.description {
-    position: absolute;
-    left: 45%;
-    margin-left: -3px;
-}
-
-.description h1 {
-    align-content: center;
-    top: 110px;
-    float: left;
-    font-size: 40px;
-    border-bottom: 6px solid #04805c;
-    margin-bottom: 50px;
-    padding: 13px 0;
-}
-
-.description p {
-    font-size: 20px;
-    padding: 3px;
-    color: #04805c;
 }

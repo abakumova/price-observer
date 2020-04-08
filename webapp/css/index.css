@@ -1,0 +1,27 @@
+.image-container {
+    box-sizing: inherit;
+    position: relative;
+    background-size: cover;
+    background-position: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    max-height: 500px;
+    clear: both;
+    width: inherit;
+    max-width: inherit;
+    margin: 0;
+    /*background-image: url('../img/slider.jpg');*/
+    background-image: url('https://priceobserver839928203.files.wordpress.com/2020/03/desola-lanre-ologun-xvcdambxcoi-unsplash-2.jpg');
+}
+
+.motto {
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+    margin: 30px 0 0;
+    padding: 0;
+    color: var(--main-color);
+}

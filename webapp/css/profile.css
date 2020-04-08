@@ -1,0 +1,113 @@
+html {
+    overflow-y: hidden;
+}
+
+main {
+    color: var(--main-color);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profile-photo {
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    width: 250px;
+    height: 250px;
+    border: 1px solid #CCC;
+    background-color: white;
+    padding: 4px;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
+}
+
+.upload-form {
+    margin-top: 280px;
+    margin-left: 50px;
+    width: 150px;
+}
+
+.upload-button-picture {
+    width: 180px;
+    background: none;
+    border: 2px solid var(--main-color);
+    padding: 6px;
+    font-size: 25px;
+    cursor: pointer;
+    margin: 20px 29px;
+    text-decoration: none;
+    text-decoration-color: var(--main-color);
+    color: var(--main-color);
+}
+
+.profile-form {
+    position: absolute;
+    top: 90px;
+    left: 350px;
+    margin: 5px;
+    font-size: 25px;
+}
+
+.profile-form h1 {
+    top: 110px;
+    float: left;
+    font-size: 40px;
+    border-bottom: 6px solid var(--main-color);
+    margin-bottom: 50px;
+    padding: 13px 0;
+}
+
+.profile-form input {
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px 0;
+    margin: 8px 0;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: none;
+    border-bottom: 1px solid var(--main-color);
+    left: 450px;
+}
+
+.field {
+    clear: both;
+    text-align: justify-all;
+    line-height: 20px;
+    font-size: 18px;
+}
+
+.wish-list {
+    position: absolute;
+    left: 55%;
+    margin-left: -3px;
+    top: 90px;
+}
+
+.title {
+    position: absolute;
+    left: 55%;
+    align-content: center;
+    top: 90px;
+    float: left;
+    font-size: 40px;
+    color: var(--main-color);
+    border-bottom: 6px solid var(--main-color);
+    margin-bottom: 50px;
+    padding: 13px 0;
+}
+
+.wish {
+    top: 230px;
+    height: 450px;
+    position: absolute;
+    right: 0;
+    left: 55%;
+    margin-left: -3px;
+    color: var(--main-color);
+}
+
+.wish-main {
+    overflow-y: scroll;
+}
