@@ -48,7 +48,7 @@ public class User {
     private Date birth;
 
     @NotBlank
-    @Max(50)
+    @Max(64)
     @Column(name = "password")
     private String encryptedPassword;
 
