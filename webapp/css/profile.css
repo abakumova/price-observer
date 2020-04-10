@@ -30,11 +30,11 @@ main {
 }
 
 .upload-button-picture {
-    width: 180px;
+    width: 130px;
     background: none;
     border: 2px solid var(--main-color);
     padding: 6px;
-    font-size: 25px;
+    font-size: 18px;
     cursor: pointer;
     margin: 20px 29px;
     text-decoration: none;
@@ -100,7 +100,8 @@ main {
 
 .wish {
     top: 230px;
-    height: 450px;
+    height: auto;
+    bottom: 50px;
     position: absolute;
     right: 0;
     left: 55%;

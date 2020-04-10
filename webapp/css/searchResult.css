@@ -1,3 +1,8 @@
+main {
+    color: var(--main-color);
+    font-family: 'Montserrat', sans-serif;
+}
+
 .main-result {
     overflow-y: scroll;
     box-sizing: border-box;

@@ -129,17 +129,18 @@ main {
 
 .vl {
     border-left: 2px solid #04805c;
-    height: 623px;
+    height: auto;
     position: absolute;
     left: 50%;
     margin-left: -3px;
     top: 90px;
+    bottom: 41px;
 }
 
 .error-message {
     color: var(--main-color);
     margin-left: 120px;
-    top: 250px;
+    top: 350px;
     font-size: 40px;;
     padding: 15px 0;
 }
