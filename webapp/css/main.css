@@ -5,6 +5,10 @@ html, body {
     margin: 0;
     font-family: 'Montserrat', sans-serif !important;
     --main-color: #04805c !important;
+    --left: #84fab0;
+    --middle: #8fd3f4;
+    --white: white;
+    --error: #a0090a;
 }
 
 body {
@@ -18,7 +22,7 @@ header {
     position: sticky;
     top: 0;
     height: 90px;
-    background-color: white;
+    background-color: var(--white);
 }
 
 .wrapper {
@@ -52,7 +56,7 @@ header {
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
-    color: white;
+    color: var(--white);
     box-shadow: 0 0 20px #eee;
     border-radius: 10px;
     font-weight: bold;
@@ -62,7 +66,7 @@ header {
     position: fixed;
     top: 10px;
     right: 150px;
-    background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+    background-image: linear-gradient(to right, var(--left) 0%, var(--middle) 51%, var(--left) 100%);
 }
 
 form.search-field input[type=text] {
@@ -74,15 +78,15 @@ form.search-field input[type=text] {
     height: 24px;
     padding: 10px;
     font-size: 17px;
-    color: white;
+    color: var(--white);
     border: 0 solid #8fd3f4;
     float: left;
-    background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+    background-image: linear-gradient(to right, var(--left) 0%, var(--middle) 51%, var(--left) 100%);
 }
 
 form.search-field input.active {
-    background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
-    color: white;
+    background-image: linear-gradient(to right, var(--left) 0%, var(--middle) 51%, var(--left) 100%);
+    color: var(--white);
     border: none;
 }
 
@@ -95,10 +99,10 @@ form.search-field button {
     width: 45px;
     height: 44px;
     padding: 10px;
-    background: #84fab0;
-    color: white;
+    background: var(--left);
+    color: var(--white);
     font-size: 17px;
-    border: 0 solid #84fab0;
+    border: 0 solid var(--left);
     border-left: none;
     cursor: pointer;
 }
@@ -115,7 +119,7 @@ form.search-field::after {
 
 main {
     flex-grow: 1;
-    background-color: white;
+    background-color: var(--white);
 }
 
 .footer {

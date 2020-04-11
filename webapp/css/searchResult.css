@@ -16,7 +16,7 @@ main {
 .border {
     width: 300px;
     margin: 0 auto 50px;
-    background: white;
+    background: var(--white);
     padding: 20px;
     border: 1px solid #F1E7E8;
 }
@@ -74,7 +74,7 @@ main {
 .product-button a {
     text-decoration: none;
     display: block;
-    border: 1px solid white;
+    border: 1px solid var(--white);
     white-space: nowrap;
     text-transform: uppercase;
     padding: .5em 1em;
@@ -84,19 +84,19 @@ main {
     position: relative;
     overflow: hidden;
     text-align: center;
-    color: white;
+    color: var(--white);
     min-width: 160px;
     margin: 5px auto;
     transition: .3s ease-in-out;
 }
 
 .product-button a:hover {
-    background: white;
+    background: var(--white);
     color: black;
 }
 
 .border:hover {
-    border-color: #04805c;
+    border-color: var(--main-color);
 }
 
 .product-info {

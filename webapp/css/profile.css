@@ -14,7 +14,7 @@ main {
     width: 250px;
     height: 250px;
     border: 1px solid #CCC;
-    background-color: white;
+    background-color: var(--white);
     padding: 4px;
     display: inline-block;
     -webkit-box-sizing: border-box;
