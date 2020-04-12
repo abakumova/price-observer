@@ -1,0 +1,138 @@
+main {
+    color: var(--main-color);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.main-result {
+    overflow-y: scroll;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /*grid-template-rows: repeat(2, 1fr);*/
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+}
+
+.border {
+    width: 300px;
+    margin: 0 auto 50px;
+    background: var(--white);
+    padding: 20px;
+    border: 1px solid #F1E7E8;
+}
+
+.wrap {
+    height: 100%;
+    position: relative;
+}
+
+.product-wrap {
+    position: relative;
+}
+
+.product-wrap:after {
+    content: '';
+    background: rgba(10, 202, 110, 0.3);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    opacity: 0;
+    transform: scale(.3);
+    transition: .3s ease-in-out;
+}
+
+.border:hover .product-wrap:after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.product-wrap a {
+    display: block;
+    text-decoration: none;
+}
+
+.product-wrap img {
+    display: block;
+    width: 100%;
+}
+
+.product-button {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: .3s ease-in-out;
+}
+
+.border:hover .product-button {
+    opacity: 1;
+}
+
+.product-button a {
+    text-decoration: none;
+    display: block;
+    border: 1px solid var(--white);
+    white-space: nowrap;
+    text-transform: uppercase;
+    padding: .5em 1em;
+    font-size: 14px;
+    line-height: 1.6;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    color: var(--white);
+    min-width: 160px;
+    margin: 5px auto;
+    transition: .3s ease-in-out;
+}
+
+.product-button a:hover {
+    background: var(--white);
+    color: black;
+}
+
+.border:hover {
+    border-color: var(--main-color);
+}
+
+.product-info {
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.product-title {
+    font-size: 18px;
+}
+
+.price {
+    font-weight: bold;
+}
+
+/*This one is a button. If you hover on the button, it will change color */
+/*.product-button a:last-child:hover {*/
+/*    background: #c00;*/
+/*    color: red;*/
+/*}*/
+
+/*This one is p tags. */
+/*.product-info div:last-child p {
+/*    color: red;*/
+/*}*/
+
+/*http://jsfiddle.net/Symphony/7Lzg5s31/1/ simple example*/
+/*here I have a question - how can we connect first and second styles (P.S. + ~ > don't work)*/
+/*.product-button a:last-child:hover > .product-info div:last-child p {*/
+/*    !*background: #c00;*!*/
+/*    !*display: block;*!*/
+/*    visibility: visible;*/
+/*}*/
+
+/*!*This style is for hiding Price History*!*/
+/*.history {*/
+/*    visibility: hidden;*/
+/*}*/
