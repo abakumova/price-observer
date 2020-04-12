@@ -17,11 +17,11 @@ function validateRegLogin() {
     }
 
     if (!usersEmail) {
-        emailField.style.borderBottomColor = "#C70039";
+        emailField.style.borderBottomColor = "#a0090a";
         hint.innerText = "Enter your email.";
         return;
     } else if (!isValidEmail(usersEmail)) {
-        emailField.style.borderBottomColor = "#C70039";
+        emailField.style.borderBottomColor = "#a0090a";
         hint.innerText = "Provide a valid email address.";
         return;
     }
@@ -38,11 +38,11 @@ function validateRegPassword() {
     hint.innerText = "";
 
     if (!password) {
-        passwordField.style.borderBottomColor = "#C70039";
+        passwordField.style.borderBottomColor = "#a0090a";
         hint.innerText = 'Enter your password.';
         return;
     } else if (!isValidPassword(password)) {
-        passwordField.style.borderBottomColor = "#C70039";
+        passwordField.style.borderBottomColor = "#a0090a";
         hint.innerText = 'At least 6 characters, 1 digit and 1 uppercase letter.';
         return;
     }
@@ -62,12 +62,12 @@ function validateRegPasswordRepeat() {
     hint.innerText = "";
 
     if (!passwordRepeat) {
-        passwordRepeatField.style.borderBottomColor = "#C70039";
+        passwordRepeatField.style.borderBottomColor = "#a0090a";
         hint.innerText = 'Repeat your password.';
         return;
     } else if (passwordRepeat !== password) {
-        passwordField.style.borderBottomColor = "#C70039";
-        passwordRepeatField.style.borderBottomColor = "#C70039";
+        passwordField.style.borderBottomColor = "#a0090a";
+        passwordRepeatField.style.borderBottomColor = "#a0090a";
         hint.innerText = 'Passwords are different';
         return;
     }
@@ -88,7 +88,7 @@ function validateFirstName() {
     hint.innerText = "";
 
     if (!validateName(firstName)) {
-        firstNameField.style.borderBottomColor = "#C70039";
+        firstNameField.style.borderBottomColor = "#a0090a";
         hint.innerText = 'Provide a valid first name';
         return;
     }
@@ -105,7 +105,7 @@ function validateLastName() {
     hint.innerText = "";
 
     if (!validateName(lastName)) {
-        lastNameField.style.borderBottomColor = "#C70039";
+        lastNameField.style.borderBottomColor = "#a0090a";
         hint.innerText = 'Provide a valid last name';
         return;
     }

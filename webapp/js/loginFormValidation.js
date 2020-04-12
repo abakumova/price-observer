@@ -17,11 +17,11 @@ function validateLogin() {
     }
 
     if (!email) {
-        emailField.style.borderBottomColor = "#C70039";
+        emailField.style.borderBottomColor = "#a0090a";
         hint.innerText = "Enter your email.";
         return;
     } else if (!isValidEmail(email)) {
-        emailField.style.borderBottomColor = "#C70039";
+        emailField.style.borderBottomColor = "#a0090a";
         hint.innerText = "Provide a valid email address.";
         return;
     }
@@ -38,7 +38,7 @@ function validatePassword() {
     hint.innerText = "";
 
     if (!password) {
-        passwordField.style.borderBottomColor = "#C70039";
+        passwordField.style.borderBottomColor = "#a0090a";
         hint.innerText = 'Enter your password.';
         return;
     }
@@ -60,8 +60,8 @@ function logIn() {
         if (xhr.status === 200) {
             let response = xhr.responseText;
             if (response === 'incorrect') {
-                email.style.borderBottomColor = "#C70039";
-                password.style.borderBottomColor = "#C70039";
+                email.style.borderBottomColor = "#a0090a";
+                password.style.borderBottomColor = "#a0090a";
                 hint.innerText = 'Incorrect login or password.';
             } else if (response === 'success') {
                 window.location.reload(true);
