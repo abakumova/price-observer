@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Product</title>
-    <link href="../static/assets/css/main.css" rel="stylesheet">
-    <link href="../static/assets/css/productPage.css" rel="stylesheet">
+    <link th:href="@{/assets/css/main.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/productPage.css}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -14,9 +14,9 @@
         <div class="row">
             <div class="logo">
                 <p>
-                    <a href="index.html"></a>
-                    <img alt="logo" class="logo-picture" height="40.5" src="../static/assets/img/logo.png"
-                         width="251.5">
+                    <a th:href="@{/}">
+                        <img alt="logo" class="logo-picture" height="40.5" th:src="@{/assets/img/logo.png}"
+                             width="251.5"></a>
                 </p>
             </div>
             <form action="" class="search-field">
@@ -24,7 +24,7 @@
                 <button type="submit"><em class="fa fa-search"></em></button>
             </form>
             <div class="button-container">
-                <a class="btn header-button">Log in</a> <!-- LogIn Profile  -->
+                <a class="btn header-button" th:href="@{/login}">Log in</a> <!-- LogIn Profile  -->
             </div>
         </div>
     </div>
