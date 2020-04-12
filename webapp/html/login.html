@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/e99543c0a3.js"></script>
-    <script src="../js/loginFormValidation.js"></script>
-    <script src="../js/signupFormValidation.js"></script>
+    <script src="js/loginFormValidation.js"></script>
+    <script src="js/signupFormValidation.js"></script>
     <meta charset="UTF-8">
     <title>Log In</title>
     <link href="../css/main.css" rel="stylesheet">
+    <link href="../css/login.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body>
 <header>
     <div class="wrapper">
         <div class="row">
@@ -25,51 +25,57 @@
                 <button type="submit"><em class="fa fa-search"></em></button>
             </form>
             <div class="button-container">
-                <a class="btn login">Log in</a> <!-- LogIn Profile  -->
+                <a class="btn header-button">Log in</a> <!-- LogIn Profile  -->
             </div>
         </div>
     </div>
 </header>
-<main>
-    <form class="login-box">
+<main class="login-main">
+    <form class="box login-box">
         <p>If you have an account, please enter your email and password</p>
         <h1>Log in</h1>
         <div class="textbox">
             <em class="fas fa-user"></em>
             <input id="login" name="email" placeholder="Username" type="text">
         </div>
-        <div class="textboxHint" id="login-hint"></div>
+        <div class="textbox-hint" id="login-hint"></div>
         <div class="textbox">
             <em class="fas fa-lock"></em>
             <input id="pwd" name="password" placeholder="Password" type="password">
         </div>
-        <div class="textboxHint" id="pwd-hint"></div>
+        <div class="textbox-hint" id="pwd-hint"></div>
+
         <button class="button-submit" onclick="validateAndLogIn()">Log in</button>
     </form>
+
     <div class="vl"></div>
-    <form class="signup-box">
+
+    <form class="box signup-box">
         <p>If you have don't have an account, please fill this form to create it</p>
         <h1>Sign up</h1>
         <div class="textbox">
             <input id="first_name" name="firstName" placeholder="First name" type="text" value="">
         </div>
-        <div class="textboxHint" id="reg-first-name-hint"></div>
+        <div class="textbox-hint" id="reg-first-name-hint"></div>
+
         <div class="textbox">
             <input id="last_name" name="lastName" placeholder="Last name" type="text" value="">
         </div>
-        <div class="textboxHint" id="reg-last-name-hint"></div>
+        <div class="textbox-hint" id="reg-last-name-hint"></div>
         <div class="textbox">
             <input id="reg-login" name="email" placeholder="E-mail" type="text">
         </div>
-        <div class="textboxHint" id="reg-login-hint"></div>
+        <div class="textbox-hint" id="reg-login-hint"></div>
+
         <div class="textbox">
             <input id="reg-pwd" name="password" placeholder="Password" type="password">
         </div>
-        <div class="textboxHint" id="reg-password-hint"></div>
+        <div class="textbox-hint" id="reg-password-hint"></div>
+
         <div class="textbox">
             <input id="reg-pwd-r" name="password_r" placeholder="Repeat password" type="password">
         </div>
-        <div class="textboxHint" id="reg-password-r-hint"></div>
+        <div class="textbox-hint" id="reg-password-r-hint"></div>
         <button class="button-submit" onclick="validateAndSignUp()">Sign Up</button>
     </form>
 </main>
