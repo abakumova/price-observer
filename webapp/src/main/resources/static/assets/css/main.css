@@ -118,6 +118,7 @@ form.search-field::after {
 }
 
 main {
+    height: 100%;
     flex-grow: 1;
     background-color: var(--white);
 }
