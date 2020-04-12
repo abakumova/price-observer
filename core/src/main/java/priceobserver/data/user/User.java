@@ -55,6 +55,7 @@ public class User {
     /**
      * We store only encrypted password.
      */
+    @Max(50)
     @Transient
     private String password;
 
