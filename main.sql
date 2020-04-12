@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `user`
     `last_name`     VARCHAR(50) NOT NULL,
     `email`         VARCHAR(70) NOT NULL,
     `birth`         DATE        NOT NULL,
-    `password`      VARCHAR(50) NOT NULL,
+    `password`      VARCHAR(64) NOT NULL,
     `role_id`       TINYINT     NOT NULL,
     `profile_image` TEXT, #A link to the profile image (local storage).
     PRIMARY KEY (`id`)

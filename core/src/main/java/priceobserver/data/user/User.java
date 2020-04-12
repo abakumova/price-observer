@@ -48,13 +48,14 @@ public class User {
     private Date birth;
 
     @NotBlank
-    @Max(50)
+    @Max(64)
     @Column(name = "password")
     private String encryptedPassword;
 
     /**
      * We store only encrypted password.
      */
+    @Max(50)
     @Transient
     private String password;
 

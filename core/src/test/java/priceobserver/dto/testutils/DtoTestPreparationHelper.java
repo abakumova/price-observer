@@ -84,7 +84,7 @@ public final class DtoTestPreparationHelper {
     private static final String FIRST_NAME = "First name";
     private static final String LAST_NAME = "Last name";
     private static final String EMAIL = "email@email.email";
-    private static final String ENCRYPTED_PASSWORD = "Encrypted password";
+    private static final String ENCRYPTED_PASSWORD = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
     private static final String PASSWORD = "Password";
     private static final String USER_ROLE_AS_STRING = "user";
     private static final LocalDate BIRTH = LocalDate.now();
