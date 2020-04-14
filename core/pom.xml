@@ -80,7 +80,7 @@
         </dependency>
         <dependency>
             <groupId>price-observer</groupId>
-            <artifactId>webapp</artifactId>
+            <artifactId>price-observer-webapp</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
