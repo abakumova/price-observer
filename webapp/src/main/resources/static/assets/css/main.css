@@ -152,3 +152,7 @@ main {
     font-size: 40px;;
     padding: 15px 0;
 }
+
+.error-picture {
+    text-align: center;
+}
