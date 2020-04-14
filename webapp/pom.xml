@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>parent-project</artifactId>
+        <artifactId>price-observer</artifactId>
         <groupId>price-observer</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webapp</artifactId>
+    <artifactId>price-observer-webapp</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
