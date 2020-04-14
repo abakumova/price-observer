@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@1,500;1,600&display=swap');
+
+.error {
+    text-align: center;
+    color: #04805c;
+    text-shadow: 0 7px 0 #0b513c;
+}
+
+.num {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 7rem;
+    margin-bottom: 20px;
+}
+
+.text {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 6rem;
+    margin: 0;
+}
