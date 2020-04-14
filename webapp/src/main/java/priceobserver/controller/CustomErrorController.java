@@ -25,7 +25,7 @@ public class CustomErrorController implements ErrorController {
                 .map(Integer::parseInt);
 
         if (status.isPresent() && status.get() == HttpStatus.NOT_FOUND.value()) {
-            LOGGER.error(String.format("ERROR 404 URL %s?%s", request.getRequestURL().toString(), request.getQueryString()));
+            LOGGER.error("ERROR 404 URL {}?{}", request.getRequestURL(), request.getQueryString());
             return PAGE404;
         }
 
