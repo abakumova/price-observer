@@ -2,18 +2,19 @@
 
 .error {
     text-align: center;
-    color: #04805c;
-    text-shadow: 0 7px 0 #0b513c;
+    color: var(--main-color);
+    font-family: 'Montserrat Alternates', sans-serif;
+    --shadow: #0b513c;
 }
 
 .num {
-    font-family: 'Montserrat Alternates', sans-serif;
     font-size: 7rem;
     margin-bottom: 20px;
+    text-shadow: 0 7px 0 var(--shadow);
 }
 
 .text {
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 6rem;
-    margin: 0;
+    font-size: 4rem;
+    margin-top: 35px;
+    text-shadow: 0 5px 0 var(--shadow);
 }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Page not found</title>
+    <title>Error Page</title>
     <link rel="stylesheet" th:href="@{/assets/css/main.css}">
     <link rel="stylesheet" th:href="@{/assets/css/error.css}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
@@ -29,8 +29,8 @@
     </div>
 </header>
 <main>
-    <h1 class="error num">404</h1>
-    <h1 class="error text">Page not found</h1>
+    <h1 class="error num" th:inline="text">[[${errorCode}]]</h1>
+    <h1 class="error text" th:inline="text">[[${errorText}]]</h1>
 </main>
 <footer>
     <p class="footer">Karazin University 2020</p>
