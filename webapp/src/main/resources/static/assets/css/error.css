@@ -18,3 +18,15 @@
     margin-top: 35px;
     text-shadow: 0 5px 0 var(--shadow);
 }
+
+.return-p {
+    text-align: center;
+    font-size: 35px;
+    margin-top: 120px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.return-a:active, .return-a:visited, .return-a:link {
+    text-decoration: none;
+    color: #636363;
+}
