@@ -69,8 +69,9 @@ CREATE TABLE IF NOT EXISTS `product_type`
 
 CREATE TABLE IF NOT EXISTS `store`
 (
-    `id`   INT         NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(50) NOT NULL,
+    `id`   INT          NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50)  NOT NULL,
+    `url`  VARCHAR(100) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
