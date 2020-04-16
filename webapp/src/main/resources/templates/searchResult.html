@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head(~{::title},~{::link})">
+<head>
     <title>Find</title>
     <link th:href="@{/assets/css/searchResult.css}" rel="stylesheet">
+    <th:block th:insert="fragments/commonHead :: copy"/>
 </head>
 <body>
-<div th:insert="fragments/header :: copy"></div>
+<th:block th:insert="fragments/header :: copy"/>
 <main class="main-result">
     <div class="border">
         <div class="wrap">
@@ -86,6 +87,6 @@
         </div>
     </div>
 </main>
-<div th:insert="fragments/footer :: copy"></div>
+<th:block th:insert="fragments/footer :: copy"/>
 </body>
 </html>

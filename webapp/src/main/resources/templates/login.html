@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head(~{::title},~{::link})">
-    <!--    <script src="js/loginFormValidation.js"></script>-->
-    <!--    <script src="js/signupFormValidation.js"></script>-->
+<head>
     <title>Log In</title>
     <link th:href="@{/assets/css/login.css}" rel="stylesheet">
+    <th:block th:insert="fragments/commonHead :: copy"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/e99543c0a3.js"></script>
+    <!--    <script src="js/loginFormValidation.js"></script>-->
+    <!--    <script src="js/signupFormValidation.js"></script>-->
 </head>
-<div th:insert="fragments/header :: copy"></div>
-<script crossorigin="anonymous" src="https://kit.fontawesome.com/e99543c0a3.js"></script>
+<th:block th:insert="fragments/header :: copy"/>
 <main class="login-main">
     <form class="box login-box">
         <p>If you have an account, please enter your email and password</p>
@@ -57,6 +58,6 @@
         <button class="button-submit" onclick="validateAndSignUp()">Sign Up</button>
     </form>
 </main>
-<div th:insert="fragments/footer :: copy"></div>
+<th:block th:insert="fragments/footer :: copy"/>
 </body>
 </html>

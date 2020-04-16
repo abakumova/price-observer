@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head(~{::title},~{::link})">
+<head>
     <title>Error Page</title>
     <link rel="stylesheet" th:href="@{/assets/css/error.css}">
+    <th:block th:insert="fragments/commonHead :: copy"/>
 </head>
 <body>
-<div th:insert="fragments/header :: copy"></div>
+<th:block th:insert="fragments/header :: copy"/>
 <main>
     <h1 class="error num" th:inline="text">[[${errorCode}]]</h1>
     <h1 class="error text" th:inline="text">[[${errorText}]]</h1>
@@ -13,6 +14,6 @@
         <p class="return-p"><a class="return-a" th:href="@{/}">Return to home page</a></p>
     </div>
 </main>
-<div th:insert="fragments/footer :: copy"></div>
+<th:block th:insert="fragments/footer :: copy"/>
 </body>
 </html>

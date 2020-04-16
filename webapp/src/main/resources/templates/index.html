@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head(~{::title},~{::link})">
+<head>
     <title>Price Observer</title>
     <link th:href="@{/assets/css/index.css}" rel="stylesheet">
+    <th:block th:insert="fragments/commonHead :: copy"/>
 </head>
 <body>
-<div th:insert="fragments/header :: copy"></div>
+<th:block th:insert="fragments/header :: copy"/>
 <main>
     <div class="image-container"></div>
     <p class="motto">Find your best price</p>
 </main>
-<div th:insert="fragments/footer :: copy"></div>
+<th:block th:insert="fragments/footer :: copy"/>
 </body>
 </html>
