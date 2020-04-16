@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="head :: head(~{::title},~{::link})">
+<head th:replace="fragments/head :: head(~{::title},~{::link}, ~{::script})">
     <title>Find</title>
+    <link>
+    <script/>
 </head>
 <body>
-<div th:insert="header :: copy"></div>
+<div th:insert="fragments/header :: copy"></div>
 <main>
     <h1 class="error-message">SORRY, NO RESULTS FOR "---" HAVE BEEN FOUND</h1>
 </main>
-<div th:insert="footer :: copy"></div>
+<div th:insert="fragments/footer :: copy"></div>
 </body>
 </html>

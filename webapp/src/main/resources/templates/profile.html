@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="head :: head(~{::title},~{::link})">
+<head th:replace="fragments/head :: head(~{::title},~{::link}, ~{::script})">
     <title>Profile</title>
     <link th:href="@{/assets/css/profile.css}" rel="stylesheet">
+    <script/>
 </head>
 <body>
-<div th:insert="header :: copy"></div>
+<div th:insert="fragments/header :: copy"></div>
 <main>
     <div>
         <div>
@@ -76,6 +77,6 @@
         </div>
     </form>
 </main>
-<div th:insert="footer :: copy"></div>
+<div th:insert="fragments/footer :: copy"></div>
 </body>
 </html>
