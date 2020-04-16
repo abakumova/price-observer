@@ -5,12 +5,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import priceobserver.data.productprice.ProductPrice;
+import priceobserver.dto.DtoTestConfiguration;
 
 import static priceobserver.dto.testutils.DtoTestPreparationHelper.getPreparedProductPriceDto;
 import static priceobserver.dto.testutils.DtoTestPreparationHelper.getPreparedProductPriceEntity;
 
 @SpringBootTest
+@ContextConfiguration(classes = DtoTestConfiguration.class)
 class ProductPriceDtoConverterImplTest {
 
     private static ProductPriceDto productPriceDto;
