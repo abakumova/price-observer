@@ -3,6 +3,7 @@ package priceobserver.data.store;
 public final class StoreBuilder {
     private Long id;
     private String name;
+    private String url;
 
     private StoreBuilder() {
     }
@@ -21,10 +22,16 @@ public final class StoreBuilder {
         return this;
     }
 
+    public StoreBuilder withUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
     public Store build() {
         Store store = new Store();
         store.setId(id);
         store.setName(name);
+        store.setUrl(url);
         return store;
     }
 }

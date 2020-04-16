@@ -20,6 +20,10 @@ public class StoreRepositoryTest {
     private static final String STORE_NAME_2 = "Store_2";
     private static final String STORE_NAME_3 = "Store_3";
 
+    private static final String STORE_URL_1 = "http://localhost:8081/";
+    private static final String STORE_URL_2 = "http://localhost:8082/";
+    private static final String STORE_URL_3 = "http://localhost:8083/";
+
     private static Store store1;
     private static Store store2;
     private static Store store3;
@@ -29,14 +33,9 @@ public class StoreRepositoryTest {
 
     @BeforeAll
     static void setUp() {
-        store1 = new Store();
-        store1.setName(STORE_NAME_1);
-
-        store2 = new Store();
-        store2.setName(STORE_NAME_2);
-
-        store3 = new Store();
-        store3.setName(STORE_NAME_3);
+        store1 = StoreBuilder.aStore().withName(STORE_NAME_1).withUrl(STORE_URL_1).build();
+        store2 = StoreBuilder.aStore().withName(STORE_NAME_2).withUrl(STORE_URL_2).build();
+        store3 = StoreBuilder.aStore().withName(STORE_NAME_3).withUrl(STORE_URL_3).build();
     }
 
     @Test
@@ -54,7 +53,6 @@ public class StoreRepositoryTest {
     @Test
     public void shouldFindStoreByPassedName() {
         storeRepository.saveAll(Arrays.asList(store1, store2, store3));
-
 
         assertTrue(storeRepository.findFirstByName(STORE_NAME_1).isPresent());
         assertTrue(storeRepository.findFirstByName(STORE_NAME_2).isPresent());

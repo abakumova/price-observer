@@ -8,6 +8,8 @@ public class StoreDto implements Serializable {
 
     private String name;
 
+    private String url;
+
     public Long getId() {
         return id;
     }
@@ -24,11 +26,20 @@ public class StoreDto implements Serializable {
         this.name = name;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "StoreDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 
@@ -38,11 +49,12 @@ public class StoreDto implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         StoreDto storeDto = (StoreDto) o;
         return Objects.equals(id, storeDto.id) &&
-                Objects.equals(name, storeDto.name);
+                Objects.equals(name, storeDto.name) &&
+                Objects.equals(url, storeDto.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, url);
     }
 }

@@ -23,6 +23,10 @@ public class Store {
     @Size(max = 50)
     private String name;
 
+    @NotBlank
+    @Size(min = 5, max = 100)
+    private String url;
+
     public Long getId() {
         return id;
     }
@@ -39,11 +43,20 @@ public class Store {
         this.name = name;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "Store{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 
@@ -53,11 +66,12 @@ public class Store {
         if (o == null || getClass() != o.getClass()) return false;
         Store store = (Store) o;
         return Objects.equals(id, store.id) &&
-                Objects.equals(name, store.name);
+                Objects.equals(name, store.name) &&
+                Objects.equals(url, store.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, url);
     }
 }
