@@ -69,6 +69,7 @@ public final class DtoTestPreparationHelper {
 
     // Store fields.
     private static final String STORE_NAME = "Store name";
+    private static final String STORE_URL = "http://localhost:8080/";
     private static final Long STORE_ID = 1L;
 
     // Product price fields
@@ -174,6 +175,7 @@ public final class DtoTestPreparationHelper {
         return StoreBuilder.aStore()
                 .withId(STORE_ID)
                 .withName(STORE_NAME)
+                .withUrl(STORE_URL)
                 .build();
     }
 
@@ -181,6 +183,7 @@ public final class DtoTestPreparationHelper {
         return StoreDtoBuilder.aStoreDto()
                 .withId(STORE_ID)
                 .withName(STORE_NAME)
+                .withUrl(STORE_URL)
                 .build();
     }
 

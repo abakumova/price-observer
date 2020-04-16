@@ -24,7 +24,7 @@ public class Store {
     private String name;
 
     @NotBlank
-    @Size(min = 5, max = 50)
+    @Size(min = 5, max = 100)
     private String url;
 
     public Long getId() {
