@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head(title,links,scripts)">
+<head th:fragment="head(title,links)">
     <meta charset="UTF-8">
     <title th:replace="${title}"></title>
     <link rel="stylesheet" th:href="@{/assets/css/main.css}">
@@ -9,5 +9,4 @@
     <link rel="icon" th:href="@{/assets/img/icon.png}" type="image/icon type">
 
     <th:block th:replace="${links}"/>
-    <th:block th:replace="${scripts}"/>
 </head>

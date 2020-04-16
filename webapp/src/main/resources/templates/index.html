@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head(~{::title},~{::link}, ~{::script})">
+<head th:replace="fragments/head :: head(~{::title},~{::link})">
     <title>Price Observer</title>
     <link th:href="@{/assets/css/index.css}" rel="stylesheet">
-    <script/>
 </head>
 <body>
 <div th:insert="fragments/header :: copy"></div>
