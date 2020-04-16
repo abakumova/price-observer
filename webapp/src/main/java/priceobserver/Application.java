@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * To start the application run this class main method.
  * By default, the application starts on 8080 port.
- * <p>
+ *
  * Note: do not forget to specify DB credentials at core module resources/application.properties
  */
 @SpringBootApplication
