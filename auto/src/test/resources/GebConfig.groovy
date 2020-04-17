@@ -1,11 +1,13 @@
-import io.github.bonigarcia.wdm.ChromeDriverManager
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 
-reportsDir = "target/geb-reports"
+reportsDir = new File("target/geb-reports")
+reportOnTestFailureOnly = true
+
 baseUrl = "https://pn.com.ua/"
 
-ChromeDriverManager.getInstance().setup()
+System.setProperty("webdriver.chrome.driver", System.getProperty("webdriver.chrome.driver", "target/driver/chromedriver.exe"))
+
 ChromeOptions options = new ChromeOptions()
 options.addArguments("--no-sandbox")
 options.addArguments("--start-maximized")
