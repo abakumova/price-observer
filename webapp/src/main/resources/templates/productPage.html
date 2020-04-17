@@ -1,33 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Product</title>
-    <link th:href="@{/assets/css/main.css}" rel="stylesheet">
     <link th:href="@{/assets/css/productPage.css}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <th:block th:insert="fragments/commonHead :: copy"/>
 </head>
 <body>
-<header>
-    <div class="wrapper">
-        <div class="row">
-            <div class="logo">
-                <p>
-                    <a th:href="@{/}">
-                        <img alt="logo" class="logo-picture" th:src="@{/assets/img/logo.png}"></a>
-                </p>
-            </div>
-            <form action="" class="search-field">
-                <input name="search" placeholder="Search..." type="text">
-                <button type="submit"><em class="fa fa-search"></em></button>
-            </form>
-            <div class="button-container">
-                <a class="btn header-button" th:href="@{/login}">Log in</a> <!-- LogIn Profile  -->
-            </div>
-        </div>
-    </div>
-</header>
+<th:block th:insert="fragments/header :: copy"/>
 <main>
     <form>
         <div>
@@ -84,8 +63,6 @@
         </div>
     </form>
 </main>
-<footer>
-    <p class="footer">Karazin University 2020</p>
-</footer>
+<th:block th:insert="fragments/footer :: copy"/>
 </body>
 </html>

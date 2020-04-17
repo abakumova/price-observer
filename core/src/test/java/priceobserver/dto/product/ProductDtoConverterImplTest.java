@@ -4,13 +4,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import priceobserver.data.product.Product;
+import priceobserver.dto.DtoTestConfiguration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static priceobserver.dto.testutils.DtoTestPreparationHelper.getPreparedProductDto;
 import static priceobserver.dto.testutils.DtoTestPreparationHelper.getPreparedProductEntity;
 
 @SpringBootTest
+@ContextConfiguration(classes = DtoTestConfiguration.class)
 class ProductDtoConverterImplTest {
 
     private static ProductDto productDto;
