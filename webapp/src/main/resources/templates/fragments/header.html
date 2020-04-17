@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Page not found</title>
-    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/error.css}">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
 <body>
-<header>
+<header th:fragment="copy">
     <div class="wrapper">
         <div class="row">
             <div class="logo">
@@ -23,17 +15,10 @@
                 <button type="submit"><em class="fa fa-search"></em></button>
             </form>
             <div class="button-container">
-                <a class="btn header-button" th:href="@{/}">Main</a>
+                <a class="btn header-button" th:href="@{/login}">Log in</a>
             </div>
         </div>
     </div>
 </header>
-<main>
-    <h1 class="error num">404</h1>
-    <h1 class="error text">Page not found</h1>
-</main>
-<footer>
-    <p class="footer">Karazin University 2020</p>
-</footer>
 </body>
 </html>

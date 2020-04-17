@@ -3,6 +3,7 @@ package priceobserver.dto.store;
 public final class StoreDtoBuilder {
     private Long id;
     private String name;
+    private String url;
 
     private StoreDtoBuilder() {
     }
@@ -21,10 +22,16 @@ public final class StoreDtoBuilder {
         return this;
     }
 
+    public StoreDtoBuilder withUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
     public StoreDto build() {
         StoreDto storeDto = new StoreDto();
         storeDto.setId(id);
         storeDto.setName(name);
+        storeDto.setUrl(url);
         return storeDto;
     }
 }

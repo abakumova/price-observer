@@ -1,35 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Log In</title>
+    <link th:href="@{/assets/css/login.css}" rel="stylesheet">
+    <th:block th:insert="fragments/commonHead :: copy"/>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/e99543c0a3.js"></script>
     <!--    <script src="js/loginFormValidation.js"></script>-->
     <!--    <script src="js/signupFormValidation.js"></script>-->
-    <meta charset="UTF-8">
-    <title>Log In</title>
-    <link th:href="@{/assets/css/main.css}" rel="stylesheet">
-    <link th:href="@{/assets/css/login.css}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<header>
-    <div class="wrapper">
-        <div class="row">
-            <div class="logo">
-                <p>
-                    <a th:href="@{/}">
-                        <img alt="logo" class="logo-picture" th:src="@{/assets/img/logo.png}"></a>
-                </p>
-            </div>
-            <form action="" class="search-field">
-                <input name="search" placeholder="Search..." type="text">
-                <button type="submit"><em class="fa fa-search"></em></button>
-            </form>
-            <div class="button-container">
-                <a class="btn header-button" th:href="@{/}">Main</a> <!-- Main -->
-            </div>
-        </div>
-    </div>
-</header>
+<th:block th:insert="fragments/header :: copy"/>
 <main class="login-main">
     <form class="box login-box">
         <p>If you have an account, please enter your email and password</p>
@@ -79,8 +58,6 @@
         <button class="button-submit" onclick="validateAndSignUp()">Sign Up</button>
     </form>
 </main>
-<footer>
-    <p class="footer">Karazin University 2020</p>
-</footer>
+<th:block th:insert="fragments/footer :: copy"/>
 </body>
 </html>
