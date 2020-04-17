@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import priceobserver.dto.product.ProductDto;
 import priceobserver.dto.product.ProductDtoBuilder;
+import priceobserver.dto.productproperties.ProductPropertiesDto;
 import priceovserver.ProductParser;
 import priceovserver.ProductParsingException;
 
@@ -63,14 +64,18 @@ public class AvicProductParser implements ProductParser {
         //Getting normal product name by cutting cyrillic prefix
         String name = fullProductName.substring(fullProductName.indexOf(' ') + 1);
         String photo = el.select("a.img > img").first().attr("src");
-        String description = el.select("div.description > p").first().text();
+        String properties = getProductProperties(el.select("div.description > p").first().text());
 
         products.add(ProductDtoBuilder.aProductDto()
                 .withName(name)
                 .withModel(model)
                 .withImage(photo)
-                .withDescription(description)
+                .withProductProperties(new ProductPropertiesDto(properties))
                 .build());
+    }
+
+    private String getProductProperties(String rawProperties) {
+        return rawProperties.replace("/", ",");
     }
 
 
