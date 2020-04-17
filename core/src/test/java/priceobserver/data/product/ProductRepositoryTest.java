@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ContextConfiguration;
+import priceobserver.data.DataTestConfiguration;
 import priceobserver.data.manufacturer.Manufacturer;
 import priceobserver.data.manufacturer.ManufacturerRepository;
 import priceobserver.data.productproperties.ProductProperties;
@@ -23,6 +25,7 @@ import static priceobserver.dto.testutils.DtoTestPreparationHelper.getPreparedPr
 import static priceobserver.dto.testutils.DtoTestPreparationHelper.getPreparedProductTypeEntity;
 
 @DataJpaTest
+@ContextConfiguration(classes = DataTestConfiguration.class)
 class ProductRepositoryTest {
 
     private static final String PRODUCT_NAME_1 = "Product 1";
