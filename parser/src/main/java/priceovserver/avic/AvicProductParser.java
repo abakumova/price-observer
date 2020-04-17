@@ -27,6 +27,7 @@ public class AvicProductParser implements ProductParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AvicProductParser.class);
 
+    private static final String AVIC_DOMAIN = "https://avic.ua/";
     private static final String AVIC_PAGE_WITH_IPHONES = "https://avic.ua/iphone.html";
     private static final String PRODUCT_ELEMENT_CSS_CLASS_NAME = "box-product";
 
@@ -63,7 +64,7 @@ public class AvicProductParser implements ProductParser {
         }
         //Getting normal product name by cutting cyrillic prefix
         String name = fullProductName.substring(fullProductName.indexOf(' ') + 1);
-        String photo = el.select("a.img > img").first().attr("src");
+        String photo = AVIC_DOMAIN.concat(el.select("a.img > img").first().attr("src"));
         String properties = getProductProperties(el.select("div.description > p").first().text());
 
         products.add(ProductDtoBuilder.aProductDto()
