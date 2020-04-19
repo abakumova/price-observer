@@ -1,6 +1,6 @@
 package priceovserver;
 
-public class ProductParsingException extends Exception {
+public class ProductParsingException extends RuntimeException {
     public ProductParsingException() {
     }
 

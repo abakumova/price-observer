@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ProductParser {
 
-    List<ProductDto> parse() throws ProductParsingException;
+    List<ProductDto> parse();
 }
