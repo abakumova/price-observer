@@ -146,6 +146,8 @@ public class AvicProductParser implements ProductParser {
             builder.append(" ");
             builder.append(paragraph.text());
         }
+
+        builder.delete(0, 2);
         return builder.toString();
     }
 
