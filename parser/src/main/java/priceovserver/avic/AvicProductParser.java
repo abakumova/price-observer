@@ -15,8 +15,6 @@ import priceovserver.ProductParsingException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * The class to parse products from Avic store site.
@@ -33,18 +31,23 @@ public class AvicProductParser implements ProductParser {
     private static List<ProductDto> products = new ArrayList<>();
 
     @Override
-    public List<ProductDto> parse() {
-        LOGGER.info("Started parsing of the site {}", AVIC_PAGE_WITH_IPHONES);
+    public List<ProductDto> parse(String avicUrlWithProduct) {
+        LOGGER.info("Started parsing of the site {}", avicUrlWithProduct);
         fillProductPagesList();
         productPages.forEach(this::extractProductAndAddToList);
         return products;
     }
 
     private void fillProductPagesList() {
+        // Open the first part of page with products, get all product pages from it.
         Document startingPageWithProducts = getPageByUrl(AVIC_PAGE_WITH_IPHONES);
         Elements linksToProductPages = startingPageWithProducts.select("div.images > a.img");
         linksToProductPages.forEach(a -> productPages.add(getPageByUrl(a.attr("href"))));
 
+        /*
+            The page with products is split into a few pages.
+            Since we parsed the first part of it, we open others and getting product pages.
+        */
         Elements linksToNextPages = startingPageWithProducts.select("div.paging > a.ditto_page");
         List<Document> otherPagesWithProducts = new ArrayList<>();
         linksToNextPages.forEach(a -> otherPagesWithProducts.add(getPageByUrl(AVIC_DOMAIN.concat(a.attr("href")))));
@@ -71,14 +74,8 @@ public class AvicProductParser implements ProductParser {
             return;
         }
 
-        //Using regex expression to get product model from full product name
-        Pattern pattern = Pattern.compile("(M.+)");
-        Matcher matcher = pattern.matcher(fullProductName);
-        String model = null;
+        String model = getModelFromFullProductName(fullProductName);
 
-        while (matcher.find()) {
-            model = fullProductName.substring(matcher.start(), matcher.end() - 1);
-        }
         //Getting normal product name by cutting cyrillic prefix
         String name = fullProductName.substring(fullProductName.indexOf(' ') + 1);
         String photo = AVIC_DOMAIN.concat(el.select("span > a > img.js_main-img").first().attr("src"));
@@ -91,6 +88,11 @@ public class AvicProductParser implements ProductParser {
                 .withDescription(description)
                 .build());
     }
+
+    private String getModelFromFullProductName(String fullProductName) {
+        return fullProductName.substring(fullProductName.lastIndexOf('(') + 1, fullProductName.length() - 1);
+    }
+
 
     private String parseDescription(Element el) {
         Elements paragraphsWithDescription = el.select("div.about-product > p");
@@ -105,6 +107,6 @@ public class AvicProductParser implements ProductParser {
 
     public static void main(String[] args) {
         ProductParser parser = new AvicProductParser();
-        parser.parse().forEach(e -> LOGGER.info("{}\n", e));
+        parser.parse(AVIC_PAGE_WITH_IPHONES).forEach(e -> LOGGER.info("\n{}\n", e));
     }
 }

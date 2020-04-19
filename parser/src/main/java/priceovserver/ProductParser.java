@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ProductParser {
 
-    List<ProductDto> parse();
+    List<ProductDto> parse(String avicUrlWithProduct);
 }
