@@ -38,6 +38,9 @@ public class AvicProductParser implements ProductParser {
         return products;
     }
 
+    /**
+     * Parse product page gallery to get product pages.
+     */
     private void fillProductPagesList() {
         // Open the first part of page with products, get all product pages from it.
         Document startingPageWithProducts = getPageByUrl(AVIC_PAGE_WITH_IPHONES);
@@ -58,6 +61,12 @@ public class AvicProductParser implements ProductParser {
         }
     }
 
+    /**
+     * Returns a document by given URL.
+     *
+     * @param url URL to document
+     * @return document by given URL.
+     */
     private Document getPageByUrl(String url) {
         try {
             return Jsoup.connect(url).get();
@@ -67,6 +76,12 @@ public class AvicProductParser implements ProductParser {
         }
     }
 
+    /**
+     * The method parse given product page, extract data from it into ProductDto object
+     * and put the object into the List.
+     *
+     * @param el product page
+     */
     private void extractProductAndAddToList(Document el) {
         String fullProductName = el.select("div.left > h1 > span").first().text();
         //skip  product which marked as "Open box"
@@ -75,11 +90,9 @@ public class AvicProductParser implements ProductParser {
         }
 
         String model = getModelFromFullProductName(fullProductName);
-
-        //Getting normal product name by cutting cyrillic prefix
-        String name = fullProductName.substring(fullProductName.indexOf(' ') + 1);
-        String photo = AVIC_DOMAIN.concat(el.select("span > a > img.js_main-img").first().attr("src"));
-        String description = parseDescription(el);
+        String name = getShortProductName(fullProductName);
+        String photo = getPhotoUrl(el);
+        String description = getDescription(el);
 
         products.add(ProductDtoBuilder.aProductDto()
                 .withName(name)
@@ -89,12 +102,49 @@ public class AvicProductParser implements ProductParser {
                 .build());
     }
 
+    /**
+     * Get model from full product name.
+     * For example, model from "Смартфон Apple iPhone 11 Pro 64GB Space Gray (MWC22)" will look like
+     * "MWC22".
+     *
+     * @param fullProductName a full name of a product
+     * @return string with model
+     */
     private String getModelFromFullProductName(String fullProductName) {
         return fullProductName.substring(fullProductName.lastIndexOf('(') + 1, fullProductName.length() - 1);
     }
 
+    /**
+     * Getting normal product name by cutting cyrillic prefix and model number.
+     * For example, "Смартфон Apple iPhone 11 Pro 64GB Space Gray (MWC22)" will be cut to
+     * "Apple iPhone 11 Pro 64GB Space Gray".
+     *
+     * @param fullProductName a full name of a product
+     * @return short name of the product.
+     */
+    private String getShortProductName(String fullProductName) {
+        String nameWithoutCyrillic = fullProductName.substring(fullProductName.indexOf(' ') + 1);
+        return nameWithoutCyrillic.substring(0, nameWithoutCyrillic.indexOf('(') - 1);
+    }
 
-    private String parseDescription(Element el) {
+    /**
+     * Get src link of the image at the product page, and add Avic domain name to the get absolute path.
+     *
+     * @param el a product page
+     * @return the absolute image url.
+     */
+    private String getPhotoUrl(Element el) {
+        return AVIC_DOMAIN.concat(el.select("span > a > img.js_main-img").first().attr("src"));
+    }
+
+    /**
+     * On Avic site the description of a product is split into a few paragraphs.
+     * We iterate through them and unit into the normal description.
+     *
+     * @param el a product page
+     * @return description of the product
+     */
+    private String getDescription(Element el) {
         Elements paragraphsWithDescription = el.select("div.about-product > p");
         StringBuilder builder = new StringBuilder();
         for (Element paragraph : paragraphsWithDescription) {
