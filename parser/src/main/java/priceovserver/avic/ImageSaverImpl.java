@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import priceovserver.ImageSaver;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -20,7 +21,13 @@ public class ImageSaverImpl implements ImageSaver {
 
     @Override
     public Optional<String> saveImageByUrl(String url, String saveDir) {
+        if (url == null || saveDir == null) {
+            LOGGER.error("url or save dir can't be null! url = {}, saveDir = {}", url, saveDir);
+            throw new IllegalArgumentException();
+        }
+
         String pathToFile = getPathToFile(url, saveDir);
+        createSaveDirectoryIfNotExists(saveDir);
         try (FileOutputStream fileOutputStream = new FileOutputStream(pathToFile);
              ReadableByteChannel readableByteChannel = Channels.newChannel(new URL(url).openStream())) {
 
@@ -38,6 +45,17 @@ public class ImageSaverImpl implements ImageSaver {
     private String getPathToFile(String url, String saveDir) {
         String[] splitUrl = url.split("/");
         String fileName = splitUrl[splitUrl.length - 1];
-        return new StringBuilder(saveDir).append("/").append(fileName).toString();
+        return saveDir.isEmpty() ? fileName : new StringBuilder(saveDir).append("/").append(fileName).toString();
+    }
+
+    private void createSaveDirectoryIfNotExists(String dirPath) {
+        if (dirPath.isEmpty()) {
+            return;
+        }
+
+        File saveDirectory = new File(dirPath);
+        if (!saveDirectory.exists()) {
+            saveDirectory.mkdirs();
+        }
     }
 }
