@@ -15,6 +15,7 @@ import priceovserver.ProductParsingException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The class to parse products from Avic store site.
@@ -47,10 +48,8 @@ public class AvicProductParser implements ProductParser {
         Elements linksToProductPages = startingPageWithProducts.select("div.images > a.img");
         linksToProductPages.forEach(a -> productPages.add(getPageByUrl(a.attr("href"))));
 
-        /*
-            The page with products is split into a few pages.
-            Since we parsed the first part of it, we open others and getting product pages.
-        */
+        //    The page with products is split into a few pages.
+        //    Since we parsed the first part of it, we open others and getting product pages.
         Elements linksToNextPages = startingPageWithProducts.select("div.paging > a.ditto_page");
         List<Document> otherPagesWithProducts = new ArrayList<>();
         linksToNextPages.forEach(a -> otherPagesWithProducts.add(getPageByUrl(AVIC_DOMAIN.concat(a.attr("href")))));
@@ -89,10 +88,17 @@ public class AvicProductParser implements ProductParser {
             return;
         }
 
+        //download product image by url, save to project folder and provide path to it
+        Optional<String> pathToSavedImageOptional = saveImage(getImageUrl(el));
+        String pathToImage = null;
+        if (pathToSavedImageOptional.isPresent()) {
+            pathToImage = pathToSavedImageOptional.get();
+        }
+
         products.add(ProductDtoBuilder.aProductDto()
                 .withName(getShortProductName(fullProductName))
                 .withModel(getModelFromFullProductName(fullProductName))
-                .withImage(getPhotoUrl(el))
+                .withImage(pathToImage)
                 .withDescription(getDescription(el))
                 .build());
     }
@@ -128,8 +134,12 @@ public class AvicProductParser implements ProductParser {
      * @param el a product page
      * @return the absolute image url.
      */
-    private String getPhotoUrl(Element el) {
+    private String getImageUrl(Element el) {
         return AVIC_DOMAIN.concat(el.select("span > a > img.js_main-img").first().attr("src"));
+    }
+
+    private Optional<String> saveImage(String url) {
+        return new ImageSaverImpl().saveImageByUrlToDefaultFolder(url);
     }
 
     /**
