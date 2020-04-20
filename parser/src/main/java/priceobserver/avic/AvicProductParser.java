@@ -1,4 +1,4 @@
-package priceovserver.avic;
+package priceobserver.avic;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -7,10 +7,11 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import priceobserver.ImageSaverImpl;
+import priceobserver.ProductParser;
+import priceobserver.ProductParsingException;
 import priceobserver.dto.product.ProductDto;
 import priceobserver.dto.product.ProductDtoBuilder;
-import priceovserver.ProductParser;
-import priceovserver.ProductParsingException;
 
 import java.io.IOException;
 import java.util.ArrayList;

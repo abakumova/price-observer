@@ -1,9 +1,8 @@
-package priceovserver.avic;
+package priceobserver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import priceovserver.ImageSaver;
 
 import java.io.File;
 import java.io.FileOutputStream;

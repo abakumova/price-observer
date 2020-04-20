@@ -1,4 +1,4 @@
-package priceovserver;
+package priceobserver;
 
 import java.util.Optional;
 

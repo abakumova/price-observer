@@ -1,4 +1,4 @@
-package priceovserver;
+package priceobserver;
 
 import priceobserver.dto.product.ProductDto;
 

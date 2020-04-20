@@ -1,4 +1,4 @@
-package priceovserver;
+package priceobserver;
 
 public class ProductParsingException extends RuntimeException {
     public ProductParsingException() {
