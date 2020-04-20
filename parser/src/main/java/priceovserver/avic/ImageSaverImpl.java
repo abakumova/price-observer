@@ -19,6 +19,8 @@ public class ImageSaverImpl implements ImageSaver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImageSaverImpl.class);
 
+    private static final String DEFAULT_FOLDER_PATH = "webapp/src/main/resources/static/assets/productImages";
+
     @Override
     public Optional<String> saveImageByUrl(String url, String saveDir) {
         if (url == null || saveDir == null) {
@@ -40,6 +42,16 @@ public class ImageSaverImpl implements ImageSaver {
             return Optional.empty();
         }
         return Optional.of(pathToFile);
+    }
+
+    @Override
+    public Optional<String> saveImageByUrlToDefaultFolder(String url) {
+        return saveImageByUrl(url, DEFAULT_FOLDER_PATH);
+    }
+
+    @Override
+    public String getDefaultFolderPath() {
+        return DEFAULT_FOLDER_PATH;
     }
 
     private String getPathToFile(String url, String saveDir) {
