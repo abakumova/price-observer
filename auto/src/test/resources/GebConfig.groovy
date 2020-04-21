@@ -6,11 +6,12 @@ reportOnTestFailureOnly = true
 
 baseUrl = "https://pn.com.ua/"
 
-System.setProperty("webdriver.chrome.driver", System.getProperty("webdriver.chrome.driver", "target/driver/chromedriver.exe"))
-
 ChromeOptions options = new ChromeOptions()
 options.addArguments("--no-sandbox")
 options.addArguments("--start-maximized")
 options.addArguments("--disable-notifications")
 
-driver = { new ChromeDriver(options) }
+driver = {
+    System.setProperty("webdriver.chrome.driver", System.getProperty("webdriver.chrome.driver", "target/chromedriver/chromedriver.exe"))
+    new ChromeDriver(options)
+}

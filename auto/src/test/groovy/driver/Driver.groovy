@@ -4,44 +4,85 @@ import driver.properties.PropertyHolder
 import groovyx.net.http.RESTClient
 import spock.lang.Shared
 
-import java.util.zip.ZipFile
+import java.nio.channels.Channels
+import java.nio.channels.ReadableByteChannel
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
 
 class Driver {
 
+    static def chromeVersion = PropertyHolder.chrome.getChromeVersion()
+    static def destinationFolder = "auto/target/chromedriver"
+    static def fileName = "chromedriver_win32.zip"
+    static def chromeDriverDomain = "https://chromedriver.storage.googleapis.com/"
+
     @Shared
-    def client = new RESTClient("https://chromedriver.storage.googleapis.com")
+    def client = new RESTClient(chromeDriverDomain)
 
-    def chrome = PropertyHolder.chrome.getChromeVersion()
-    def outputDir = "src/target/driver"
+    static void main(String[] args) {
+        new Driver().createChromeDriver()
+    }
 
-    def getBrowserWithVersion() {
-        //def response =  new File("target/driver/chrome")
-        def response = client.get(path: "/" + chrome + "/chromedriver_win32.zip")
+    def createChromeDriver() {
+        def response = client.get(path: "/" + chromeVersion + "/" + fileName)
         if (response.status == 200) {
-            save() // target/driver/
-            unzip()  // target/driver/
+            def pathToZip = destinationFolder + "/" + fileName
+            createDestDirectoryIfNotExists(destinationFolder)
+            saveFile(new URL(chromeDriverDomain + chromeVersion + "/" + fileName), pathToZip)
+            unzipChromeDriver(pathToZip, destinationFolder)
+            deleteZipArchive(pathToZip)
         }
     }
 
-    def save() {
-
+    static def saveFile(URL url, String filePath) {
+        ReadableByteChannel rbc = Channels.newChannel(url.openStream())
+        FileOutputStream fos = new FileOutputStream(filePath)
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE)
+        rbc.close()
+        fos.close()
     }
 
-    def unzip() {
-        def zip = new ZipFile(new File(zipFileName))
-        zip.entries().each {
-            if (!it.isDirectory()) {
-                def fOut = new File(outputDir + File.separator + it.name)
-                //create output dir if not exists
-                new File(fOut.parent).mkdirs()
-                def fos = new FileOutputStream(fOut)
-                //println "name:${it.name}, size:${it.size}"
-                def buf = new byte[it.size]
-                def len = zip.getInputStream(it).read(buf) //println zip.getInputStream(it).text
-                fos.write(buf, 0, len)
-                fos.close()
+    static def createDestDirectoryIfNotExists(String destinationFolderPath) {
+        File directoryToSave = new File(destinationFolderPath)
+        if (!directoryToSave.exists()) {
+            directoryToSave.mkdirs()
+        }
+    }
+
+    static def unzipChromeDriver(String filePath, String saveDirPath) {
+        File destDir = new File(saveDirPath)
+        byte[] buffer = new byte[1024]
+        ZipInputStream zis = new ZipInputStream(new FileInputStream(filePath))
+        ZipEntry zipEntry = zis.getNextEntry()
+        while (zipEntry != null) {
+            File newFile = newFile(destDir, zipEntry)
+            FileOutputStream fos = new FileOutputStream(newFile)
+            int len
+            while ((len = zis.read(buffer)) > 0) {
+                fos.write(buffer, 0, len)
             }
+            fos.close()
+            zipEntry = zis.getNextEntry()
         }
-        zip.close()
+        zis.closeEntry()
+        zis.close()
+    }
+
+    static def newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
+        File destFile = new File(destinationDir, zipEntry.getName())
+
+        String destDirPath = destinationDir.getCanonicalPath()
+        String destFilePath = destFile.getCanonicalPath()
+
+        if (!destFilePath.startsWith(destDirPath + File.separator)) {
+            throw new IOException("Entry is outside of the target dir: " + zipEntry.getName())
+        }
+
+        destFile
+    }
+
+    static def deleteZipArchive(String pathToZip) {
+        File zip = new File(pathToZip)
+        zip.delete()
     }
 }
