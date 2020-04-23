@@ -9,3 +9,14 @@ VALUES (1, "admin", "admin", "admin@gmail.com", '2020-01-01', "admin", 3),
        (3, "Viktoriia", "Abakumova", "abakumovaviktory@gmail.com", '1999-07-08', "admin", 1),
        (4, "Test", "Test", "test@gmail.com", '2020-02-02', "test", 2),
        (5, "User", "User", "user@gmail.com", '2020-03-03', "test", 2);
+
+INSERT INTO `price_observer`.`store` (`name`, `url`)
+VALUES ("Avic", "https://avic.ua/"),
+       ("Allo", "https://allo.ua/"),
+       ("Rozetka", "https://rozetka.com.ua/"),
+       ("Citrus", "https://www.citrus.ua/"),
+       ("Cactus", "https://www.c.ua/"),
+       ("Moyo", "https://www.moyo.ua/"),
+       ("Foxtrot", "https://www.foxtrot.com.ua/"),
+       ("Comfy", "https://comfy.ua/"),
+       ("Eldorado", "https://eldorado.ua/");
