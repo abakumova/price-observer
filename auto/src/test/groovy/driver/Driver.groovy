@@ -1,6 +1,7 @@
 package driver
 
 import driver.properties.PropertyHolder
+import jodd.log.LoggerFactory
 
 import java.nio.channels.Channels
 import java.nio.channels.ReadableByteChannel
@@ -14,6 +15,8 @@ abstract class Driver extends Script {
     static def fileName = "chromedriver_win32.zip"
     static def chromeDriverDomain = "https://chromedriver.storage.googleapis.com/"
 
+    static final def LOGGER = LoggerFactory.getLogger(Driver.class);
+
     static void main(String[] args) {
         createChromeDriver()
     }
@@ -24,6 +27,7 @@ abstract class Driver extends Script {
         saveFile(new URL(chromeDriverDomain + chromeVersion + "/" + fileName), pathToZip)
         unzipChromeDriver(pathToZip, destinationFolder)
         deleteZipArchive(pathToZip)
+        LOGGER.info(String.format("The %s version of ChromeDriver was downloaded into the auto/target/chromedriver directory. File name is: chromedriver.exe.", chromeVersion))
     }
 
     static def saveFile(URL url, String filePath) {
