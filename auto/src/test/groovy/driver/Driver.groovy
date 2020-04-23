@@ -1,37 +1,29 @@
 package driver
 
 import driver.properties.PropertyHolder
-import groovyx.net.http.RESTClient
-import spock.lang.Shared
 
 import java.nio.channels.Channels
 import java.nio.channels.ReadableByteChannel
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
-class Driver {
+abstract class Driver extends Script {
 
     static def chromeVersion = PropertyHolder.chrome.getChromeVersion()
-    static def destinationFolder = "auto/target/chromedriver"
+    static def destinationFolder = "target/chromedriver"
     static def fileName = "chromedriver_win32.zip"
     static def chromeDriverDomain = "https://chromedriver.storage.googleapis.com/"
 
-    @Shared
-    def client = new RESTClient(chromeDriverDomain)
-
     static void main(String[] args) {
-        new Driver().createChromeDriver()
+        createChromeDriver()
     }
 
-    def createChromeDriver() {
-        def response = client.get(path: "/" + chromeVersion + "/" + fileName)
-        if (response.status == 200) {
-            def pathToZip = destinationFolder + "/" + fileName
-            createDestDirectoryIfNotExists(destinationFolder)
-            saveFile(new URL(chromeDriverDomain + chromeVersion + "/" + fileName), pathToZip)
-            unzipChromeDriver(pathToZip, destinationFolder)
-            deleteZipArchive(pathToZip)
-        }
+    def static createChromeDriver() {
+        def pathToZip = destinationFolder + "/" + fileName
+        createDestDirectoryIfNotExists(destinationFolder)
+        saveFile(new URL(chromeDriverDomain + chromeVersion + "/" + fileName), pathToZip)
+        unzipChromeDriver(pathToZip, destinationFolder)
+        deleteZipArchive(pathToZip)
     }
 
     static def saveFile(URL url, String filePath) {
