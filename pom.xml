@@ -21,6 +21,7 @@
         <module>core</module>
         <module>webapp</module>
         <module>parser</module>
+        <module>auto</module>
     </modules>
 
     <properties>

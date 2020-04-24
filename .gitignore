@@ -59,3 +59,4 @@ hs_err_pid*
 /core/target/
 /parser/target/
 /webapp/target/
+/auto/target/

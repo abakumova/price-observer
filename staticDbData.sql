@@ -10,6 +10,14 @@ VALUES (1, "admin", "admin", "admin@gmail.com", '2020-01-01', "admin", 3),
        (4, "Test", "Test", "test@gmail.com", '2020-02-02', "test", 2),
        (5, "User", "User", "user@gmail.com", '2020-03-03', "test", 2);
 
+INSERT INTO `price_observer`.`product_type` (`name`)
+VALUES ("smartphone"),
+       ("laptop"),
+       ("tablet"),
+       ("smartwatch"),
+       ("earphones"),
+       ("TV");
+
 INSERT INTO `price_observer`.`manufacturer` (`name`, `country`)
 VALUES ("Apple", "USA"),
        ("Samsung", "South Korea"),
