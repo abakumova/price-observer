@@ -17,3 +17,22 @@ VALUES ("smartphone"),
        ("smartwatch"),
        ("earphones"),
        ("TV");
+
+INSERT INTO `price_observer`.`manufacturer` (`name`, `country`)
+VALUES ("Apple", "USA"),
+       ("Samsung", "South Korea"),
+       ("Xiaomi", "China"),
+       ("Huawei", "China"),
+       ("Meizu", "China"),
+       ("OnePlus", "China"),
+       ("Philips", "Netherlands"),
+       ("Bosch", "Germany"),
+       ("Asus", "Taiwan"),
+       ("Acer", "Taiwan"),
+       ("LG", "South Korea"),
+       ("Lenovo", "Hong Kong"),
+       ("HP", "USA"),
+       ("Dell", "USA"),
+       ("Microsoft", "USA"),
+       ("JBL", "USA"),
+       ("Sony", "Japan");
