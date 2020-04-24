@@ -36,3 +36,14 @@ VALUES ("Apple", "USA"),
        ("Microsoft", "USA"),
        ("JBL", "USA"),
        ("Sony", "Japan");
+
+INSERT INTO `price_observer`.`store` (`name`, `url`)
+VALUES ("Avic", "https://avic.ua/"),
+       ("Allo", "https://allo.ua/"),
+       ("Rozetka", "https://rozetka.com.ua/"),
+       ("Citrus", "https://www.citrus.ua/"),
+       ("Cactus", "https://www.c.ua/"),
+       ("Moyo", "https://www.moyo.ua/"),
+       ("Foxtrot", "https://www.foxtrot.com.ua/"),
+       ("Comfy", "https://comfy.ua/"),
+       ("Eldorado", "https://eldorado.ua/");
