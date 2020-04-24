@@ -11,7 +11,7 @@ import java.util.zip.ZipInputStream
 abstract class Driver extends Script {
 
     static def chromeVersion = PropertyHolder.chrome.getChromeVersion()
-    static def destinationFolder = "target/chromedriver"
+    static def destinationFolder = "target/chromedriver" //to save manually change this to "auto/target/chromedriver"
     static def fileName = "chromedriver_win32.zip"
     static def chromeDriverDomain = "https://chromedriver.storage.googleapis.com/"
 
