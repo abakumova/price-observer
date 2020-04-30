@@ -5,17 +5,19 @@ import org.openqa.selenium.chrome.ChromeOptions
 import java.nio.file.Files
 import java.nio.file.Paths
 
+final webDriver = "webdriver.chrome.driver"
+
 reportsDir = new File("target/geb-reports")
 reportOnTestFailureOnly = true
 
-baseUrl = "https://pn.com.ua/"
+baseUrl = "https://pn.com.ua/" //todo change to our application Base Url
 
 ChromeOptions options = new ChromeOptions()
 options.addArguments("--no-sandbox")
 options.addArguments("--start-maximized")
 options.addArguments("--disable-notifications")
 
-def path = Paths.get('target/chromedriver')
+def path = Paths.get(getProperties().getProperty("destinationFolder"))
 
 if (Files.notExists(path)) {
     def config = new CompilerConfiguration()
@@ -27,6 +29,12 @@ if (Files.notExists(path)) {
 }
 
 driver = {
-    System.setProperty("webdriver.chrome.driver", System.getProperty("webdriver.chrome.driver", "target/chromedriver/chromedriver.exe"))
+    System.setProperty(webDriver, System.getProperty(webDriver, path.toString() + "/chromedriver.exe"))
     new ChromeDriver(options)
+}
+
+static Properties getProperties() {
+    Properties properties = new Properties()
+    properties.load(GebConfig.class.getResourceAsStream('/paths.properties'))
+    properties
 }
