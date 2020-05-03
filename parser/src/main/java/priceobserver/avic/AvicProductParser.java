@@ -194,9 +194,14 @@ public class AvicProductParser implements ProductParser {
 
     private ProductPropertiesDto getProperties(Element el) {
         Elements rowsWithProperties = el.select("div.table-features > table > tbody > tr");
-        //getting properties and putting them into JSON format
+        return ProductPropertiesDtoBuilder.aProductPropertiesDto()
+                .withProperties(getPropertiesAsJsonString(rowsWithProperties))
+                .build();
+    }
+
+    private String getPropertiesAsJsonString(Elements elements) {
         StringBuilder builder = new StringBuilder("{");
-        for (Element r : rowsWithProperties) {
+        for (Element r : elements) {
             Elements keyAndValueEl = r.select("td");
             String key = keyAndValueEl.get(0).text();
             String value = keyAndValueEl.get(1).text();
@@ -209,12 +214,11 @@ public class AvicProductParser implements ProductParser {
             builder.append("\"");
             builder.append(key.replace(":", ""));
             builder.append("\" : \"");
-            builder.append(value);
+            builder.append(value.replace("\"", "'"));
             builder.append("\",");
         }
         builder.deleteCharAt(builder.length() - 1);
         builder.append("}");
-        return ProductPropertiesDtoBuilder.aProductPropertiesDto().withProperties(builder.toString()).build();
+        return builder.toString();
     }
-
 }
