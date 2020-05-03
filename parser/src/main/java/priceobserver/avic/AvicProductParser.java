@@ -175,8 +175,7 @@ public class AvicProductParser implements ProductParser {
      * @return a year of product made or null if the year is absent in product name
      */
     private Year getYear(String fullProductName) {
-        Pattern pattern = Pattern.compile("\\d{4}");
-        Matcher matcher = pattern.matcher(fullProductName);
+        Matcher matcher = Pattern.compile("\\d{4}").matcher(fullProductName);
         String year = null;
         while (matcher.find()) {
             year = fullProductName.substring(matcher.start(), matcher.end());
