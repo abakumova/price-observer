@@ -84,8 +84,9 @@ public class AvicProductParser implements ProductParser {
      */
     private void extractProductAndAddToList(Document el) {
         String fullProductName = el.select("div.left > h1 > span").first().text();
+        String description = getDescription(el);
         //skip  products which marked as "Open box"
-        if (fullProductName.contains("(Open Box)")) {
+        if (fullProductName.contains("(Open Box)") || description.toLowerCase().contains("витринный вариант")) {
             return;
         }
 
@@ -100,7 +101,7 @@ public class AvicProductParser implements ProductParser {
                 .withName(getShortProductName(fullProductName))
                 .withModel(getModelFromFullProductName(fullProductName))
                 .withImage(pathToImage)
-                .withDescription(getDescription(el))
+                .withDescription(description)
                 .build());
     }
 
