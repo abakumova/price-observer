@@ -14,9 +14,12 @@ import priceobserver.dto.product.ProductDto;
 import priceobserver.dto.product.ProductDtoBuilder;
 
 import java.io.IOException;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The class to parse products from Avic store site.
@@ -102,6 +105,7 @@ public class AvicProductParser implements ProductParser {
                 .withModel(getModelFromFullProductName(fullProductName))
                 .withImage(pathToImage)
                 .withDescription(description)
+                .withYear(getYear(fullProductName))
                 .build());
     }
 
@@ -164,6 +168,21 @@ public class AvicProductParser implements ProductParser {
         return builder.toString();
     }
 
+    /**
+     * Gets a year of product made from full product name using regex.
+     *
+     * @param fullProductName a full product name
+     * @return a year of product made or null if the year is absent in product name
+     */
+    private Year getYear(String fullProductName) {
+        Pattern pattern = Pattern.compile("\\d{4}");
+        Matcher matcher = pattern.matcher(fullProductName);
+        String year = null;
+        while (matcher.find()) {
+            year = fullProductName.substring(matcher.start(), matcher.end());
+        }
+        return year == null ? null : Year.of(Integer.parseInt(year.replace("[()]", "")));
+    }
 
     public static void main(String[] args) {
         ProductParser parser = new AvicProductParser();
