@@ -27,7 +27,8 @@ abstract class Driver extends Script {
         saveFile(new URL(chromeDriverDomain + chromeVersion + "/" + fileName), pathToZip)
         unzipChromeDriver(pathToZip, destinationFolder)
         deleteZipArchive(pathToZip)
-        LOGGER.info("The ${chromeVersion} version of ChromeDriver was downloaded into the auto/target/chromedriver directory. File name is: chromedriver.exe.")
+        LOGGER.info("The ${chromeVersion} version of ChromeDriver was downloaded into the ${destinationFolder} " +
+                " directory. File name is: chromedriver.exe.")
     }
 
     static def saveFile(URL url, String filePath) {
