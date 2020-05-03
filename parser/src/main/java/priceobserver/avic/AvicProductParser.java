@@ -140,7 +140,12 @@ public class AvicProductParser implements ProductParser {
      */
     private String getShortProductName(String fullProductName) {
         String nameWithoutCyrillic = fullProductName.substring(fullProductName.indexOf(' ') + 1);
-        String nameWithoutModel = nameWithoutCyrillic.substring(0, nameWithoutCyrillic.lastIndexOf('(') - 1);
+        String nameWithoutModel = nameWithoutCyrillic;
+        int modelPositionIndex = nameWithoutCyrillic.lastIndexOf('(');
+        if (modelPositionIndex != -1) {
+            nameWithoutModel = nameWithoutCyrillic.substring(0, modelPositionIndex - 1);
+        }
+
         return nameWithoutModel.replaceAll("[()]", "");
     }
 
