@@ -32,20 +32,22 @@ public class AvicProductParser implements ProductParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(AvicProductParser.class);
 
     private static final String AVIC_DOMAIN = "https://avic.ua/";
-    private static final String AVIC_PAGE_WITH_IPHONES = "https://avic.ua/iphone.html";
 
     private static List<Document> productPages = new ArrayList<>();
     private static List<ProductDto> products = new ArrayList<>();
 
     public static void main(String[] args) {
         ProductParser parser = new AvicProductParser();
-        parser.parse(AVIC_PAGE_WITH_IPHONES).forEach(e -> LOGGER.info("\n{}\n", e));
+        //https://avic.ua/macbook.html https://avic.ua/iphone.html https://avic.ua/ipad.html
+        List<ProductDto> productDtos = parser.parse("https://avic.ua/iphone.html");
+        LOGGER.info("products list size {}", productDtos.size());
+        productDtos.forEach(e -> LOGGER.info("\n{}\n", e));
     }
 
     @Override
     public List<ProductDto> parse(String avicUrlWithProduct) {
         LOGGER.info("Started parsing of the site {}", avicUrlWithProduct);
-        fillProductPagesList();
+        fillProductPagesList(avicUrlWithProduct);
         productPages.forEach(this::extractProductAndAddToList);
         return products;
     }
@@ -53,9 +55,9 @@ public class AvicProductParser implements ProductParser {
     /**
      * Parse product page gallery to get product pages.
      */
-    private void fillProductPagesList() {
+    private void fillProductPagesList(String avicUrlWithProduct) {
         // Open the first part of page with products, get all product pages from it.
-        Document startingPageWithProducts = getPageByUrl(AVIC_PAGE_WITH_IPHONES);
+        Document startingPageWithProducts = getPageByUrl(avicUrlWithProduct);
         Elements linksToProductPages = startingPageWithProducts.select("div.images > a.img");
         linksToProductPages.forEach(a -> productPages.add(getPageByUrl(a.attr("href"))));
 
@@ -127,7 +129,12 @@ public class AvicProductParser implements ProductParser {
      * @return string with model
      */
     private String getModelFromFullProductName(String fullProductName) {
-        return fullProductName.substring(fullProductName.lastIndexOf('(') + 1, fullProductName.length() - 1);
+        Matcher matcher = Pattern.compile("\\(M.*\\)").matcher(fullProductName);
+        String model = null;
+        while (matcher.find()) {
+            model = fullProductName.substring(matcher.start(), matcher.end()).replaceAll("[()]", "");
+        }
+        return model;
     }
 
     /**
@@ -189,7 +196,7 @@ public class AvicProductParser implements ProductParser {
      * @return a year of product made or null if the year is absent in product name
      */
     private Year getYear(String fullProductName) {
-        Matcher matcher = Pattern.compile("\\d{4}").matcher(fullProductName);
+        Matcher matcher = Pattern.compile("20\\d{2}").matcher(fullProductName);
         String year = null;
         while (matcher.find()) {
             year = fullProductName.substring(matcher.start(), matcher.end());
