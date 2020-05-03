@@ -12,6 +12,8 @@ import priceobserver.ProductParser;
 import priceobserver.ProductParsingException;
 import priceobserver.dto.product.ProductDto;
 import priceobserver.dto.product.ProductDtoBuilder;
+import priceobserver.dto.productproperties.ProductPropertiesDto;
+import priceobserver.dto.productproperties.ProductPropertiesDtoBuilder;
 
 import java.io.IOException;
 import java.time.Year;
@@ -34,6 +36,11 @@ public class AvicProductParser implements ProductParser {
 
     private static List<Document> productPages = new ArrayList<>();
     private static List<ProductDto> products = new ArrayList<>();
+
+    public static void main(String[] args) {
+        ProductParser parser = new AvicProductParser();
+        parser.parse(AVIC_PAGE_WITH_IPHONES).forEach(e -> LOGGER.info("\n{}\n", e));
+    }
 
     @Override
     public List<ProductDto> parse(String avicUrlWithProduct) {
@@ -88,8 +95,9 @@ public class AvicProductParser implements ProductParser {
     private void extractProductAndAddToList(Document el) {
         String fullProductName = el.select("div.left > h1 > span").first().text();
         String description = getDescription(el);
-        //skip  products which marked as "Open box"
-        if (fullProductName.contains("(Open Box)") || description.toLowerCase().contains("витринный вариант")) {
+        //skip  products which marked as "Open box" or as "витринный вариант"
+        if (fullProductName.toLowerCase().contains("open box")
+                || description.toLowerCase().contains("витринный вариант")) {
             return;
         }
 
@@ -106,6 +114,7 @@ public class AvicProductParser implements ProductParser {
                 .withImage(pathToImage)
                 .withDescription(description)
                 .withYear(getYear(fullProductName))
+                .withProductProperties(getProperties(el))
                 .build());
     }
 
@@ -183,8 +192,29 @@ public class AvicProductParser implements ProductParser {
         return year == null ? null : Year.of(Integer.parseInt(year.replace("[()]", "")));
     }
 
-    public static void main(String[] args) {
-        ProductParser parser = new AvicProductParser();
-        parser.parse(AVIC_PAGE_WITH_IPHONES).forEach(e -> LOGGER.info("\n{}\n", e));
+    private ProductPropertiesDto getProperties(Element el) {
+        Elements rowsWithProperties = el.select("div.table-features > table > tbody > tr");
+        //getting properties and putting them into JSON format
+        StringBuilder builder = new StringBuilder("{");
+        for (Element r : rowsWithProperties) {
+            Elements keyAndValueEl = r.select("td");
+            String key = keyAndValueEl.get(0).text();
+            String value = keyAndValueEl.get(1).text();
+
+            //skip rows with headers
+            if (key.isEmpty() || value.isEmpty()) {
+                continue;
+            }
+
+            builder.append("\"");
+            builder.append(key.replace(":", ""));
+            builder.append("\" : \"");
+            builder.append(value);
+            builder.append("\",");
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        builder.append("}");
+        return ProductPropertiesDtoBuilder.aProductPropertiesDto().withProperties(builder.toString()).build();
     }
+
 }
