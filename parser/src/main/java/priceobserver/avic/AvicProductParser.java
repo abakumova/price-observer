@@ -150,12 +150,14 @@ public class AvicProductParser implements ProductParser {
     private String getShortProductName(String fullProductName, String model) {
         String nameWithoutCyrillic = fullProductName.substring(fullProductName.indexOf(' ') + 1);
         String nameWithoutModel = nameWithoutCyrillic;
-        int modelPositionIndex = nameWithoutCyrillic.lastIndexOf('(');
-        if (modelPositionIndex != -1) {
-            nameWithoutModel = nameWithoutCyrillic.replace(model, "").trim();
+        if (model != null) {
+            nameWithoutModel = nameWithoutCyrillic.replace(model, "");
         }
 
-        return nameWithoutModel.replaceAll("[()]", "");
+        return nameWithoutModel
+                .replaceAll("[()]", "")
+                .trim()
+                .replaceAll(" +", " ");
     }
 
     /**
@@ -186,9 +188,7 @@ public class AvicProductParser implements ProductParser {
             builder.append(" ");
             builder.append(paragraph.text());
         }
-
-        builder.delete(0, 1);
-        return builder.toString();
+        return builder.toString().trim().replaceAll(" +", " ");
     }
 
     /**
