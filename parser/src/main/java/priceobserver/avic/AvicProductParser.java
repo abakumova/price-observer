@@ -35,8 +35,14 @@ public class AvicProductParser implements ProductParser {
 
     public static void main(String[] args) {
         ProductParser parser = new AvicProductParser();
-        //https://avic.ua/macbook.html https://avic.ua/iphone.html https://avic.ua/ipad.html
-        List<ProductDto> productDtos = parser.parse("https://avic.ua/macbook.html");
+        /*
+          https://avic.ua/macbook.html
+          https://avic.ua/iphone.html
+          https://avic.ua/ipad.html
+          https://avic.ua/imac.html
+          https://avic.ua/apple-watch-umnie-chasi.html
+         */
+        List<ProductDto> productDtos = parser.parse("https://avic.ua/apple-watch-umnie-chasi.html");
         LOGGER.info("products list size {}", productDtos.size());
         productDtos.forEach(e -> LOGGER.info("\n{}\n", e));
     }
