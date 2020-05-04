@@ -33,8 +33,8 @@ public class AvicProductParser implements ProductParser {
 
     private static final String AVIC_DOMAIN = "https://avic.ua/";
 
-    private static List<Document> productPages = new ArrayList<>();
-    private static List<ProductDto> products = new ArrayList<>();
+    private static final List<Document> productPages = new ArrayList<>();
+    private static final List<ProductDto> products = new ArrayList<>();
 
     public static void main(String[] args) {
         ProductParser parser = new AvicProductParser();
@@ -46,6 +46,8 @@ public class AvicProductParser implements ProductParser {
 
     @Override
     public List<ProductDto> parse(String avicUrlWithProduct) {
+        productPages.clear();
+        products.clear();
         LOGGER.info("Started parsing of the site {}", avicUrlWithProduct);
         fillProductPagesList(avicUrlWithProduct);
         productPages.forEach(this::extractProductAndAddToList);
