@@ -113,7 +113,7 @@ public class AvicProductParser implements ProductParser {
      * @return string with model
      */
     private String getModelFromFullProductName(String fullProductName) {
-        Matcher matcher = Pattern.compile("\\([a-zA-Z].*\\)").matcher(fullProductName);
+        Matcher matcher = Pattern.compile("\\([MZ].*\\)").matcher(fullProductName);
         String model = null;
         while (matcher.find()) {
             model = fullProductName.substring(matcher.start(), matcher.end()).replaceAll("[()]", "");
