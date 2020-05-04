@@ -152,7 +152,7 @@ public class AvicProductParser implements ProductParser {
         String nameWithoutModel = nameWithoutCyrillic;
         int modelPositionIndex = nameWithoutCyrillic.lastIndexOf('(');
         if (modelPositionIndex != -1) {
-            nameWithoutModel = nameWithoutCyrillic.replace(" " + model, "");
+            nameWithoutModel = nameWithoutCyrillic.replace(model, "").trim();
         }
 
         return nameWithoutModel.replaceAll("[()]", "");
