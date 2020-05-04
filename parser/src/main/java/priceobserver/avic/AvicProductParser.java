@@ -39,7 +39,7 @@ public class AvicProductParser implements ProductParser {
     public static void main(String[] args) {
         ProductParser parser = new AvicProductParser();
         //https://avic.ua/macbook.html https://avic.ua/iphone.html https://avic.ua/ipad.html
-        List<ProductDto> productDtos = parser.parse("https://avic.ua/iphone.html");
+        List<ProductDto> productDtos = parser.parse("https://avic.ua/macbook.html");
         LOGGER.info("products list size {}", productDtos.size());
         productDtos.forEach(e -> LOGGER.info("\n{}\n", e));
     }
@@ -111,10 +111,10 @@ public class AvicProductParser implements ProductParser {
         if (pathToSavedImageOptional.isPresent()) {
             pathToImage = pathToSavedImageOptional.get();
         }
-
+        String model = getModelFromFullProductName(fullProductName);
         products.add(ProductDtoBuilder.aProductDto()
-                .withName(getShortProductName(fullProductName))
-                .withModel(getModelFromFullProductName(fullProductName))
+                .withName(getShortProductName(fullProductName, model))
+                .withModel(model)
                 .withImage(pathToImage)
                 .withDescription(description)
                 .withYear(getYear(fullProductName))
@@ -131,7 +131,7 @@ public class AvicProductParser implements ProductParser {
      * @return string with model
      */
     private String getModelFromFullProductName(String fullProductName) {
-        Matcher matcher = Pattern.compile("\\(M.*\\)").matcher(fullProductName);
+        Matcher matcher = Pattern.compile("\\([a-zA-Z].*\\)").matcher(fullProductName);
         String model = null;
         while (matcher.find()) {
             model = fullProductName.substring(matcher.start(), matcher.end()).replaceAll("[()]", "");
@@ -147,12 +147,12 @@ public class AvicProductParser implements ProductParser {
      * @param fullProductName a full name of a product
      * @return short name of the product.
      */
-    private String getShortProductName(String fullProductName) {
+    private String getShortProductName(String fullProductName, String model) {
         String nameWithoutCyrillic = fullProductName.substring(fullProductName.indexOf(' ') + 1);
         String nameWithoutModel = nameWithoutCyrillic;
         int modelPositionIndex = nameWithoutCyrillic.lastIndexOf('(');
         if (modelPositionIndex != -1) {
-            nameWithoutModel = nameWithoutCyrillic.substring(0, modelPositionIndex - 1);
+            nameWithoutModel = nameWithoutCyrillic.replace(" " + model, "");
         }
 
         return nameWithoutModel.replaceAll("[()]", "");
@@ -198,12 +198,12 @@ public class AvicProductParser implements ProductParser {
      * @return a year of product made or null if the year is absent in product name
      */
     private Year getYear(String fullProductName) {
-        Matcher matcher = Pattern.compile("20\\d{2}").matcher(fullProductName);
+        Matcher matcher = Pattern.compile("(?:\\(|\\s)20\\d{2}").matcher(fullProductName);
         String year = null;
         while (matcher.find()) {
             year = fullProductName.substring(matcher.start(), matcher.end());
         }
-        return year == null ? null : Year.of(Integer.parseInt(year.replace("[()]", "")));
+        return year == null ? null : Year.of(Integer.parseInt(year.substring(1)));
     }
 
     private ProductPropertiesDto getProperties(Element el) {
