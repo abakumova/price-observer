@@ -1,6 +1,5 @@
 package priceobserver.avic;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -9,13 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import priceobserver.ImageSaverImpl;
 import priceobserver.ProductParser;
-import priceobserver.ProductParsingException;
 import priceobserver.dto.product.ProductDto;
 import priceobserver.dto.product.ProductDtoBuilder;
 import priceobserver.dto.productproperties.ProductPropertiesDto;
 import priceobserver.dto.productproperties.ProductPropertiesDtoBuilder;
 
-import java.io.IOException;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,21 +69,6 @@ public class AvicProductParser implements ProductParser {
         for (Document doc : otherPagesWithProducts) {
             linksToProductPages = doc.select("div.images > a.img");
             linksToProductPages.forEach(a -> productPages.add(getPageByUrl(a.attr("href"))));
-        }
-    }
-
-    /**
-     * Returns a document by given URL.
-     *
-     * @param url URL to document
-     * @return document by given URL.
-     */
-    private Document getPageByUrl(String url) {
-        try {
-            return Jsoup.connect(url).get();
-        } catch (IOException e) {
-            LOGGER.error("Error during getting document by provided url. Url: {} ", url, e);
-            throw new ProductParsingException(e);
         }
     }
 

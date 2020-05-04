@@ -1,7 +1,10 @@
 package priceobserver;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import priceobserver.dto.product.ProductDto;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductParser {
@@ -14,4 +17,18 @@ public interface ProductParser {
      * @return list of products
      */
     List<ProductDto> parse(String avicUrlWithProduct);
+
+    /**
+     * Returns a document by given URL.
+     *
+     * @param url URL to document
+     * @return document by given URL.
+     */
+    default Document getPageByUrl(String url) {
+        try {
+            return Jsoup.connect(url).get();
+        } catch (IOException e) {
+            throw new ProductParsingException(String.format("Error during getting document by provided url. Url: %s ", url), e);
+        }
+    }
 }
