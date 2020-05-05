@@ -59,6 +59,4 @@ hs_err_pid*
 /core/target/
 /parser/target/
 /webapp/target/
-
-# exclude downloaded product images from git tracking
-/webapp/src/main/resources/static/assets/productImages
+/auto/target/
