@@ -60,3 +60,4 @@ hs_err_pid*
 /parser/target/
 /webapp/target/
 /auto/target/
+/webapp/**/assets/productImages
