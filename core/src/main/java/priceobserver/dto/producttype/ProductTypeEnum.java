@@ -12,8 +12,8 @@ public enum ProductTypeEnum {
     EARPHONES(5, "earphones"),
     TV(6, "TV");
 
-    private final String name;
     private final int id;
+    private final String name;
 
     ProductTypeEnum(int id, String name) {
         this.id = id;
