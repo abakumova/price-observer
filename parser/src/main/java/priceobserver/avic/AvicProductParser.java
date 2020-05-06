@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import priceobserver.ImageSaverImpl;
 import priceobserver.ProductParser;
-import priceobserver.dto.product.ProductDto;
-import priceobserver.dto.product.ProductDtoBuilder;
-import priceobserver.dto.productproperties.ProductPropertiesDto;
-import priceobserver.dto.productproperties.ProductPropertiesDtoBuilder;
+import priceobserver.data.product.Product;
+import priceobserver.data.product.ProductBuilder;
+import priceobserver.data.productproperties.ProductProperties;
+import priceobserver.data.productproperties.ProductPropertiesBuilder;
 
 import java.time.Year;
 import java.util.ArrayList;
@@ -31,24 +31,17 @@ public class AvicProductParser implements ProductParser {
     private static final String AVIC_DOMAIN = "https://avic.ua/";
 
     private static final List<Document> productPages = new ArrayList<>();
-    private static final List<ProductDto> products = new ArrayList<>();
+    private static final List<Product> products = new ArrayList<>();
 
     public static void main(String[] args) {
         ProductParser parser = new AvicProductParser();
-        /*
-          https://avic.ua/macbook.html
-          https://avic.ua/iphone.html
-          https://avic.ua/ipad.html
-          https://avic.ua/imac.html
-          https://avic.ua/apple-watch-umnie-chasi.html
-         */
-        List<ProductDto> productDtos = parser.parse("https://avic.ua/apple-watch-umnie-chasi.html");
+        List<Product> productDtos = parser.parse("https://avic.ua/apple-watch-umnie-chasi.html");
         LOGGER.info("products list size {}", productDtos.size());
         productDtos.forEach(e -> LOGGER.info("\n{}\n", e));
     }
 
     @Override
-    public List<ProductDto> parse(String avicUrlWithProduct) {
+    public List<Product> parse(String avicUrlWithProduct) {
         productPages.clear();
         products.clear();
         LOGGER.info("Started parsing of the site {}", avicUrlWithProduct);
@@ -100,7 +93,7 @@ public class AvicProductParser implements ProductParser {
             pathToImage = pathToSavedImageOptional.get();
         }
         String model = getModelFromFullProductName(fullProductName);
-        products.add(ProductDtoBuilder.aProductDto()
+        products.add(ProductBuilder.aProduct()
                 .withName(getShortProductName(fullProductName, model))
                 .withModel(model)
                 .withImage(pathToImage)
@@ -194,9 +187,9 @@ public class AvicProductParser implements ProductParser {
         return year == null ? null : Year.of(Integer.parseInt(year.substring(1)));
     }
 
-    private ProductPropertiesDto getProperties(Element el) {
+    private ProductProperties getProperties(Element el) {
         Elements rowsWithProperties = el.select("div.table-features > table > tbody > tr");
-        return ProductPropertiesDtoBuilder.aProductPropertiesDto()
+        return ProductPropertiesBuilder.aProductProperties()
                 .withProperties(getPropertiesAsJsonString(rowsWithProperties))
                 .build();
     }

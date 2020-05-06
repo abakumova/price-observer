@@ -1,12 +1,12 @@
 package priceobserver;
 
-import priceobserver.dto.product.ProductDto;
+import priceobserver.data.product.Product;
 
 import java.util.List;
 
 public interface ParsingManager {
 
-    List<ProductDto> parsePages();
+    List<Product> parsePages();
 
-    void loadProducts(List<ProductDto> products);
+    void loadProducts(List<Product> products);
 }

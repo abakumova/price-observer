@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import priceobserver.ParsingManager;
 import priceobserver.ProductParser;
+import priceobserver.data.product.Product;
 import priceobserver.data.product.ProductRepository;
-import priceobserver.data.productproperties.ProductPropertiesRepository;
-import priceobserver.dto.product.ProductDto;
-import priceobserver.dto.product.ProductDtoConverter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,19 +22,15 @@ public class AvicParsingManager implements ParsingManager {
 
     private final ProductParser parser;
     private final ProductRepository productRepository;
-    private final ProductPropertiesRepository propertiesRepository;
-    private final ProductDtoConverter productDtoConverter;
 
     @Autowired
-    public AvicParsingManager(ProductParser parser, ProductRepository productRepository, ProductPropertiesRepository propertiesRepository, ProductDtoConverter productDtoConverter) {
+    public AvicParsingManager(ProductParser parser, ProductRepository productRepository) {
         this.parser = parser;
         this.productRepository = productRepository;
-        this.propertiesRepository = propertiesRepository;
-        this.productDtoConverter = productDtoConverter;
     }
 
     @Override
-    public List<ProductDto> parsePages() {
+    public List<Product> parsePages() {
         List<String> pages = List.of(PAGE_WITH_APPLE_WATCH,
                 PAGE_WITH_IMACS,
                 PAGE_WITH_IPADS,
@@ -46,9 +40,7 @@ public class AvicParsingManager implements ParsingManager {
     }
 
     @Override
-    public void loadProducts(List<ProductDto> products) {
-        productRepository.saveAll(products.stream()
-                .map(productDtoConverter::convertToEntity)
-                .collect(Collectors.toList()));
+    public void loadProducts(List<Product> products) {
+        productRepository.saveAll(products);
     }
 }
