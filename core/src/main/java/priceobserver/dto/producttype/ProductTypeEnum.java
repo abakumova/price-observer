@@ -22,13 +22,13 @@ public enum ProductTypeEnum {
 
     public static Optional<ProductTypeEnum> getById(int id) {
         return Arrays.stream(ProductTypeEnum.values())
-                .filter(pt -> pt.getId() == id)
+                .filter(pt -> pt.id == id)
                 .findFirst();
     }
 
     public static Optional<ProductTypeEnum> getByName(String name) {
         return Arrays.stream(ProductTypeEnum.values())
-                .filter(pt -> pt.getName().equals(name))
+                .filter(pt -> pt.name.equals(name))
                 .findFirst();
     }
 

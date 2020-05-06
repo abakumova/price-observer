@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import priceobserver.data.user.User;
 import priceobserver.data.user.UserBuilder;
 import priceobserver.data.userrole.UserRole;
+import priceobserver.dto.userrole.UserRoleEnum;
 
 import java.sql.Date;
 

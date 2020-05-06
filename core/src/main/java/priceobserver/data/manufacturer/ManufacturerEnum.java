@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum ManufacturerEnum {
+
     APPLE(1, "Apple", "USA"),
     SAMSUNG(2, "Samsung", "South Korea"),
     XIAOMI(3, "Xiaomi", "China"),
@@ -34,13 +35,13 @@ public enum ManufacturerEnum {
 
     public static Optional<ManufacturerEnum> getById(int id) {
         return Arrays.stream(ManufacturerEnum.values())
-                .filter(m -> m.getId() == id)
+                .filter(m -> m.id == id)
                 .findFirst();
     }
 
     public static Optional<ManufacturerEnum> getByName(String name) {
         return Arrays.stream(ManufacturerEnum.values())
-                .filter(m -> m.getName().equals(name))
+                .filter(m -> m.name.equals(name))
                 .findFirst();
     }
 
