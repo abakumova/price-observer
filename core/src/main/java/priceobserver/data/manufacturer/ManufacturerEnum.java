@@ -23,11 +23,11 @@ public enum ManufacturerEnum {
     JBL(16, "JBL", "USA"),
     SONY(17, "Sony", "Japan");
 
-    private final int id;
+    private final long id;
     private final String name;
     private final String country;
 
-    ManufacturerEnum(int id, String name, String country) {
+    ManufacturerEnum(long id, String name, String country) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -45,7 +45,7 @@ public enum ManufacturerEnum {
                 .findFirst();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

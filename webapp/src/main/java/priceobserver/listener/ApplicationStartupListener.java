@@ -6,9 +6,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import priceobserver.avic.AvicParsingManager;
-import priceobserver.dto.product.ProductDto;
-
-import java.util.List;
 
 @Component
 @Order(0)
@@ -23,7 +20,6 @@ public class ApplicationStartupListener implements ApplicationListener<Applicati
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        List<ProductDto> products = avicParsingManager.parsePages();
-        System.out.println("Size " + products.size());
+        avicParsingManager.loadProducts(avicParsingManager.parsePages());
     }
 }

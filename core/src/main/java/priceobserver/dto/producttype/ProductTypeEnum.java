@@ -12,7 +12,7 @@ public enum ProductTypeEnum {
     EARPHONES(5, "earphones"),
     TV(6, "TV");
 
-    private final int id;
+    private final long id;
     private final String name;
 
     ProductTypeEnum(int id, String name) {
@@ -20,7 +20,7 @@ public enum ProductTypeEnum {
         this.name = name;
     }
 
-    public static Optional<ProductTypeEnum> getById(int id) {
+    public static Optional<ProductTypeEnum> getById(long id) {
         return Arrays.stream(ProductTypeEnum.values())
                 .filter(pt -> pt.id == id)
                 .findFirst();
@@ -32,7 +32,7 @@ public enum ProductTypeEnum {
                 .findFirst();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

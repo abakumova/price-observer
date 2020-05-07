@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `product`
 (
     `id`              INT          NOT NULL AUTO_INCREMENT,
     `name`            VARCHAR(50)  NOT NULL,
-    `description`     VARCHAR(255),
+    `description`     TEXT,
     `properties_id`   INT          NOT NULL,
     `model`           VARCHAR(255) NOT NULL,
     `manufacturer_id` INT          NOT NULL,
