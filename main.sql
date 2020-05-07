@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS price_observer;
+CREATE DATABASE IF NOT EXISTS price_observer CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE price_observer;
 
 CREATE TABLE IF NOT EXISTS `product`
