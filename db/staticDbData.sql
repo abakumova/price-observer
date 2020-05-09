@@ -16,7 +16,8 @@ VALUES (1, 'smartphone'),
        (3, 'tablet'),
        (4, 'smartwatch'),
        (5, 'earphones'),
-       (6, 'TV');
+       (6, 'TV'),
+       (7, 'all-in-one');
 
 INSERT INTO `price_observer`.`manufacturer` (`id`, `name`, `country`)
 VALUES (1, 'Apple', 'USA'),
