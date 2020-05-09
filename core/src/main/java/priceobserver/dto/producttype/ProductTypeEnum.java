@@ -10,7 +10,8 @@ public enum ProductTypeEnum {
     TABLET(3, "tablet"),
     SMARTWATCH(4, "smartwatch"),
     EARPHONES(5, "earphones"),
-    TV(6, "TV");
+    TV(6, "TV"),
+    ALL_IN_ONE(7, "all-in-one");
 
     private final long id;
     private final String name;
@@ -38,5 +39,13 @@ public enum ProductTypeEnum {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductTypeEnum{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
