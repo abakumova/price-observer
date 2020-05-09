@@ -1,16 +1,5 @@
 package priceobserver.avic;
 
-import static priceobserver.data.manufacturer.ManufacturerEnum.APPLE;
-import static priceobserver.dto.producttype.ProductTypeEnum.ALL_IN_ONE;
-import static priceobserver.dto.producttype.ProductTypeEnum.LAPTOP;
-import static priceobserver.dto.producttype.ProductTypeEnum.SMARTPHONE;
-import static priceobserver.dto.producttype.ProductTypeEnum.SMARTWATCH;
-import static priceobserver.dto.producttype.ProductTypeEnum.TABLET;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
@@ -24,6 +13,18 @@ import priceobserver.data.product.ProductRepository;
 import priceobserver.data.producttype.ProductType;
 import priceobserver.data.producttype.ProductTypeRepository;
 import priceobserver.dto.producttype.ProductTypeEnum;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static priceobserver.data.manufacturer.ManufacturerEnum.APPLE;
+import static priceobserver.dto.producttype.ProductTypeEnum.ALL_IN_ONE;
+import static priceobserver.dto.producttype.ProductTypeEnum.LAPTOP;
+import static priceobserver.dto.producttype.ProductTypeEnum.SMARTPHONE;
+import static priceobserver.dto.producttype.ProductTypeEnum.SMARTWATCH;
+import static priceobserver.dto.producttype.ProductTypeEnum.TABLET;
 
 @Component
 public class AvicParsingManager implements ParsingManager {
@@ -50,9 +51,9 @@ public class AvicParsingManager implements ParsingManager {
 
     @Autowired
     public AvicParsingManager(ProductParser parser,
-        ProductRepository productRepository,
-        ManufacturerRepository manufacturerRepository,
-        ProductTypeRepository productTypeRepository) {
+                              ProductRepository productRepository,
+                              ManufacturerRepository manufacturerRepository,
+                              ProductTypeRepository productTypeRepository) {
         this.parser = parser;
         this.productRepository = productRepository;
         this.manufacturerRepository = manufacturerRepository;
@@ -61,31 +62,29 @@ public class AvicParsingManager implements ParsingManager {
 
     @Override
     public void run() {
-        payload.forEach(this::parseSeparateProductType);
+        payload.forEach(this::processProducts);
     }
 
-    private void parseSeparateProductType(String key,
-        Pair<ManufacturerEnum, ProductTypeEnum> value) {
+    private void processProducts(String key, Pair<ManufacturerEnum, ProductTypeEnum> value) {
         loadProducts(parser.parse(key), value.getFirst(), value.getSecond());
     }
 
     @Transactional
     @Override
     public void loadProducts(List<Product> products,
-        ManufacturerEnum manufacturer,
-        ProductTypeEnum productType) {
-        Optional<Manufacturer> manufacturerOpt = manufacturerRepository
-            .findById(manufacturer.getId());
+                             ManufacturerEnum manufacturer,
+                             ProductTypeEnum productType) {
+        Optional<Manufacturer> manufacturerOpt = manufacturerRepository.findById(manufacturer.getId());
         Optional<ProductType> productTypeOpt = productTypeRepository.findById(productType.getId());
         if (manufacturerOpt.isPresent() && productTypeOpt.isPresent()) {
-            products.forEach(p -> processProduct(p, manufacturerOpt.get(), productTypeOpt.get()));
+            products.forEach(p -> prepareProduct(p, manufacturerOpt.get(), productTypeOpt.get()));
         }
         productRepository.saveAll(products);
     }
 
-    private void processProduct(Product product,
-        Manufacturer manufacturer,
-        ProductType productType) {
+    private void prepareProduct(Product product,
+                                Manufacturer manufacturer,
+                                ProductType productType) {
         product.setManufacturer(manufacturer);
         product.setProductType(productType);
     }

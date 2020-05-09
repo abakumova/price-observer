@@ -1,11 +1,5 @@
 package priceobserver.avic;
 
-import java.time.Year;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -20,6 +14,13 @@ import priceobserver.data.product.ProductBuilder;
 import priceobserver.data.productproperties.ProductProperties;
 import priceobserver.data.productproperties.ProductPropertiesBuilder;
 
+import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * The class to parse products from Avic store site.
  */
@@ -27,6 +28,8 @@ import priceobserver.data.productproperties.ProductPropertiesBuilder;
 public class AvicProductParser implements ProductParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AvicProductParser.class);
+
+    private static final String ROUND_BRACES_REGEX = "[()]";
 
     private static final List<Document> productPages = new ArrayList<>();
     private static final List<Product> products = new ArrayList<>();
@@ -106,7 +109,8 @@ public class AvicProductParser implements ProductParser {
         Matcher matcher = Pattern.compile(modelRegex).matcher(fullProductName);
         String model = null;
         while (matcher.find()) {
-            model = fullProductName.substring(matcher.start(), matcher.end()).replaceAll("[()]", "");
+            model = fullProductName.substring(matcher.start(), matcher.end())
+                    .replaceAll(ROUND_BRACES_REGEX, "");
         }
         return model;
     }
@@ -127,7 +131,7 @@ public class AvicProductParser implements ProductParser {
         }
 
         return nameWithoutModel
-                .replaceAll("[()]", "")
+                .replaceAll(ROUND_BRACES_REGEX, "")
                 .trim()
                 .replaceAll(" +", " ");
     }
@@ -180,16 +184,20 @@ public class AvicProductParser implements ProductParser {
     }
 
     private ProductProperties getProperties(Element el) {
-        Elements rowsWithProperties = el
-            .select("div.characteristic-table > ul.characteristic-list > li");
+        Elements rowsWithProperties = el.select("div.characteristic-table > ul.characteristic-list > li");
+        if (!rowsWithProperties.isEmpty()) {
+            return ProductPropertiesBuilder.aProductProperties()
+                                           .withProperties(getPropertiesAsJsonStringFromSpan(rowsWithProperties))
+                                           .build();
+        }
+        rowsWithProperties = el.select("div.characteristic-table > table.pp-tab-characteristics-table > tbody > tr");
         return rowsWithProperties.isEmpty() ?
-            null : ProductPropertiesBuilder.aProductProperties()
-            .withProperties(getPropertiesAsJsonString(rowsWithProperties))
-            .build();
-
+                null : ProductPropertiesBuilder.aProductProperties()
+                                               .withProperties(getPropertiesAsJsonStringFromTable(rowsWithProperties))
+                                               .build();
     }
 
-    private String getPropertiesAsJsonString(Elements elements) {
+    private String getPropertiesAsJsonStringFromSpan(Elements elements) {
         StringBuilder builder = new StringBuilder("{");
         for (Element r : elements) {
             Elements keyAndValue = r.select("span");
@@ -198,6 +206,27 @@ public class AvicProductParser implements ProductParser {
             }
             String key = keyAndValue.first().text();
             String value = keyAndValue.last().text();
+
+            builder.append("\"");
+            builder.append(key.replace(":", ""));
+            builder.append("\" : \"");
+            builder.append(value.replace("\"", "'"));
+            builder.append("\",");
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        builder.append("}");
+        return builder.toString();
+    }
+
+    private String getPropertiesAsJsonStringFromTable(Elements elements) {
+        StringBuilder builder = new StringBuilder("{");
+        for (Element r : elements) {
+            Elements keyAndValue = r.select("td");
+            String key = keyAndValue.first().text();
+            String value = keyAndValue.last().text();
+            if (key.isBlank() || value.isBlank()) {
+                continue;
+            }
 
             builder.append("\"");
             builder.append(key.replace(":", ""));
