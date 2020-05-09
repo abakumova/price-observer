@@ -35,7 +35,7 @@ public class AvicProductParser implements ProductParser {
 
     public static void main(String[] args) {
         ProductParser parser = new AvicProductParser();
-        List<Product> productDtos = parser.parse("https://avic.ua/apple-watch-umnie-chasi.html");
+        List<Product> productDtos = parser.parse("https://avic.ua/iphone");
         LOGGER.info("products list size {}", productDtos.size());
         productDtos.forEach(e -> LOGGER.info("\n{}\n", e));
     }
@@ -54,19 +54,11 @@ public class AvicProductParser implements ProductParser {
      * Parse product page gallery to get product pages.
      */
     private void fillProductPagesList(String avicUrlWithProduct) {
-        // Open the first part of page with products, get all product pages from it.
-        Document startingPageWithProducts = getPageByUrl(avicUrlWithProduct);
-        Elements linksToProductPages = startingPageWithProducts.select("div.images > a.img");
-        linksToProductPages.forEach(a -> productPages.add(getPageByUrl(a.attr("href"))));
-
-        //    The page with products is split into a few pages.
-        //    Since we parsed the first part of it, we open others and getting product pages.
-        Elements linksToNextPages = startingPageWithProducts.select("div.paging > a.ditto_page");
-        List<Document> otherPagesWithProducts = new ArrayList<>();
-        linksToNextPages.forEach(a -> otherPagesWithProducts.add(getPageByUrl(AVIC_DOMAIN.concat(a.attr("href")))));
-
-        for (Document doc : otherPagesWithProducts) {
-            linksToProductPages = doc.select("div.images > a.img");
+        Document currentPage = getPageByUrl(avicUrlWithProduct);
+        int countOfPages = Integer.parseInt(currentPage.select("ul.js_pagination > li.page-item").last().text());
+        for (int i = 1; i <= countOfPages; i++) {
+            currentPage = getPageByUrl(avicUrlWithProduct + "?page=" + i);
+            Elements linksToProductPages = currentPage.select("div.prod-cart > div.prod-cart__top > a.js_go_product");
             linksToProductPages.forEach(a -> productPages.add(getPageByUrl(a.attr("href"))));
         }
     }
@@ -78,7 +70,7 @@ public class AvicProductParser implements ProductParser {
      * @param el product page
      */
     private void extractProductAndAddToList(Document el) {
-        String fullProductName = el.select("div.left > h1 > span").first().text();
+        String fullProductName = el.select("h1.page-title").first().text();
         String description = getDescription(el);
         //skip  products which marked as "Open box" or as "витринный вариант"
         if (fullProductName.toLowerCase().contains("open box")
@@ -148,7 +140,7 @@ public class AvicProductParser implements ProductParser {
      * @return the absolute image url.
      */
     private String getImageUrl(Element el) {
-        return AVIC_DOMAIN.concat(el.select("span > a > img.js_main-img").first().attr("src"));
+        return el.select("div.swiper-slide > a.fancybox > img").first().attr("src");
     }
 
     private Optional<String> saveImage(String url) {
@@ -163,7 +155,7 @@ public class AvicProductParser implements ProductParser {
      * @return description of the product
      */
     private String getDescription(Element el) {
-        Elements paragraphsWithDescription = el.select("div.about-product > p");
+        Elements paragraphsWithDescription = el.select("div.col-lg-8.col-md-12 > div.content > p");
         StringBuilder builder = new StringBuilder();
         for (Element paragraph : paragraphsWithDescription) {
             builder.append(" ");
@@ -179,7 +171,8 @@ public class AvicProductParser implements ProductParser {
      * @return a year of product made or null if the year is absent in product name
      */
     private Year getYear(String fullProductName) {
-        Matcher matcher = Pattern.compile("(?:\\(|\\s)20\\d{2}").matcher(fullProductName);
+        String yearRegex = "(?:\\(|\\s)20\\d{2}";
+        Matcher matcher = Pattern.compile(yearRegex).matcher(fullProductName);
         String year = null;
         while (matcher.find()) {
             year = fullProductName.substring(matcher.start(), matcher.end());
@@ -188,7 +181,7 @@ public class AvicProductParser implements ProductParser {
     }
 
     private ProductProperties getProperties(Element el) {
-        Elements rowsWithProperties = el.select("div.table-features > table > tbody > tr");
+        Elements rowsWithProperties = el.select("div.characteristic-table > ul.characteristic-list > li");
         return ProductPropertiesBuilder.aProductProperties()
                 .withProperties(getPropertiesAsJsonString(rowsWithProperties))
                 .build();
@@ -197,14 +190,12 @@ public class AvicProductParser implements ProductParser {
     private String getPropertiesAsJsonString(Elements elements) {
         StringBuilder builder = new StringBuilder("{");
         for (Element r : elements) {
-            Elements keyAndValueEl = r.select("td");
-            String key = keyAndValueEl.get(0).text();
-            String value = keyAndValueEl.get(1).text();
-
-            //skip rows with headers
-            if (key.isEmpty() || value.isEmpty()) {
+            Elements keyAndValue = r.select("span");
+            if (keyAndValue.isEmpty()) {
                 continue;
             }
+            String key = keyAndValue.first().text();
+            String value = keyAndValue.last().text();
 
             builder.append("\"");
             builder.append(key.replace(":", ""));
