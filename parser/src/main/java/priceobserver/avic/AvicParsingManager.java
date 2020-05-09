@@ -1,6 +1,18 @@
 package priceobserver.avic;
 
+import static priceobserver.data.manufacturer.ManufacturerEnum.APPLE;
+import static priceobserver.dto.producttype.ProductTypeEnum.ALL_IN_ONE;
+import static priceobserver.dto.producttype.ProductTypeEnum.LAPTOP;
+import static priceobserver.dto.producttype.ProductTypeEnum.SMARTPHONE;
+import static priceobserver.dto.producttype.ProductTypeEnum.SMARTWATCH;
+import static priceobserver.dto.producttype.ProductTypeEnum.TABLET;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 import priceobserver.ParsingManager;
 import priceobserver.ProductParser;
@@ -13,11 +25,6 @@ import priceobserver.data.producttype.ProductType;
 import priceobserver.data.producttype.ProductTypeRepository;
 import priceobserver.dto.producttype.ProductTypeEnum;
 
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 @Component
 public class AvicParsingManager implements ParsingManager {
 
@@ -28,13 +35,24 @@ public class AvicParsingManager implements ParsingManager {
     private static final String PAGE_WITH_IMACS = "https://avic.ua/imac";
     private static final String PAGE_WITH_APPLE_WATCH = "https://avic.ua/apple-watch-umnie-chasi";
 
+    private static final Map<String, Pair<ManufacturerEnum, ProductTypeEnum>> payload = Map.of(
+        PAGE_WITH_APPLE_WATCH, Pair.of(APPLE, SMARTWATCH),
+        PAGE_WITH_IMACS, Pair.of(APPLE, ALL_IN_ONE),
+        PAGE_WITH_IPADS, Pair.of(APPLE, TABLET),
+        PAGE_WITH_IPHONES, Pair.of(APPLE, SMARTPHONE),
+        PAGE_WITH_MACBOOKS, Pair.of(APPLE, LAPTOP)
+    );
+
     private final ProductParser parser;
     private final ProductRepository productRepository;
     private final ManufacturerRepository manufacturerRepository;
     private final ProductTypeRepository productTypeRepository;
 
     @Autowired
-    public AvicParsingManager(ProductParser parser, ProductRepository productRepository, ManufacturerRepository manufacturerRepository, ProductTypeRepository productTypeRepository) {
+    public AvicParsingManager(ProductParser parser,
+        ProductRepository productRepository,
+        ManufacturerRepository manufacturerRepository,
+        ProductTypeRepository productTypeRepository) {
         this.parser = parser;
         this.productRepository = productRepository;
         this.manufacturerRepository = manufacturerRepository;
@@ -42,27 +60,32 @@ public class AvicParsingManager implements ParsingManager {
     }
 
     @Override
-    public List<Product> parsePages() {
-        List<String> pages = List.of(PAGE_WITH_APPLE_WATCH,
-                PAGE_WITH_IMACS,
-                PAGE_WITH_IPADS,
-                PAGE_WITH_IPHONES,
-                PAGE_WITH_MACBOOKS);
-        return pages.stream().flatMap(p -> parser.parse(p).stream()).collect(Collectors.toList());
+    public void run() {
+        payload.forEach(this::parseSeparateProductType);
+    }
+
+    private void parseSeparateProductType(String key,
+        Pair<ManufacturerEnum, ProductTypeEnum> value) {
+        loadProducts(parser.parse(key), value.getFirst(), value.getSecond());
     }
 
     @Transactional
     @Override
-    public void loadProducts(List<Product> products) {
-        Optional<Manufacturer> manufacturer = manufacturerRepository.findById(ManufacturerEnum.APPLE.getId());
-        Optional<ProductType> productType = productTypeRepository.findById(ProductTypeEnum.SMARTPHONE.getId());
-        if (manufacturer.isPresent() && productType.isPresent()) {
-            products.forEach(p -> processProduct(p, manufacturer.get(), productType.get()));
+    public void loadProducts(List<Product> products,
+        ManufacturerEnum manufacturer,
+        ProductTypeEnum productType) {
+        Optional<Manufacturer> manufacturerOpt = manufacturerRepository
+            .findById(manufacturer.getId());
+        Optional<ProductType> productTypeOpt = productTypeRepository.findById(productType.getId());
+        if (manufacturerOpt.isPresent() && productTypeOpt.isPresent()) {
+            products.forEach(p -> processProduct(p, manufacturerOpt.get(), productTypeOpt.get()));
         }
         productRepository.saveAll(products);
     }
 
-    private void processProduct(Product product, Manufacturer manufacturer, ProductType productType) {
+    private void processProduct(Product product,
+        Manufacturer manufacturer,
+        ProductType productType) {
         product.setManufacturer(manufacturer);
         product.setProductType(productType);
     }

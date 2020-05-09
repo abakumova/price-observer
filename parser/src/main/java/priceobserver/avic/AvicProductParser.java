@@ -1,5 +1,11 @@
 package priceobserver.avic;
 
+import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -13,13 +19,6 @@ import priceobserver.data.product.Product;
 import priceobserver.data.product.ProductBuilder;
 import priceobserver.data.productproperties.ProductProperties;
 import priceobserver.data.productproperties.ProductPropertiesBuilder;
-
-import java.time.Year;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * The class to parse products from Avic store site.
@@ -181,10 +180,13 @@ public class AvicProductParser implements ProductParser {
     }
 
     private ProductProperties getProperties(Element el) {
-        Elements rowsWithProperties = el.select("div.characteristic-table > ul.characteristic-list > li");
-        return ProductPropertiesBuilder.aProductProperties()
-                .withProperties(getPropertiesAsJsonString(rowsWithProperties))
-                .build();
+        Elements rowsWithProperties = el
+            .select("div.characteristic-table > ul.characteristic-list > li");
+        return rowsWithProperties.isEmpty() ?
+            null : ProductPropertiesBuilder.aProductProperties()
+            .withProperties(getPropertiesAsJsonString(rowsWithProperties))
+            .build();
+
     }
 
     private String getPropertiesAsJsonString(Elements elements) {

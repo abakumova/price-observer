@@ -1,12 +1,14 @@
 package priceobserver;
 
-import priceobserver.data.product.Product;
-
 import java.util.List;
+import priceobserver.data.manufacturer.ManufacturerEnum;
+import priceobserver.data.product.Product;
+import priceobserver.dto.producttype.ProductTypeEnum;
 
 public interface ParsingManager {
 
-    List<Product> parsePages();
+    void loadProducts(List<Product> products, ManufacturerEnum manufacturer,
+        ProductTypeEnum productType);
 
-    void loadProducts(List<Product> products);
+    void run();
 }
