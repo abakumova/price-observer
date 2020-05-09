@@ -5,8 +5,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import priceobserver.ImageSaverImpl;
+import priceobserver.ImageSaver;
 import priceobserver.ProductParser;
 import priceobserver.data.product.Product;
 import priceobserver.data.product.ProductBuilder;
@@ -28,16 +29,14 @@ public class AvicProductParser implements ProductParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AvicProductParser.class);
 
-    private static final String AVIC_DOMAIN = "https://avic.ua/";
-
     private static final List<Document> productPages = new ArrayList<>();
     private static final List<Product> products = new ArrayList<>();
 
-    public static void main(String[] args) {
-        ProductParser parser = new AvicProductParser();
-        List<Product> productDtos = parser.parse("https://avic.ua/iphone");
-        LOGGER.info("products list size {}", productDtos.size());
-        productDtos.forEach(e -> LOGGER.info("\n{}\n", e));
+    private final ImageSaver imageSaver;
+
+    @Autowired
+    public AvicProductParser(ImageSaver imageSaver) {
+        this.imageSaver = imageSaver;
     }
 
     @Override
@@ -104,7 +103,8 @@ public class AvicProductParser implements ProductParser {
      * @return string with model
      */
     private String getModelFromFullProductName(String fullProductName) {
-        Matcher matcher = Pattern.compile("\\([MZ].*\\)").matcher(fullProductName);
+        String modelRegex = "\\([MZ].*\\)";
+        Matcher matcher = Pattern.compile(modelRegex).matcher(fullProductName);
         String model = null;
         while (matcher.find()) {
             model = fullProductName.substring(matcher.start(), matcher.end()).replaceAll("[()]", "");
@@ -144,7 +144,7 @@ public class AvicProductParser implements ProductParser {
     }
 
     private Optional<String> saveImage(String url) {
-        return new ImageSaverImpl().saveImageByUrlToDefaultFolder(url);
+        return imageSaver.saveImageByUrlToDefaultFolder(url);
     }
 
     /**

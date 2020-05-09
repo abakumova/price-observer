@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 public class AvicParsingManager implements ParsingManager {
 
 
-    private static final String PAGE_WITH_MACBOOKS = "https://avic.ua/macbook.html";
-    private static final String PAGE_WITH_IPHONES = "https://avic.ua/iphone.html";
-    private static final String PAGE_WITH_IPADS = "https://avic.ua/ipad.html";
-    private static final String PAGE_WITH_IMACS = "https://avic.ua/imac.html";
-    private static final String PAGE_WITH_APPLE_WATCH = "https://avic.ua/apple-watch-umnie-chasi.html";
+    private static final String PAGE_WITH_MACBOOKS = "https://avic.ua/macbook";
+    private static final String PAGE_WITH_IPHONES = "https://avic.ua/iphone";
+    private static final String PAGE_WITH_IPADS = "https://avic.ua/ipad";
+    private static final String PAGE_WITH_IMACS = "https://avic.ua/imac";
+    private static final String PAGE_WITH_APPLE_WATCH = "https://avic.ua/apple-watch-umnie-chasi";
 
     private final ProductParser parser;
     private final ProductRepository productRepository;
@@ -43,7 +43,11 @@ public class AvicParsingManager implements ParsingManager {
 
     @Override
     public List<Product> parsePages() {
-        List<String> pages = List.of(PAGE_WITH_IPHONES);
+        List<String> pages = List.of(PAGE_WITH_APPLE_WATCH,
+                PAGE_WITH_IMACS,
+                PAGE_WITH_IPADS,
+                PAGE_WITH_IPHONES,
+                PAGE_WITH_MACBOOKS);
         return pages.stream().flatMap(p -> parser.parse(p).stream()).collect(Collectors.toList());
     }
 
