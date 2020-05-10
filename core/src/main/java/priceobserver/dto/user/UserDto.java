@@ -1,5 +1,7 @@
 package priceobserver.dto.user;
 
+import priceobserver.dto.userrole.UserRoleEnum;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;

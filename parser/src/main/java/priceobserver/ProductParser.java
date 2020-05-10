@@ -2,7 +2,7 @@ package priceobserver;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import priceobserver.dto.product.ProductDto;
+import priceobserver.data.product.Product;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +16,7 @@ public interface ProductParser {
      * @param avicUrlWithProduct URL to products page
      * @return list of products
      */
-    List<ProductDto> parse(String avicUrlWithProduct);
+    List<Product> parse(String avicUrlWithProduct);
 
     /**
      * Returns a document by given URL.

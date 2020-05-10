@@ -4,6 +4,8 @@ import priceobserver.data.manufacturer.Manufacturer;
 import priceobserver.data.productproperties.ProductProperties;
 import priceobserver.data.producttype.ProductType;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,16 +31,16 @@ public class Product {
     private Long id;
 
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 255)
     private String name;
 
-    @Size(max = 255)
+    @Size(max = 65535)
     private String description;
 
-    @NotBlank
     @Size(max = 255)
     private String model;
 
+    @Convert(converter = YearFieldConverter.class)
     private Year year;
 
     /**
@@ -48,8 +50,7 @@ public class Product {
     @Version
     private Integer version;
 
-    @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "properties_id", nullable = false)
     private ProductProperties productProperties;
 

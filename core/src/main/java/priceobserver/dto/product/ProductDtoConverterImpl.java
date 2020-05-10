@@ -19,9 +19,9 @@ public class ProductDtoConverterImpl implements ProductDtoConverter {
     private static final String PRODUCT_TYPE_FIELD = "productType";
     private static final String MANUFACTURER_FIELD = "manufacturer";
 
-    private ProductPropertiesDtoConverter productPropertiesDtoConverter;
-    private ProductTypeDtoConverter productTypeDtoConverter;
-    private ManufacturerDtoConverter manufacturerDtoConverter;
+    private final ProductPropertiesDtoConverter productPropertiesDtoConverter;
+    private final ProductTypeDtoConverter productTypeDtoConverter;
+    private final ManufacturerDtoConverter manufacturerDtoConverter;
 
     @Autowired
     public ProductDtoConverterImpl(ProductPropertiesDtoConverter productPropertiesDtoConverter,
