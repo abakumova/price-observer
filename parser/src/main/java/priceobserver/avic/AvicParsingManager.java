@@ -1,5 +1,7 @@
 package priceobserver.avic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
@@ -29,6 +31,7 @@ import static priceobserver.dto.producttype.ProductTypeEnum.TABLET;
 @Component
 public class AvicParsingManager implements ParsingManager {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AvicParsingManager.class);
 
     private static final String PAGE_WITH_MACBOOKS = "https://avic.ua/macbook";
     private static final String PAGE_WITH_IPHONES = "https://avic.ua/iphone";
@@ -60,26 +63,33 @@ public class AvicParsingManager implements ParsingManager {
         this.productTypeRepository = productTypeRepository;
     }
 
+    @Transactional
     @Override
     public void run() {
+        LOGGER.info("Started parsing Avic products. Payload: {}", payload);
         payload.forEach(this::processProducts);
+        LOGGER.info("Avic parsing was successfully finished.");
     }
 
     private void processProducts(String key, Pair<ManufacturerEnum, ProductTypeEnum> value) {
         loadProducts(parser.parse(key), value.getFirst(), value.getSecond());
     }
 
-    @Transactional
     @Override
     public void loadProducts(List<Product> products,
                              ManufacturerEnum manufacturer,
                              ProductTypeEnum productType) {
+        LOGGER.info("Saving products with type {} and manufacturer {} to DB. List size {}",
+                productType.getName(), manufacturer.getName(), products.size());
+
         Optional<Manufacturer> manufacturerOpt = manufacturerRepository.findById(manufacturer.getId());
         Optional<ProductType> productTypeOpt = productTypeRepository.findById(productType.getId());
         if (manufacturerOpt.isPresent() && productTypeOpt.isPresent()) {
             products.forEach(p -> prepareProduct(p, manufacturerOpt.get(), productTypeOpt.get()));
         }
         productRepository.saveAll(products);
+        LOGGER.info("Products with type {} and manufacturer {} were saved to DB. List size {}",
+                productType.getName(), manufacturer.getName(), products.size());
     }
 
     private void prepareProduct(Product product,

@@ -204,11 +204,14 @@ public class AvicProductParser implements ProductParser {
             if (keyAndValue.isEmpty()) {
                 continue;
             }
-            String key = keyAndValue.first().text();
+            String key = keyAndValue.first().text().replace(":", "");
             String value = keyAndValue.last().text();
+            if (builder.toString().contains("\"" + key + "\" :")) {
+                continue;
+            }
 
             builder.append("\"");
-            builder.append(key.replace(":", ""));
+            builder.append(key);
             builder.append("\" : \"");
             builder.append(value.replace("\"", "'"));
             builder.append("\",");
@@ -224,12 +227,12 @@ public class AvicProductParser implements ProductParser {
             Elements keyAndValue = r.select("td");
             String key = keyAndValue.first().text();
             String value = keyAndValue.last().text();
-            if (key.isBlank() || value.isBlank()) {
+            if (key.isBlank() || value.isBlank() || builder.toString().contains("\"" + key + "\" :")) {
                 continue;
             }
 
             builder.append("\"");
-            builder.append(key.replace(":", ""));
+            builder.append(key);
             builder.append("\" : \"");
             builder.append(value.replace("\"", "'"));
             builder.append("\",");

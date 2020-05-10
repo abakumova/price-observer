@@ -31,13 +31,12 @@ public class Product {
     private Long id;
 
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 255)
     private String name;
 
     @Size(max = 65535)
     private String description;
 
-    @NotBlank
     @Size(max = 255)
     private String model;
 
@@ -51,7 +50,6 @@ public class Product {
     @Version
     private Integer version;
 
-    @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "properties_id", nullable = false)
     private ProductProperties productProperties;
