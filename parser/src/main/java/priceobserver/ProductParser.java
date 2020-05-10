@@ -1,12 +1,9 @@
 package priceobserver;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import priceobserver.data.product.Product;
 import priceobserver.data.productproperties.ProductProperties;
 
-import java.io.IOException;
 import java.time.Year;
 import java.util.List;
 
@@ -20,20 +17,6 @@ public interface ProductParser {
      * @return list of products
      */
     List<Product> parse(String avicUrlWithProduct);
-
-    /**
-     * Returns a document by given URL.
-     *
-     * @param url URL to document
-     * @return document by given URL.
-     */
-    default Document getPageByUrl(String url) {
-        try {
-            return Jsoup.connect(url).get();
-        } catch (IOException e) {
-            throw new ProductParsingException(String.format("Error during getting document by provided url. Url: %s ", url), e);
-        }
-    }
 
     /**
      * Get model from full product name.

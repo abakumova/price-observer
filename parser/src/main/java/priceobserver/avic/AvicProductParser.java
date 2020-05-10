@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import priceobserver.ImageSaver;
+import priceobserver.ParsingUtils;
 import priceobserver.ProductParser;
 import priceobserver.data.product.Product;
 import priceobserver.data.product.ProductBuilder;
@@ -35,10 +36,12 @@ public class AvicProductParser implements ProductParser {
     private static final List<Product> products = new ArrayList<>();
 
     private final ImageSaver imageSaver;
+    private final ParsingUtils parsingUtils;
 
     @Autowired
-    public AvicProductParser(ImageSaver imageSaver) {
+    public AvicProductParser(ImageSaver imageSaver, ParsingUtils parsingUtils) {
         this.imageSaver = imageSaver;
+        this.parsingUtils = parsingUtils;
     }
 
     @Override
@@ -127,12 +130,12 @@ public class AvicProductParser implements ProductParser {
      * Parse product page gallery to get product pages.
      */
     private void fillProductPagesList(String avicUrlWithProduct) {
-        Document currentPage = getPageByUrl(avicUrlWithProduct);
+        Document currentPage = parsingUtils.getPageByUrl(avicUrlWithProduct);
         int countOfPages = Integer.parseInt(currentPage.select("ul.js_pagination > li.page-item").last().text());
         for (int i = 1; i <= countOfPages; i++) {
-            currentPage = getPageByUrl(avicUrlWithProduct + "?page=" + i);
+            currentPage = parsingUtils.getPageByUrl(avicUrlWithProduct + "?page=" + i);
             Elements linksToProductPages = currentPage.select("div.prod-cart > div.prod-cart__top > a.js_go_product");
-            linksToProductPages.forEach(a -> productPages.add(getPageByUrl(a.attr("href"))));
+            linksToProductPages.forEach(a -> productPages.add(parsingUtils.getPageByUrl(a.attr("href"))));
         }
     }
 
