@@ -71,10 +71,6 @@ public class AvicParsingManager implements ParsingManager {
         LOGGER.info("Avic parsing was successfully finished.");
     }
 
-    private void processProducts(String key, Pair<ManufacturerEnum, ProductTypeEnum> value) {
-        loadProducts(parser.parse(key), value.getFirst(), value.getSecond());
-    }
-
     @Override
     public void loadProducts(List<Product> products,
                              ManufacturerEnum manufacturer,
@@ -90,6 +86,10 @@ public class AvicParsingManager implements ParsingManager {
         productRepository.saveAll(products);
         LOGGER.info("Products with type {} and manufacturer {} were saved to DB. List size {}",
                 productType.getName(), manufacturer.getName(), products.size());
+    }
+
+    private void processProducts(String key, Pair<ManufacturerEnum, ProductTypeEnum> value) {
+        loadProducts(parser.parse(key), value.getFirst(), value.getSecond());
     }
 
     private void prepareProduct(Product product,
