@@ -1,4 +1,4 @@
-package priceobserver.dto.user;
+package priceobserver.dto.userrole;
 
 public enum UserRoleEnum {
 
@@ -6,8 +6,8 @@ public enum UserRoleEnum {
     USER("user", (byte) 2),
     GOD("god", (byte) 3);
 
-    private String role;
-    private Byte id;
+    private final String role;
+    private final Byte id;
 
     UserRoleEnum(String role, Byte id) {
         this.role = role;

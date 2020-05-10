@@ -9,6 +9,13 @@ public class ProductPropertiesDto implements Serializable {
     private String properties;
     private Integer version;
 
+    public ProductPropertiesDto(String properties) {
+        this.properties = properties;
+    }
+
+    public ProductPropertiesDto() {
+    }
+
     public Long getId() {
         return id;
     }

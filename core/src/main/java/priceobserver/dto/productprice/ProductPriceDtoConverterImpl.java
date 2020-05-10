@@ -12,8 +12,8 @@ import java.sql.Date;
 @Component
 public class ProductPriceDtoConverterImpl implements ProductPriceDtoConverter {
 
-    private ProductDtoConverter productDtoConverter;
-    private StoreDtoConverter storeDtoConverter;
+    private final ProductDtoConverter productDtoConverter;
+    private final StoreDtoConverter storeDtoConverter;
 
     @Autowired
     public ProductPriceDtoConverterImpl(ProductDtoConverter productDtoConverter, StoreDtoConverter storeDtoConverter) {

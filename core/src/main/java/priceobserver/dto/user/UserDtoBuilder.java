@@ -1,5 +1,7 @@
 package priceobserver.dto.user;
 
+import priceobserver.dto.userrole.UserRoleEnum;
+
 import java.time.LocalDate;
 
 public final class UserDtoBuilder {

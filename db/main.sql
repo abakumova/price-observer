@@ -1,13 +1,13 @@
-CREATE DATABASE IF NOT EXISTS price_observer;
+CREATE DATABASE IF NOT EXISTS price_observer CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE price_observer;
 
 CREATE TABLE IF NOT EXISTS `product`
 (
     `id`              INT          NOT NULL AUTO_INCREMENT,
-    `name`            VARCHAR(50)  NOT NULL,
-    `description`     VARCHAR(255),
-    `properties_id`   INT          NOT NULL,
-    `model`           VARCHAR(255) NOT NULL,
+    `name`            VARCHAR(255)  NOT NULL,
+    `description`     TEXT,
+    `properties_id`   INT,
+    `model`           VARCHAR(255),
     `manufacturer_id` INT          NOT NULL,
     `year`            YEAR,
     `image`           TEXT,
