@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
-import priceobserver.ParsingManager;
 import priceobserver.ProductParser;
+import priceobserver.ProductParsingManager;
 import priceobserver.data.manufacturer.Manufacturer;
 import priceobserver.data.manufacturer.ManufacturerEnum;
 import priceobserver.data.manufacturer.ManufacturerRepository;
@@ -29,9 +29,9 @@ import static priceobserver.dto.producttype.ProductTypeEnum.SMARTWATCH;
 import static priceobserver.dto.producttype.ProductTypeEnum.TABLET;
 
 @Component
-public class AvicParsingManager implements ParsingManager {
+public class AvicProductParsingManager implements ProductParsingManager {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AvicParsingManager.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AvicProductParsingManager.class);
 
     private static final String PAGE_WITH_MACBOOKS = "https://avic.ua/macbook";
     private static final String PAGE_WITH_IPHONES = "https://avic.ua/iphone";
@@ -53,10 +53,10 @@ public class AvicParsingManager implements ParsingManager {
     private final ProductTypeRepository productTypeRepository;
 
     @Autowired
-    public AvicParsingManager(ProductParser parser,
-                              ProductRepository productRepository,
-                              ManufacturerRepository manufacturerRepository,
-                              ProductTypeRepository productTypeRepository) {
+    public AvicProductParsingManager(ProductParser parser,
+                                     ProductRepository productRepository,
+                                     ManufacturerRepository manufacturerRepository,
+                                     ProductTypeRepository productTypeRepository) {
         this.parser = parser;
         this.productRepository = productRepository;
         this.manufacturerRepository = manufacturerRepository;
