@@ -119,6 +119,14 @@ public class AvicProductParser implements ProductParser {
                                            .withProperties(getPropertiesAsJsonStringFromSpan(rowsWithProperties))
                                            .build();
         }
+
+        rowsWithProperties = el.select("div.characteristic-table > table > tbody > tr");
+        if (!rowsWithProperties.isEmpty()) {
+            return ProductPropertiesBuilder.aProductProperties()
+                    .withProperties(getPropertiesAsJsonStringFromTable(rowsWithProperties))
+                    .build();
+        }
+
         rowsWithProperties = el.select("div.characteristic-table > table.pp-tab-characteristics-table > tbody > tr");
         return rowsWithProperties.isEmpty() ?
                 null : ProductPropertiesBuilder.aProductProperties()
