@@ -13,8 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -27,12 +26,11 @@ public class ProductPrice {
     private Long id;
 
     @NotNull
-    @PositiveOrZero
     private Float price;
 
     @NotNull
     @PastOrPresent
-    private Date date;
+    private LocalDate date;
 
     @NotNull
     @ManyToOne
@@ -60,11 +58,11 @@ public class ProductPrice {
         this.price = price;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

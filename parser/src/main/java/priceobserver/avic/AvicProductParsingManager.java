@@ -40,11 +40,11 @@ public class AvicProductParsingManager implements ProductParsingManager {
     private static final String PAGE_WITH_APPLE_WATCH = "https://avic.ua/apple-watch-umnie-chasi";
 
     private static final Map<String, Pair<ManufacturerEnum, ProductTypeEnum>> payload = Map.of(
-        PAGE_WITH_APPLE_WATCH, Pair.of(APPLE, SMARTWATCH),
-        PAGE_WITH_IMACS, Pair.of(APPLE, ALL_IN_ONE),
-        PAGE_WITH_IPADS, Pair.of(APPLE, TABLET),
-        PAGE_WITH_IPHONES, Pair.of(APPLE, SMARTPHONE),
-        PAGE_WITH_MACBOOKS, Pair.of(APPLE, LAPTOP)
+            PAGE_WITH_APPLE_WATCH, Pair.of(APPLE, SMARTWATCH),
+            PAGE_WITH_IMACS, Pair.of(APPLE, ALL_IN_ONE),
+            PAGE_WITH_IPADS, Pair.of(APPLE, TABLET),
+            PAGE_WITH_IPHONES, Pair.of(APPLE, SMARTPHONE),
+            PAGE_WITH_MACBOOKS, Pair.of(APPLE, LAPTOP)
     );
 
     private final ProductParser parser;

@@ -1,10 +1,14 @@
 package priceobserver;
 
-import priceobserver.data.productprice.ProductPrice;
-
-import java.util.List;
+import org.jsoup.nodes.Document;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface PriceParser {
 
-    List<ProductPrice> parse(String url);
+    void parse(String url);
+
+    @Transactional
+    void savePrice(String name, String model, float price);
+
+    void processPage(Document page);
 }

@@ -7,8 +7,6 @@ import priceobserver.data.productprice.ProductPriceBuilder;
 import priceobserver.dto.product.ProductDtoConverter;
 import priceobserver.dto.store.StoreDtoConverter;
 
-import java.sql.Date;
-
 @Component
 public class ProductPriceDtoConverterImpl implements ProductPriceDtoConverter {
 
@@ -26,7 +24,7 @@ public class ProductPriceDtoConverterImpl implements ProductPriceDtoConverter {
         return ProductPriceDtoBuilder.aProductPriceDto()
                 .withId(entity.getId())
                 .withPrice(entity.getPrice())
-                .withDate(entity.getDate().toLocalDate())
+                .withDate(entity.getDate())
                 .withProduct(productDtoConverter.convertToDto(entity.getProduct()))
                 .withStore(storeDtoConverter.convertToDto(entity.getStore()))
                 .build();
@@ -37,7 +35,7 @@ public class ProductPriceDtoConverterImpl implements ProductPriceDtoConverter {
         return ProductPriceBuilder.aProductPrice()
                 .withId(dto.getId())
                 .withPrice(dto.getPrice())
-                .withDate(Date.valueOf(dto.getDate()))
+                .withDate(dto.getDate())
                 .withProduct(productDtoConverter.convertToEntity(dto.getProduct()))
                 .withStore(storeDtoConverter.convertToEntity(dto.getStore()))
                 .build();
