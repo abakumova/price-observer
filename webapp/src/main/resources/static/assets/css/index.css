@@ -20,7 +20,54 @@
     text-align: center;
     font-size: 45px;
     font-weight: bold;
-    margin: 30px 0 0;
+    margin: 30px 0 10px;
     padding: 0;
     color: var(--main-color);
+}
+
+.index-main {
+    overflow-x: hidden;
+}
+
+.product-type-btn {
+    transition: box-shadow .3s;
+    border-radius: 50px !important;
+    padding: 25px 50px 25px 50px;
+    margin: 20px;
+    background: var(--main-color);
+    width: 220px;
+    display: block;
+    float: left;
+
+}
+
+.product-type-btn-text {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.product-type-btn:hover {
+    box-shadow: 0 0 15px var(--main-color);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px 20px;
+    grid-template-areas: "a" "b";
+}
+
+.first-row-product-category {
+    display: inline-block;
+    transform: translate(25%, 0);
+    grid-area: a;
+}
+
+.second-row-product-category {
+    display: inline-block;
+    transform: translate(35%, 0);
+    grid-area: b;
 }
