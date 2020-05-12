@@ -31,7 +31,7 @@
 
 .product-type-btn {
     transition: box-shadow .3s;
-    border-radius: 50px;
+    border-radius: 50px !important;
     padding: 25px 50px 25px 50px;
     margin: 20px;
     background: var(--main-color);
@@ -62,12 +62,12 @@
 
 .first-row-product-category {
     display: inline-block;
-    transform: translate(15%, 0);
+    transform: translate(25%, 0);
     grid-area: a;
 }
 
 .second-row-product-category {
     display: inline-block;
-    transform: translate(25%, 0);
+    transform: translate(35%, 0);
     grid-area: b;
 }
