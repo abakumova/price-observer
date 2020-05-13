@@ -23,7 +23,7 @@ public class CustomErrorController implements ErrorController {
                 .map(Integer::parseInt)
                 .map(HttpStatus::valueOf);
 
-        if (!status.isPresent()) {
+        if (status.isEmpty()) {
             return MAIN_PAGE;
         }
 

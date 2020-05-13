@@ -31,9 +31,11 @@
         <th:block th:each="product : ${products}">
             <div class="border">
                 <div class="wrap">
-                    <div class="product-wrap">
-                        <a href=""><img th:src="${product.image}"></a>
-                    </div>
+                    <a th:href="@{'/product/' + ${product.id}}">
+                        <div class="product-wrap">
+                            <img th:src="${product.image}" th:alt="${product.name}">
+                        </div>
+                    </a>
                     <div class="product-button">
                         <a href="">Add to wish list</a>
                         <a href="">Price history</a>

@@ -7,10 +7,8 @@ html {
 }
 
 .product-photo {
-    height: 500px;
-    width: 450px;
     position: absolute;
-    top: 100px;
+    top: 150px;
     left: 70px;
     border: 1px solid #CCC;
     background-color: var(--white);

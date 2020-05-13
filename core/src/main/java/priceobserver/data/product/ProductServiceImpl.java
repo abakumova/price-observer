@@ -7,6 +7,7 @@ import priceobserver.dto.product.ProductDtoConverter;
 import priceobserver.dto.producttype.ProductTypeEnum;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -31,6 +32,16 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
         products.forEach(this::prepareImageUrl);
         return products;
+    }
+
+    @Override
+    public Optional<ProductDto> getOneById(Long id) {
+        if (id == null || id < 1) {
+            throw new IllegalArgumentException("Id can't be null or less than 1!");
+        }
+        Optional<ProductDto> product = repository.findById(id).map(converter::convertToDto);
+        product.ifPresent(this::prepareImageUrl);
+        return product;
     }
 
     private void prepareImageUrl(ProductDto p) {

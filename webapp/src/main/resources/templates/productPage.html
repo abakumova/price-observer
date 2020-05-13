@@ -8,57 +8,32 @@
 <body>
 <th:block th:insert="fragments/header :: copy"/>
 <main>
-    <form>
+    <form th:object="${product}">
         <div>
-            <img alt="Product photo"
-                 class="product-photo"
-                 src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-11-pro-gold-select-2019_GEO_EMEA?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1567808542418">
+            <img th:alt="*{name + ' photo'}" class="product-photo" th:src="*{image}">
         </div>
         <h1 class="title">Description</h1>
         <div class="description product-main">
             <div>
-                <p>Name:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                <p><b>Name: </b><span th:text="*{name}"></span></p>
             </div>
             <div>
-                <p>Model:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                <p><b>Model: </b><span th:text="*{model}"></span></p>
+            </div>
+            <div th:if="*{manufacturer.name != null}">
+                <p><b>Manufacturer: </b><span th:text="*{manufacturer.name}"></span></p>
+            </div>
+            <div th:if="*{year != null}">
+                <p><b>Year: </b><span th:text="*{year}"></span></p>
             </div>
             <div>
-                <p>Manufacturer: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                <p><b>Type: </b><span th:text="*{productType.name}"></span></p>
+            </div>
+            <div th:if="*{productProperties.properties != null}">
+                <p><b>Properties: </b><span th:text="*{productProperties.properties}"></span></p>
             </div>
             <div>
-                <p>Year:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-            </div>
-            <div>
-                <p>Type:</p>
-            </div>
-            <div>
-                <p>Description:</p>
-            </div>
-            <div>
-                <p>Properties:</p>
-            </div>
-
-
-            <div>
-                <p>Name:</p>
-            </div>
-            <div>
-                <p>Model:</p>
-            </div>
-            <div>
-                <p>Manufacturer:</p>
-            </div>
-            <div>
-                <p>Year:</p>
-            </div>
-            <div>
-                <p>Type:</p>
-            </div>
-            <div>
-                <p>Description:</p>
-            </div>
-            <div>
-                <p>Properties:</p>
+                <p><b>Description: </b><span th:text="*{description}"></span></p>
             </div>
         </div>
     </form>
