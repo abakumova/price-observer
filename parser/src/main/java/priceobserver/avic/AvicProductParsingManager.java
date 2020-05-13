@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
-import priceobserver.ParsingManager;
 import priceobserver.ProductParser;
+import priceobserver.ProductParsingManager;
 import priceobserver.data.manufacturer.Manufacturer;
 import priceobserver.data.manufacturer.ManufacturerEnum;
 import priceobserver.data.manufacturer.ManufacturerRepository;
@@ -29,9 +29,9 @@ import static priceobserver.dto.producttype.ProductTypeEnum.SMARTWATCH;
 import static priceobserver.dto.producttype.ProductTypeEnum.TABLET;
 
 @Component
-public class AvicParsingManager implements ParsingManager {
+public class AvicProductParsingManager implements ProductParsingManager {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AvicParsingManager.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AvicProductParsingManager.class);
 
     private static final String PAGE_WITH_MACBOOKS = "https://avic.ua/macbook";
     private static final String PAGE_WITH_IPHONES = "https://avic.ua/iphone";
@@ -40,11 +40,11 @@ public class AvicParsingManager implements ParsingManager {
     private static final String PAGE_WITH_APPLE_WATCH = "https://avic.ua/apple-watch-umnie-chasi";
 
     private static final Map<String, Pair<ManufacturerEnum, ProductTypeEnum>> payload = Map.of(
-        PAGE_WITH_APPLE_WATCH, Pair.of(APPLE, SMARTWATCH),
-        PAGE_WITH_IMACS, Pair.of(APPLE, ALL_IN_ONE),
-        PAGE_WITH_IPADS, Pair.of(APPLE, TABLET),
-        PAGE_WITH_IPHONES, Pair.of(APPLE, SMARTPHONE),
-        PAGE_WITH_MACBOOKS, Pair.of(APPLE, LAPTOP)
+            PAGE_WITH_APPLE_WATCH, Pair.of(APPLE, SMARTWATCH),
+            PAGE_WITH_IMACS, Pair.of(APPLE, ALL_IN_ONE),
+            PAGE_WITH_IPADS, Pair.of(APPLE, TABLET),
+            PAGE_WITH_IPHONES, Pair.of(APPLE, SMARTPHONE),
+            PAGE_WITH_MACBOOKS, Pair.of(APPLE, LAPTOP)
     );
 
     private final ProductParser parser;
@@ -53,10 +53,10 @@ public class AvicParsingManager implements ParsingManager {
     private final ProductTypeRepository productTypeRepository;
 
     @Autowired
-    public AvicParsingManager(ProductParser parser,
-                              ProductRepository productRepository,
-                              ManufacturerRepository manufacturerRepository,
-                              ProductTypeRepository productTypeRepository) {
+    public AvicProductParsingManager(ProductParser parser,
+                                     ProductRepository productRepository,
+                                     ManufacturerRepository manufacturerRepository,
+                                     ProductTypeRepository productTypeRepository) {
         this.parser = parser;
         this.productRepository = productRepository;
         this.manufacturerRepository = manufacturerRepository;

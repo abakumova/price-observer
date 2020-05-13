@@ -191,7 +191,7 @@ public final class DtoTestPreparationHelper {
         return ProductPriceBuilder.aProductPrice()
                 .withId(PRODUCT_PRICE_ID)
                 .withPrice(PRODUCT_PRICE_VALUE)
-                .withDate(Date.valueOf(DATE_NOW))
+                .withDate(DATE_NOW)
                 .withProduct(getPreparedProductEntity())
                 .withStore(getPreparedStoreEntity())
                 .build();

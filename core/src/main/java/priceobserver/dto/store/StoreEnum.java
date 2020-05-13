@@ -15,17 +15,17 @@ public enum StoreEnum {
     COMFY(8, "Comfy", "https://comfy.ua/"),
     ELDORADO(9, "Eldorado", "https://eldorado.ua/");
 
-    private final int id;
+    private final long id;
     private final String name;
     private final String url;
 
-    StoreEnum(int id, String name, String url) {
+    StoreEnum(long id, String name, String url) {
         this.id = id;
         this.name = name;
         this.url = url;
     }
 
-    public static Optional<StoreEnum> getById(int id) {
+    public static Optional<StoreEnum> getById(long id) {
         return Arrays.stream(StoreEnum.values())
                 .filter(s -> s.id == id)
                 .findFirst();
@@ -37,7 +37,7 @@ public enum StoreEnum {
                 .findFirst();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -3,12 +3,12 @@ package priceobserver.data.productprice;
 import priceobserver.data.product.Product;
 import priceobserver.data.store.Store;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public final class ProductPriceBuilder {
     private Long id;
     private Float price;
-    private Date date;
+    private LocalDate date;
     private Product product;
     private Store store;
 
@@ -29,7 +29,7 @@ public final class ProductPriceBuilder {
         return this;
     }
 
-    public ProductPriceBuilder withDate(Date date) {
+    public ProductPriceBuilder withDate(LocalDate date) {
         this.date = date;
         return this;
     }
