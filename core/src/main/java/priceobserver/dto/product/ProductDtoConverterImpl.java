@@ -18,6 +18,7 @@ public class ProductDtoConverterImpl implements ProductDtoConverter {
     private static final String PRODUCT_PROPERTIES_FIELD = "productProperties";
     private static final String PRODUCT_TYPE_FIELD = "productType";
     private static final String MANUFACTURER_FIELD = "manufacturer";
+    private static final String VERSION_FIELD = "version";
 
     private final ProductPropertiesDtoConverter productPropertiesDtoConverter;
     private final ProductTypeDtoConverter productTypeDtoConverter;
@@ -35,7 +36,11 @@ public class ProductDtoConverterImpl implements ProductDtoConverter {
     @Override
     public ProductDto convertToDto(Product entity) {
         ProductDto dto = new ProductDto();
-        copyProperties(entity, dto, PRODUCT_PROPERTIES_FIELD, PRODUCT_TYPE_FIELD, MANUFACTURER_FIELD);
+        if (entity.getVersion() == null) {
+            copyProperties(entity, dto, PRODUCT_PROPERTIES_FIELD, PRODUCT_TYPE_FIELD, MANUFACTURER_FIELD, VERSION_FIELD);
+        } else {
+            copyProperties(entity, dto, PRODUCT_PROPERTIES_FIELD, PRODUCT_TYPE_FIELD, MANUFACTURER_FIELD);
+        }
 
         dto.setProductProperties(productPropertiesDtoConverter.convertToDto(entity.getProductProperties()));
         dto.setProductType(productTypeDtoConverter.convertToDto(entity.getProductType()));
@@ -47,7 +52,11 @@ public class ProductDtoConverterImpl implements ProductDtoConverter {
     @Override
     public Product convertToEntity(ProductDto dto) {
         Product entity = new Product();
-        copyProperties(dto, entity, PRODUCT_PROPERTIES_FIELD, PRODUCT_TYPE_FIELD, MANUFACTURER_FIELD);
+        if (dto.getVersion() == null) {
+            copyProperties(dto, entity, PRODUCT_PROPERTIES_FIELD, PRODUCT_TYPE_FIELD, MANUFACTURER_FIELD, VERSION_FIELD);
+        } else {
+            copyProperties(dto, entity, PRODUCT_PROPERTIES_FIELD, PRODUCT_TYPE_FIELD, MANUFACTURER_FIELD);
+        }
 
         entity.setProductProperties(productPropertiesDtoConverter.convertToEntity(dto.getProductProperties()));
         entity.setProductType(productTypeDtoConverter.convertToEntity(dto.getProductType()));

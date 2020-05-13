@@ -27,84 +27,29 @@
     </a>
 </div>
 <main class="main-result">
-    <div class="border">
-        <div class="wrap">
-            <div class="product-wrap">
-                <a href=""><img
-                        src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-11-pro-gold-select-2019_GEO_EMEA?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1567808542418"></a>
-            </div>
-            <div class="product-button">
-                <a href="">Add to wish list</a>
-                <a href="">Price history</a>
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">IPhone 10</h3>
-                <div class="price">1999</div>
-                <div class="history">
-                    <p>01/01/2020 2500 Rozetka</p>
-                    <p>01/09/2020 2700 Rozetka</p>
+    <th:block th:if="${products != null}">
+        <th:block th:each="product : ${products}">
+            <div class="border">
+                <div class="wrap">
+                    <div class="product-wrap">
+                        <a href=""><img th:src="${product.image}"></a>
+                    </div>
+                    <div class="product-button">
+                        <a href="">Add to wish list</a>
+                        <a href="">Price history</a>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title" th:text="${product.name}"></h3>
+                        <div class="price">1999</div>
+                        <div class="history">
+                            <p>01/01/2020 2500 Rozetka</p>
+                            <p>01/09/2020 2700 Rozetka</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="border">
-        <div class="wrap">
-            <div class="product-wrap">
-                <a href=""><img
-                        src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-11-pro-gold-select-2019_GEO_EMEA?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1567808542418"></a>
-            </div>
-            <div class="product-button">
-                <a href="">Add to wish list</a>
-                <a href="">Price history</a>
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">IPhone 11</h3>
-                <div class="price">3999</div>
-                <div class="history">
-                    <p>01/01/2020 5500 Avic </p>
-                    <p>01/09/2020 6700 Avic </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="border">
-        <div class="wrap">
-            <div class="product-wrap">
-                <a href=""><img
-                        src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-11-pro-gold-select-2019_GEO_EMEA?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1567808542418"></a>
-            </div>
-            <div class="product-button">
-                <a href="">Add to wish list</a>
-                <a href="">Price history</a>
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">IPhone 12</h3>
-                <div class="price">4999</div>
-                <div class="history">
-                    <p>Nothing to show</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="border">
-        <div class="wrap">
-            <div class="product-wrap">
-                <a href=""><img
-                        src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-11-pro-gold-select-2019_GEO_EMEA?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1567808542418"></a>
-            </div>
-            <div class="product-button">
-                <a href="">Add to wish list</a>
-                <a href="">Price history</a>
-            </div>
-            <div class="product-info">
-                <h3 class="product-title">IPhone 12</h3>
-                <div class="price">4999</div>
-                <div class="history">
-                    <p>Nothing to show</p>
-                </div>
-            </div>
-        </div>
-    </div>
+        </th:block>
+    </th:block>
 </main>
 <th:block th:insert="fragments/footer :: copy"/>
 </body>
