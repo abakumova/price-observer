@@ -20,6 +20,8 @@ public class ProductManageController {
     private static final String PRODUCT_PAGE = "productPage";
     private static final String SEARCH_RESULT_PAGE = "searchResult";
 
+    private static final String PRODUCT_NOT_FOUND_MESSAGE = "Oops, the product you're looking for isn't found";
+
     private final ProductService productService;
 
     @Autowired
@@ -41,7 +43,7 @@ public class ProductManageController {
 
         modelAndView = new ModelAndView("forward:/error");
         modelAndView.addObject(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.NOT_FOUND.value());
-        modelAndView.addObject(RequestDispatcher.ERROR_MESSAGE, HttpStatus.NOT_FOUND.getReasonPhrase());
+        modelAndView.addObject(RequestDispatcher.ERROR_MESSAGE, PRODUCT_NOT_FOUND_MESSAGE);
         return modelAndView;
     }
 
