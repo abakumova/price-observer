@@ -1,5 +1,6 @@
 package priceobserver.controller;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,9 @@ import priceobserver.dto.product.ProductDto;
 import priceobserver.dto.producttype.ProductTypeEnum;
 
 import javax.servlet.RequestDispatcher;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -33,10 +37,12 @@ public class ProductManageController {
     public ModelAndView viewProducts(@PathVariable("id") String id) {
         ModelAndView modelAndView;
         if (id != null) {
-            Optional<ProductDto> product = productService.getOneById(Long.parseLong(id));
-            if (product.isPresent()) {
+            Optional<ProductDto> productOpt = productService.getOneById(Long.parseLong(id));
+            if (productOpt.isPresent()) {
                 modelAndView = new ModelAndView(PRODUCT_PAGE);
-                modelAndView.addObject("product", product.get());
+                ProductDto product = productOpt.get();
+                modelAndView.addObject("product", product);
+                modelAndView.addObject("propertiesMap", getPropertiesMap(product));
                 return modelAndView;
             }
         }
@@ -60,5 +66,22 @@ public class ProductManageController {
 
     private void prepareModel(ProductTypeEnum type, Model model) {
         model.addAttribute("products", productService.getProductsByType(type));
+    }
+
+    private Map<String, String> getPropertiesMap(ProductDto product) {
+        return Optional.ofNullable(product.getProductProperties())
+                .map(p -> new JSONObject(p.getProperties()).toMap())
+                .map(this::convertMap)
+                .orElse(Collections.emptyMap());
+    }
+
+    private Map<String,String> convertMap(Map<String,Object> map) {
+        Map<String,String> newMap = new HashMap<>();
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            if(entry.getValue() instanceof String){
+                newMap.put(entry.getKey(), (String) entry.getValue());
+            }
+        }
+        return newMap;
     }
 }

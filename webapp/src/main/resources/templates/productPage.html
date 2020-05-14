@@ -29,11 +29,14 @@
             <div>
                 <p><b>Type: </b><span th:text="*{productType.name}"></span></p>
             </div>
-            <div th:if="*{productProperties.properties != null}">
-                <p><b>Properties: </b><span th:text="*{productProperties.properties}"></span></p>
+            <div th:if="${!propertiesMap.isEmpty()}">
+                <p><b>Properties: </b></p>
+                <p th:each="property : ${propertiesMap}">
+                    <span class="first-line-indent" th:text="${property.key + ': ' + property.value}"><br></span>
+                </p>
             </div>
             <div>
-                <p><b>Description: </b><span th:text="*{description}"></span></p>
+                <p class="rows-spacing"><b>Description: </b><br><span th:text="*{description}"></span></p>
             </div>
         </div>
     </form>

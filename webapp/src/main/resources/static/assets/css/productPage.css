@@ -49,3 +49,12 @@ html {
     font-size: 20px;
     padding: 3px;
 }
+
+.rows-spacing {
+    line-height: 1.5;
+}
+
+.first-line-indent {
+    padding-left: 1.5em;
+    text-indent:-1.5em;
+}
