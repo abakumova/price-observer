@@ -1,6 +1,6 @@
 var x, i, j, selElmnt, a, b, c;
 /*look for any elements with the class "custom-select":*/
-x = document.getElementsByClassName("custom-select");
+x = document.getElementsByClassName("sort-select");
 for (i = 0; i < x.length; i++) {
     selElmnt = x[i].getElementsByTagName("select")[0];
     /*for each element, create a new DIV that will act as the selected item:*/

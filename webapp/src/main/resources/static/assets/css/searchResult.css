@@ -215,7 +215,7 @@ main {
 }
 
 /*SORT SELECT*/
-.custom-select {
+.sort-select {
     position: relative;
     width:205px;
     transform: translate(600%, 0);
@@ -223,11 +223,12 @@ main {
     z-index: 1;
 }
 
-.custom-select select {
+.sort-select select {
     display: none; /*hide original SELECT element:*/
 }
 
 .select-selected {
+    border-radius: 8px;
     background-color: var(--main-color);
 }
 
@@ -261,6 +262,7 @@ main {
 
 /*style items (options):*/
 .select-items {
+    border-radius: 4px;
     position: absolute;
     background-color: var(--main-color);
     top: 100%;
