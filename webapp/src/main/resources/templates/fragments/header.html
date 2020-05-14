@@ -7,15 +7,15 @@
             <div class="logo">
                 <p>
                     <a th:href="@{/}">
-                        <img alt="logo" class="logo-picture" th:src="@{/assets/img/logo.png}"></a>
+                        <img id="logo" alt="logo" class="logo-picture" th:src="@{/assets/img/logo.png}"></a>
                 </p>
             </div>
             <form action="" class="search-field">
-                <input name="search" placeholder="Search..." type="text">
-                <button type="submit"><em class="fa fa-search"></em></button>
+                <input id="search-field" name="search" placeholder="Search..." type="text">
+                <button id="search-button" type="submit"><em class="fa fa-search"></em></button>
             </form>
             <div class="button-container">
-                <a class="btn header-button" th:href="@{/login}">Log in</a>
+                <a id="index-button" class="btn header-button" th:href="@{/login}">Log in</a>
             </div>
         </div>
     </div>

@@ -4,12 +4,16 @@
     <title>Find</title>
     <link th:href="@{/assets/css/searchResult.css}" rel="stylesheet">
     <th:block th:insert="fragments/commonHead :: copy"/>
+<!--    <script src="assets/js/sortSelect.js"></script>-->
 </head>
 <body>
 <th:block th:insert="fragments/header :: copy"/>
 <div class="pagination">
-    <a class="button-arrow pagination-direction">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    <a class="button-arrow pagination-direction left-arrow">
+        <em class="fa fa-angle-left" aria-hidden="true"></em>
+    </a>
+    <a class="button-arrow pagination-direction right-arrow">
+        <em class="fa fa-angle-right" aria-hidden="true"></em>
     </a>
     <ul class="pagination-list">
         <li><a class="pagination-link pagination-active-link">1</a></li>
@@ -17,14 +21,20 @@
         <li><a class="pagination-link" href="">3 </a></li>
         <li><a class="pagination-link" href="">4 </a></li>
         <li><a class="pagination-link" href="">5 </a></li>
-        <li><a class="pagination-link" href="">6 </a></li>
-        <li><a class="pagination-link" href="">7 </a></li>
         <li><a class="pagination-link" href=""> ... </a></li>
         <li><a class="pagination-link" href="">34 </a></li>
     </ul>
-    <a class="button-arrow pagination-direction" href="">
-        <em class="fa fa-angle-right" aria-hidden="true"></em>
-    </a>
+</div>
+<div class="sort-select">
+    <label>
+        <select id="sort-select" class="sort-select">
+            <option value="0">Sort by:</option>
+            <option value="1">Price upward</option>
+            <option value="2">Price downward</option>
+            <option value="3">Name upward</option>
+            <option value="4">Name downward</option>
+        </select>
+    </label>
 </div>
 <main class="main-result">
     <th:block th:if="${products != null}">
@@ -54,5 +64,6 @@
     </th:block>
 </main>
 <th:block th:insert="fragments/footer :: copy"/>
+<script src="assets/js/sortSelect.js"></script>
 </body>
 </html>
