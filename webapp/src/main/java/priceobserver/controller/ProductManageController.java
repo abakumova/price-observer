@@ -65,7 +65,8 @@ public class ProductManageController {
     }
 
     private void prepareModel(ProductTypeEnum type, Model model) {
-        model.addAttribute("products", productService.getProductsByType(type));
+        model.addAttribute("pageCount", Math.ceil(productService.getProductCountByType(type) / 9.0));
+        model.addAttribute("products", productService.getProductsPageableByType(type, 0, 9));
     }
 
     private Map<String, String> getPropertiesMap(ProductDto product) {
