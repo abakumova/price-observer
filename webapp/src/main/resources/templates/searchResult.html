@@ -16,13 +16,10 @@
         <em class="fa fa-angle-right" aria-hidden="true"></em>
     </a>
     <ul class="pagination-list">
-        <li><a class="pagination-link pagination-active-link">1</a></li>
-        <li><a class="pagination-link" href="">2</a></li>
-        <li><a class="pagination-link" href="">3 </a></li>
-        <li><a class="pagination-link" href="">4 </a></li>
-        <li><a class="pagination-link" href="">5 </a></li>
-        <li><a class="pagination-link" href=""> ... </a></li>
-        <li><a class="pagination-link" href="">34 </a></li>
+        <!--        <li><a class="pagination-link pagination-active-link">1</a></li>-->
+        <th:block th:each="i : ${#numbers.sequence(1, pageCount)}">
+            <li><a class="pagination-link" th:classappend="${i == selectedPage} ? 'pagination-active-link' : ''" href="" th:text="${i}"></a></li>
+        </th:block>
     </ul>
 </div>
 <div class="sort-select">

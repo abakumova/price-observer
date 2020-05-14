@@ -65,7 +65,9 @@ public class ProductManageController {
     }
 
     private void prepareModel(ProductTypeEnum type, Model model) {
-        model.addAttribute("pageCount", (int) Math.ceil(productService.getProductCountByType(type) / 9.0));
+        int countOfPages = (int) Math.ceil(productService.getProductCountByType(type) / 9.0);
+        model.addAttribute("selectedPage", 2);
+        model.addAttribute("pageCount", countOfPages);
         model.addAttribute("products", productService.getProductsPageableByType(type, 0, 9));
     }
 
