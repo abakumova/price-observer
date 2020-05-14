@@ -10,10 +10,10 @@
     overflow: hidden;
     max-height: 500px;
     clear: both;
-    width: inherit;
+    width: 100%;
     max-width: inherit;
     margin: 0;
-    background-image: url('../img/slider.webp');
+    object-fit: cover;
 }
 
 .motto {
