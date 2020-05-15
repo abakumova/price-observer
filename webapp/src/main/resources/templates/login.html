@@ -24,7 +24,7 @@
         </div>
         <div class="textbox-hint" id="pwd-hint"></div>
 
-        <button class="button-submit" onclick="validateAndLogIn()">Log in</button>
+        <button id="log-in-but" class="button-submit" onclick="validateAndLogIn()">Log in</button>
     </form>
 
     <div class="vl"></div>
@@ -55,7 +55,7 @@
             <input id="reg-pwd-r" name="password_r" placeholder="Repeat password" type="password">
         </div>
         <div class="textbox-hint" id="reg-password-r-hint"></div>
-        <button class="button-submit" onclick="validateAndSignUp()">Sign Up</button>
+        <button id="sign-up-but" class="button-submit" onclick="validateAndSignUp()">Sign Up</button>
     </form>
 </main>
 <th:block th:insert="fragments/footer :: copy"/>
