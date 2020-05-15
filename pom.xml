@@ -42,7 +42,7 @@
 
     <build>
 
-        <defaultGoal>clean install</defaultGoal>
+        <defaultGoal>clean compile</defaultGoal>
 
         <!-- lock down plugins versions to avoid using Maven defaults -->
         <pluginManagement>
@@ -65,11 +65,6 @@
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.0.2</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
                 </plugin>
 
                 <plugin>

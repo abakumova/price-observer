@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Find</title>
-    <link th:href="@{/assets/css/searchResult.css}" rel="stylesheet">
+    <link th:href="@{/static/assets/css/productsList.css}" rel="stylesheet">
     <th:block th:insert="fragments/commonHead :: copy"/>
 </head>
 <body>
@@ -15,11 +15,12 @@
         <em class="fa fa-angle-right" aria-hidden="true"></em>
     </a>
     <ul class="pagination-list">
-        <th:block th:each="pageNumber : ${pageList}">
+        <th:block th:each="pageNumber : ${pageList}" th:with="isNumberShunt=${pageNumber.equals('...')}">
             <li>
                 <a class="pagination-link"
-                   th:classappend="${pageNumber.equals(selectedPage)} ? 'pagination-active-link' : ''"
-                   th:href="@{'/products/' + ${type} + '?page=' + ${pageNumber}}"
+                   th:classappend="${(pageNumber.equals(selectedPage) ? 'pagination-active-link' : '') +
+                                     (isNumberShunt ? 'not-clickable' : '')}"
+                   th:href="@{${isNumberShunt ? '' : '/products/' + type + '?page=' + pageNumber}}"
                    th:text="${pageNumber}"></a>
             </li>
         </th:block>
