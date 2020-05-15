@@ -1,4 +1,4 @@
-package priceobserver.controller;
+package priceobserver.controller.product;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
-public class ProductManageController {
+public class ProductViewController {
 
     private static final String PRODUCT_PAGE = "product";
     private static final String SEARCH_RESULT_PAGE = "productsList";
@@ -30,7 +30,7 @@ public class ProductManageController {
     private final ProductService productService;
 
     @Autowired
-    public ProductManageController(ProductService productService) {
+    public ProductViewController(ProductService productService) {
         this.productService = productService;
     }
 
