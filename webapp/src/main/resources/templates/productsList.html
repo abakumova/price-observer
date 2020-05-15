@@ -2,16 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Find</title>
-    <link th:href="@{/static/assets/css/productsList.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/productsList.css}" rel="stylesheet">
     <th:block th:insert="fragments/commonHead :: copy"/>
 </head>
 <body>
 <th:block th:insert="fragments/header :: copy"/>
 <div class="pagination">
-    <a class="button-arrow pagination-direction left-arrow">
+    <a class="button-arrow pagination-direction left-arrow"
+       th:href="@{${previousPage.isEmpty() ? '' : '/products/' + type + '?page=' + previousPage}}"
+       th:classappend="${previousPage.isEmpty() ? 'not-clickable' : ''}">
         <em class="fa fa-angle-left" aria-hidden="true"></em>
     </a>
-    <a class="button-arrow pagination-direction right-arrow">
+    <a class="button-arrow pagination-direction right-arrow"
+       th:href="@{${nextPage.isEmpty() ? '' : '/products/' + type + '?page=' + nextPage}}"
+       th:classappend="${nextPage.isEmpty() ? 'not-clickable' : ''}">
         <em class="fa fa-angle-right" aria-hidden="true"></em>
     </a>
     <ul class="pagination-list">

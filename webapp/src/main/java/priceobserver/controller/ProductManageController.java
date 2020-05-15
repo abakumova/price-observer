@@ -77,6 +77,8 @@ public class ProductManageController {
         model.addAttribute("pageList", LayoutUtils.getPaginationList(selectedPage, countOfPages));
         model.addAttribute("products", productService.getProductsPageableByType(type, selectedPage - 1, 9));
         model.addAttribute("type", type.getName());
+        model.addAttribute("previousPage", selectedPage - 1 < 1 ? "" : String.valueOf(selectedPage - 1));
+        model.addAttribute("nextPage", selectedPage + 1 > countOfPages ? "" : String.valueOf(selectedPage + 1));
     }
 
     private Map<String, String> getPropertiesMap(ProductDto product) {
