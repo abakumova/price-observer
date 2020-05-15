@@ -29,15 +29,15 @@ public class LayoutUtils {
             }
             pageList.add("...");
         } else if(selectedPage == countOfPages) {
-            for (int i = countOfPages - 1; i > countOfPages - 6; i--) {
+            for (int i = countOfPages - 4; i < countOfPages; i++) {
                 pageList.add(String.valueOf(i));
             }
             pageList.add(1, "...");
-        } else if (selectedPage == 2 || selectedPage == 3) {
+        } else if (selectedPage <= 4) {
             pageList.addAll(
                     List.of("2","3", "4", "5", "...")
             );
-        } else if (selectedPage == countOfPages - 2 || selectedPage == countOfPages - 3) {
+        } else if (selectedPage >= countOfPages - 3) {
             pageList.addAll(
                     List.of("...",
                             String.valueOf(countOfPages - 4),
