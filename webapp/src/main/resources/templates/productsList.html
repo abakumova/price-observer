@@ -16,7 +16,12 @@
     </a>
     <ul class="pagination-list">
         <th:block th:each="pageNumber : ${pageList}">
-            <li><a class="pagination-link" th:classappend="${pageNumber.equals(selectedPage)} ? 'pagination-active-link' : ''" href="" th:text="${pageNumber}"></a></li>
+            <li>
+                <a class="pagination-link"
+                   th:classappend="${pageNumber.equals(selectedPage)} ? 'pagination-active-link' : ''"
+                   th:href="@{'/products/' + ${type} + '?page=' + ${pageNumber}}"
+                   th:text="${pageNumber}"></a>
+            </li>
         </th:block>
     </ul>
 </div>
