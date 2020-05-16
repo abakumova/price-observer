@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product</title>
+    <link th:href="@{/assets/css/productPage.css}" rel="stylesheet">
+    <th:block th:insert="fragments/commonHead :: copy"/>
+</head>
+<body>
+<th:block th:insert="fragments/header :: copy"/>
+<main>
+    <form th:object="${product}">
+        <div>
+            <img th:alt="*{name + ' photo'}" class="product-photo" th:src="*{image}">
+        </div>
+        <h1 class="title">Description</h1>
+        <div class="description product-main">
+            <div>
+                <p><b>Name: </b><span th:text="*{name}"></span></p>
+            </div>
+            <div>
+                <p><b>Model: </b><span th:text="*{model}"></span></p>
+            </div>
+            <div th:if="*{manufacturer.name != null}">
+                <p><b>Manufacturer: </b><span th:text="*{manufacturer.name}"></span></p>
+            </div>
+            <div th:if="*{year != null}">
+                <p><b>Year: </b><span th:text="*{year}"></span></p>
+            </div>
+            <div>
+                <p><b>Type: </b><span th:text="*{productType.name}"></span></p>
+            </div>
+            <div th:if="${!propertiesMap.isEmpty()}">
+                <p><b>Properties: </b></p>
+                <p th:each="property : ${propertiesMap}">
+                    <span class="first-line-indent" th:text="${property.key + ' ' + property.value}"><br></span>
+                </p>
+            </div>
+            <div>
+<!--                <p class="rows-spacing"><b>Description: </b><br><span th:text="*{description}"></span></p>-->
+            </div>
+        </div>
+    </form>
+</main>
+<th:block th:insert="fragments/footer :: copy"/>
+</body>
+</html>

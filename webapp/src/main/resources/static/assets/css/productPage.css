@@ -7,10 +7,8 @@ html {
 }
 
 .product-photo {
-    height: 500px;
-    width: 450px;
     position: absolute;
-    top: 100px;
+    top: 150px;
     left: 70px;
     border: 1px solid #CCC;
     background-color: var(--white);
@@ -50,4 +48,13 @@ html {
     word-wrap: break-word;
     font-size: 20px;
     padding: 3px;
+}
+
+.rows-spacing {
+    line-height: 1.5;
+}
+
+.first-line-indent {
+    padding-left: 1.5em;
+    text-indent:-1.5em;
 }

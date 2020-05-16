@@ -6,9 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
+
+import static javax.servlet.RequestDispatcher.ERROR_MESSAGE;
+import static javax.servlet.RequestDispatcher.ERROR_STATUS_CODE;
 
 @Controller
 public class CustomErrorController implements ErrorController {
@@ -18,16 +20,16 @@ public class CustomErrorController implements ErrorController {
 
     @GetMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
-        Optional<HttpStatus> status = Optional.ofNullable(request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE))
+        Optional<HttpStatus> status = Optional.ofNullable(request.getAttribute(ERROR_STATUS_CODE))
                 .map(Object::toString)
                 .map(Integer::parseInt)
                 .map(HttpStatus::valueOf);
 
-        if (!status.isPresent()) {
+        if (status.isEmpty()) {
             return MAIN_PAGE;
         }
 
-        populateModel(status.get(), model);
+        populateModel(status.get(), model, request);
         return ERROR_PAGE;
     }
 
@@ -36,7 +38,7 @@ public class CustomErrorController implements ErrorController {
         return "/error";
     }
 
-    private void populateModel(HttpStatus status, Model model) {
+    private void populateModel(HttpStatus status, Model model, HttpServletRequest request) {
         String errorText;
         switch (status) {
             case NOT_FOUND:
@@ -49,7 +51,10 @@ public class CustomErrorController implements ErrorController {
                 errorText = status.getReasonPhrase();
                 break;
         }
+        Optional<String> customMessage = Optional.ofNullable(request.getAttribute(ERROR_MESSAGE))
+                                                 .map(m -> (String) m)
+                                                 .filter(m -> !m.isBlank());
         model.addAttribute("errorCode", status.value());
-        model.addAttribute("errorText", errorText);
+        model.addAttribute("errorText", customMessage.orElse(errorText));
     }
 }

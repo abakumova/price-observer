@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Find</title>
+    <link th:href="@{/assets/css/productsList.css}" rel="stylesheet">
+    <th:block th:insert="fragments/commonHead :: copy"/>
+</head>
+<body>
+<th:block th:insert="fragments/header :: copy"/>
+<div class="pagination">
+    <a class="button-arrow pagination-direction left-arrow"
+       th:href="@{${previousPage.isEmpty() ? '' : '/products/' + type + '?page=' + previousPage}}"
+       th:classappend="${previousPage.isEmpty() ? 'not-clickable' : ''}">
+        <em class="fa fa-angle-left" aria-hidden="true"></em>
+    </a>
+    <a class="button-arrow pagination-direction right-arrow"
+       th:href="@{${nextPage.isEmpty() ? '' : '/products/' + type + '?page=' + nextPage}}"
+       th:classappend="${nextPage.isEmpty() ? 'not-clickable' : ''}">
+        <em class="fa fa-angle-right" aria-hidden="true"></em>
+    </a>
+    <ul class="pagination-list">
+        <th:block th:each="pageNumber : ${pageList}" th:with="isNumberStub=${pageNumber.equals('...')}">
+            <li>
+                <a class="pagination-link"
+                   th:classappend="${(pageNumber.equals(selectedPage) ? 'pagination-active-link not-clickable' : '') +
+                                     (isNumberStub ? 'not-clickable' : '')}"
+                   th:href="@{${isNumberStub ? '' : '/products/' + type + '?page=' + pageNumber}}"
+                   th:text="${pageNumber}"></a>
+            </li>
+        </th:block>
+    </ul>
+</div>
+<div class="sort-select">
+    <label>
+        <select id="sort-select" class="sort-select">
+            <option value="0">Sort by:</option>
+            <option value="1">Price upward</option>
+            <option value="2">Price downward</option>
+            <option value="3">Name upward</option>
+            <option value="4">Name downward</option>
+        </select>
+    </label>
+</div>
+<main class="main-result">
+    <th:block th:if="${products != null}">
+        <th:block th:each="product : ${products}">
+            <div class="border">
+                <div class="wrap">
+                    <a th:href="@{'/product/' + ${product.id}}">
+                        <div class="product-wrap">
+                            <img th:src="${product.image}" th:alt="${product.name}">
+                        </div>
+                    </a>
+                    <div class="product-button">
+                        <a href="">Add to wish list</a>
+                        <a href="">Price history</a>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title" th:text="${product.name}"></h3>
+                        <div class="price">1999</div>
+                        <div class="history">
+                            <p>01/01/2020 2500 Rozetka</p>
+                            <p>01/09/2020 2700 Rozetka</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </th:block>
+</main>
+<th:block th:insert="fragments/footer :: copy"/>
+<script type="text/javascript" th:src="@{/assets/js/sortSelect.js}"></script>
+</body>
+</html>

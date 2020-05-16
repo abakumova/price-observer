@@ -1,5 +1,6 @@
 package priceobserver.data.product;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -12,4 +13,10 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Query("SELECT p FROM Product p WHERE p.name = ?1 AND p.model = ?2")
     List<Product> findFirstByNameAndModel(String name, String model);
+
+    List<Product> findAllByProductTypeId(Long id);
+
+    List<Product> findAllByProductTypeId(Long id, Pageable pageable);
+
+    long countAllByProductTypeId(Long id);
 }

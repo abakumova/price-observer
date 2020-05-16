@@ -8,17 +8,19 @@
 <body>
 <th:block th:insert="fragments/header :: copy"/>
 <main class="index-main">
-    <div class="image-container"></div>
+    <div>
+        <img src="./assets/img/slider.webp" class="image-container">
+    </div>
     <p class="motto">Find your best price</p>
     <div class="grid-container">
         <div class="first-row-product-category">
-            <a id="smartphone" href="" class="btn product-type-btn product-type-btn-text" target="_blank">Smartphone</a>
-            <a id="laptop" href="" class="btn product-type-btn product-type-btn-text" target="_blank">Laptop</a>
-            <a id="tablet" href="" class="btn product-type-btn product-type-btn-text" target="_blank">Tablet</a>
+            <a th:href="@{/products/smartphone}" id="smartphone" class="btn product-type-btn product-type-btn-text">Smartphone</a>
+            <a th:href="@{/products/laptop}" id="laptop" class="btn product-type-btn product-type-btn-text">Laptop</a>
+            <a th:href="@{/products/tablet}" id="tablet" class="btn product-type-btn product-type-btn-text">Tablet</a>
         </div>
         <div class="second-row-product-category">
-            <a id="watch" href="" class="btn product-type-btn product-type-btn-text" target="_blank">Smart Watch</a>
-            <a id="allinone" href="" class="btn product-type-btn product-type-btn-text" target="_blank">All-in-one</a>
+            <a th:href="@{/products/smartwatch}" id="smartwatch" class="btn product-type-btn product-type-btn-text">Smart Watch</a>
+            <a th:href="@{/products/all-in-one}" id="all-in-one" class="btn product-type-btn product-type-btn-text">All-in-one</a>
         </div>
     </div>
 </main>
