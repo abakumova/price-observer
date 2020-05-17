@@ -12,13 +12,13 @@
 <div class="pagination">
     <a class="button-arrow pagination-direction left-arrow"
        th:with="isPrevPagePresent=${previousPage != null && !previousPage.isEmpty()}"
-       th:href="@{${isPrevPagePresent ? '/products/?page=' + previousPage : ''}}"
+       th:href="@{${isPrevPagePresent ? '/search?page=' + previousPage + '&query=': ''}}"
        th:classappend="${isPrevPagePresent ? '' : 'not-clickable'}">
         <em class="fa fa-angle-left" aria-hidden="true"></em>
     </a>
     <a class="button-arrow pagination-direction right-arrow"
        th:with="isNextPagePresent=${nextPage != null && !nextPage.isEmpty()}"
-       th:href="@{${isNextPagePresent ? '/products/?page=' + nextPage : ''}}"
+       th:href="@{${isNextPagePresent ? '/search?page=' + nextPage + '&query=': ''}}"
        th:classappend="${isNextPagePresent ? '' : 'not-clickable'}">
         <em class="fa fa-angle-right" aria-hidden="true"></em>
     </a>
@@ -29,7 +29,7 @@
                 <a class="pagination-link"
                    th:classappend="${(pageNumber.equals(selectedPage) ? 'pagination-active-link not-clickable' : '') +
                                      (isNumberStub ? 'not-clickable' : '')}"
-                   th:href="@{${isNumberStub ? '' : '/products/?page=' + pageNumber}}"
+                   th:href="@{${isNumberStub ? '' : '/search?page=' + pageNumber + '&query='}}"
                    th:text="${pageNumber}"></a>
             </li>
         </th:block>
