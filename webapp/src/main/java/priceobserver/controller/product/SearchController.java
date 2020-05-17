@@ -31,7 +31,7 @@ public class SearchController {
         if (query == null || query.isBlank()) {
             model.addAttribute("query", "");
         } else {
-            prepareModel(query, model, selectedPage);
+            prepareModel(query.trim(), model, selectedPage);
         }
 
         return SEARCH_RESULT_LIST_PAGE;
