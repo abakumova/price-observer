@@ -68,13 +68,19 @@ public class ProductViewController {
     }
 
     private void prepareModel(ProductTypeEnum type, Model model, Integer selectedPage) {
-        model.addAttribute("productsAndPrices", productService.getProductsInfoPageableByType(
-                type,
-                selectedPage - 1,
-                NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME)
-        );
+        long countOfProducts = productService.getProductsCountByType(type);
+        model.addAttribute("singleProductList", countOfProducts == 1);
+        int countOfPages = (int) Math.ceil(countOfProducts / (float) NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME);
+
+        if (countOfPages > 0) {
+            model.addAttribute("productsAndPrices", productService.getProductsInfoPageableByType(
+                    type,
+                    selectedPage - 1,
+                    NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME)
+            );
+        }
+
         model.addAttribute("type", type.getName());
-        int countOfPages = (int) Math.ceil(productService.getProductsCountByType(type) / (float) NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME);
         LayoutUtils.preparePagination(model, selectedPage, countOfPages);
     }
 

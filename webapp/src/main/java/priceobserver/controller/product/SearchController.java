@@ -38,9 +38,9 @@ public class SearchController {
     }
 
     private void prepareModel(String query, Model model, Integer selectedPage) {
-        int countOfPages = (int) Math.ceil(
-                productService.getProductsByNameOrModelContaining(query) / (float) NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME
-        );
+        long countOfProducts = productService.getProductsByNameOrModelContaining(query);
+        model.addAttribute("singleProductList", countOfProducts == 1);
+        int countOfPages = (int) Math.ceil(countOfProducts / (float) NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME);
 
         if (countOfPages > 0) {
             LayoutUtils.preparePagination(model, selectedPage, countOfPages);

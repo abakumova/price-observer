@@ -9,7 +9,7 @@
 
 <th:block th:insert="fragments/header :: copy"/>
 
-<th:block th:if="${areProductsPresent}">
+<th:block th:if="${areProductsPresent && !singleProductList}">
     <div class="pagination">
         <a class="button-arrow pagination-direction left-arrow"
            th:with="isPrevPagePresent=${previousPage != null && !previousPage.isEmpty()}"
