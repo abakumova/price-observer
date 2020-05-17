@@ -6,14 +6,18 @@
     <th:block th:insert="fragments/commonHead :: copy"/>
 </head>
 <body>
+
 <th:block th:insert="fragments/header :: copy"/>
+
 <div class="pagination">
-    <a class="button-arrow pagination-direction left-arrow" th:with="isPrevPagePresent=${previousPage != null && !previousPage.isEmpty()}"
+    <a class="button-arrow pagination-direction left-arrow"
+       th:with="isPrevPagePresent=${previousPage != null && !previousPage.isEmpty()}"
        th:href="@{${isPrevPagePresent ? '/products/?page=' + previousPage : ''}}"
        th:classappend="${isPrevPagePresent ? '' : 'not-clickable'}">
         <em class="fa fa-angle-left" aria-hidden="true"></em>
     </a>
-    <a class="button-arrow pagination-direction right-arrow" th:with="isNextPagePresent=${nextPage != null && !nextPage.isEmpty()}"
+    <a class="button-arrow pagination-direction right-arrow"
+       th:with="isNextPagePresent=${nextPage != null && !nextPage.isEmpty()}"
        th:href="@{${isNextPagePresent ? '/products/?page=' + nextPage : ''}}"
        th:classappend="${isNextPagePresent ? '' : 'not-clickable'}">
         <em class="fa fa-angle-right" aria-hidden="true"></em>
@@ -31,46 +35,20 @@
         </th:block>
     </ul>
 </div>
-<div class="sort-select">
-    <label>
-        <select id="sort-select" class="sort-select">
-            <option value="0">Sort by:</option>
-            <option value="1">Price upward</option>
-            <option value="2">Price downward</option>
-            <option value="3">Name upward</option>
-            <option value="4">Name downward</option>
-        </select>
-    </label>
-</div>
+
+<th:block th:insert="fragments/sortDropdown :: sort-dropdown"/>
+
 <main class="main-result">
     <th:block th:if="${productsAndPrices != null && !productsAndPrices.isEmpty()}">
-        <th:block th:each="productAndPrice : ${productsAndPrices}">
-            <div class="border">
-                <div class="wrap">
-                    <a th:href="@{'/product/' + ${productAndPrice.product.id}}">
-                        <div class="product-wrap">
-                            <img th:src="${productAndPrice.product.image}" th:alt="${productAndPrice.product.name}">
-                        </div>
-                    </a>
-                    <div class="product-button">
-                        <a href="">Add to wish list</a>
-                        <a th:href="@{'/product/' + ${productAndPrice.product.id} + '#section-price'}">Price history</a>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title" th:text="${productAndPrice.product.name}"></h3>
-                        <div class="price"
-                             th:text="${productAndPrice.price != null && productAndPrice.price.price > 0 ?
-                             productAndPrice.price.price + ' UAH': 'price unavailable'}"></div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
+        <th:block th:insert="fragments/productListing :: listing"/>
     </th:block>
     <th:block th:unless="${pageList != null && pageList.isEmpty()}">
         <h1 class="error-message">SORRY, NO RESULTS FOR "---" HAVE BEEN FOUND</h1>
     </th:block>
 </main>
+
 <th:block th:insert="fragments/footer :: copy"/>
+
 <script type="text/javascript" th:src="@{/assets/js/sortSelect.js}"></script>
 </body>
 </html>
