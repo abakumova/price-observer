@@ -6,6 +6,11 @@ import java.util.stream.IntStream;
 
 public class LayoutUtils {
 
+    public static final String PRODUCT_PAGE = "product";
+    public static final String PRODUCT_LIST_PAGE = "productsList";
+    public static final String SEARCH_RESULT_LIST_PAGE = "searchResultList";
+    public static final String PRODUCT_NOT_FOUND_MESSAGE = "Oops, the product you're looking for isn't found";
+
     private LayoutUtils() {
         //prevent object of utils classes
     }

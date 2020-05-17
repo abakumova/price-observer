@@ -20,12 +20,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static priceobserver.util.LayoutUtils.PRODUCT_LIST_PAGE;
+import static priceobserver.util.LayoutUtils.PRODUCT_NOT_FOUND_MESSAGE;
+import static priceobserver.util.LayoutUtils.PRODUCT_PAGE;
+
 @Controller
 public class ProductViewController {
-
-    private static final String PRODUCT_PAGE = "product";
-    private static final String PRODUCT_LIST_PAGE = "productsList";
-    private static final String PRODUCT_NOT_FOUND_MESSAGE = "Oops, the product you're looking for isn't found";
 
     private final ProductService productService;
 
@@ -63,11 +63,6 @@ public class ProductViewController {
         }
         Integer finalSelectedPage = selectedPage;
         ProductTypeEnum.getByName(typeStr).ifPresent(t -> prepareModel(t, model, finalSelectedPage));
-        return PRODUCT_LIST_PAGE;
-    }
-
-    @GetMapping("/search")
-    public String viewSearchResult() {
         return PRODUCT_LIST_PAGE;
     }
 

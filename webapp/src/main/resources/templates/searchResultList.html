@@ -9,12 +9,12 @@
 <th:block th:insert="fragments/header :: copy"/>
 <div class="pagination">
     <a class="button-arrow pagination-direction left-arrow" th:with="isPrevPagePresent=${previousPage != null && !previousPage.isEmpty()}"
-       th:href="@{${isPrevPagePresent ? '/products/' + type + '?page=' + previousPage : ''}}"
+       th:href="@{${isPrevPagePresent ? '/products/?page=' + previousPage : ''}}"
        th:classappend="${isPrevPagePresent ? '' : 'not-clickable'}">
         <em class="fa fa-angle-left" aria-hidden="true"></em>
     </a>
     <a class="button-arrow pagination-direction right-arrow" th:with="isNextPagePresent=${nextPage != null && !nextPage.isEmpty()}"
-       th:href="@{${isNextPagePresent ? '/products/' + type + '?page=' + nextPage : ''}}"
+       th:href="@{${isNextPagePresent ? '/products/?page=' + nextPage : ''}}"
        th:classappend="${isNextPagePresent ? '' : 'not-clickable'}">
         <em class="fa fa-angle-right" aria-hidden="true"></em>
     </a>
@@ -25,7 +25,7 @@
                 <a class="pagination-link"
                    th:classappend="${(pageNumber.equals(selectedPage) ? 'pagination-active-link not-clickable' : '') +
                                      (isNumberStub ? 'not-clickable' : '')}"
-                   th:href="@{${isNumberStub ? '' : '/products/' + type + '?page=' + pageNumber}}"
+                   th:href="@{${isNumberStub ? '' : '/products/?page=' + pageNumber}}"
                    th:text="${pageNumber}"></a>
             </li>
         </th:block>
@@ -65,6 +65,9 @@
                 </div>
             </div>
         </th:block>
+    </th:block>
+    <th:block th:unless="${pageList != null && pageList.isEmpty()}">
+        <h1 class="error-message">SORRY, NO RESULTS FOR "---" HAVE BEEN FOUND</h1>
     </th:block>
 </main>
 <th:block th:insert="fragments/footer :: copy"/>

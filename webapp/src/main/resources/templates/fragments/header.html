@@ -10,7 +10,7 @@
                         <img id="logo" alt="logo" class="logo-picture" th:src="@{/assets/img/logo.png}"></a>
                 </p>
             </div>
-            <form action="" class="search-field">
+            <form th:action="@{/search}" class="search-field" method="get">
                 <input id="search-field" name="search" placeholder="Search..." type="text">
                 <button id="search-button" type="submit"><em class="fa fa-search"></em></button>
             </form>
