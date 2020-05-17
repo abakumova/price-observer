@@ -32,7 +32,7 @@
             <div th:if="${!propertiesMap.isEmpty()}">
                 <p><b>Properties: </b></p>
                 <p th:each="property : ${propertiesMap}">
-                    <span class="first-line-indent" th:text="${property.key + ' ' + property.value}"><br></span>
+                    <span class="first-line-indent" th:text="${property.key + ': ' + property.value}"><br></span>
                 </p>
             </div>
             <div id="section-price">
