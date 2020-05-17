@@ -38,12 +38,16 @@ public class SearchController {
     }
 
     private void prepareModel(String query, Model model, Integer selectedPage) {
-        model.addAttribute("productsAndPrices", productService.getProductsByNameOrModelContaining(
-                query, selectedPage - 1, NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME));
-        model.addAttribute("query", query);
         int countOfPages = (int) Math.ceil(
                 productService.getProductsByNameOrModelContaining(query) / (float) NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME
         );
-        LayoutUtils.preparePagination(model, selectedPage, countOfPages);
+
+        if (countOfPages > 0) {
+            LayoutUtils.preparePagination(model, selectedPage, countOfPages);
+            model.addAttribute("productsAndPrices", productService.getProductsByNameOrModelContaining(
+                    query, selectedPage - 1, NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME));
+        }
+
+        model.addAttribute("query", query);
     }
 }
