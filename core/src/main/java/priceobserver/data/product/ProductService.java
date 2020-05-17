@@ -9,7 +9,8 @@ import java.util.Optional;
 public interface ProductService {
     List<ProductDto> getProductsByType(ProductTypeEnum type);
     Optional<ProductDto> getOneById(Long id);
-    long getProductCountByType(ProductTypeEnum type);
+    long getProductsCountByType(ProductTypeEnum type);
+    long getProductsByNameOrModelContaining(String contains);
     List<ProductAndPricePresentation> getProductsByNameOrModelContaining(String contains,
                                                                          int pageNumber,
                                                                          int rowsOnPageCount);

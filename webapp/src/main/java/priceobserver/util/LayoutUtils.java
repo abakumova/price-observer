@@ -1,5 +1,7 @@
 package priceobserver.util;
 
+import org.springframework.ui.Model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -16,7 +18,14 @@ public class LayoutUtils {
         //prevent object of utils classes
     }
 
-    public static List<String> getPaginationList(int selectedPage, int countOfPages) {
+    public static void preparePagination(Model model, Integer selectedPage, int countOfPages) {
+        model.addAttribute("selectedPage", selectedPage.toString());
+        model.addAttribute("pageList", LayoutUtils.getPaginationList(selectedPage, countOfPages));
+        model.addAttribute("previousPage", selectedPage - 1 < 1 ? "" : String.valueOf(selectedPage - 1));
+        model.addAttribute("nextPage", selectedPage + 1 > countOfPages ? "" : String.valueOf(selectedPage + 1));
+    }
+
+    private static List<String> getPaginationList(int selectedPage, int countOfPages) {
         if (selectedPage < 1 || countOfPages < 1) {
             throw new IllegalArgumentException("Count of pages or selected page can't be less than 1.");
         }

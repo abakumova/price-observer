@@ -14,6 +14,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findAllByNameContainingOrModelContaining(String nameContains,
                                                            String modelContains,
                                                            Pageable pageable);
+    long countAllByNameContainingOrModelContaining(String nameContains, String modelContains);
 
     @Query("SELECT p FROM Product p WHERE p.name = ?1 AND p.model = ?2")
     List<Product> findFirstByNameAndModel(String name, String model);

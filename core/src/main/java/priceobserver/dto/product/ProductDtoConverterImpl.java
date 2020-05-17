@@ -3,6 +3,7 @@ package priceobserver.dto.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import priceobserver.data.product.Product;
+import priceobserver.data.productproperties.ProductProperties;
 import priceobserver.dto.manufacturer.ManufacturerDtoConverter;
 import priceobserver.dto.productproperties.ProductPropertiesDtoConverter;
 import priceobserver.dto.producttype.ProductTypeDtoConverter;
@@ -42,7 +43,10 @@ public class ProductDtoConverterImpl implements ProductDtoConverter {
             copyProperties(entity, dto, PRODUCT_PROPERTIES_FIELD, PRODUCT_TYPE_FIELD, MANUFACTURER_FIELD);
         }
 
-        dto.setProductProperties(productPropertiesDtoConverter.convertToDto(entity.getProductProperties()));
+        ProductProperties productProperties = entity.getProductProperties();
+        if (productProperties != null) {
+            dto.setProductProperties(productPropertiesDtoConverter.convertToDto(entity.getProductProperties()));
+        }
         dto.setProductType(productTypeDtoConverter.convertToDto(entity.getProductType()));
         dto.setManufacturer(manufacturerDtoConverter.convertToDto(entity.getManufacturer()));
 

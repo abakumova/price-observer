@@ -51,11 +51,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public long getProductCountByType(ProductTypeEnum type) {
+    public long getProductsCountByType(ProductTypeEnum type) {
         if (type == null) {
             throw new IllegalArgumentException("Type can't be null!");
         }
         return productRepository.countAllByProductTypeId(type.getId());
+    }
+
+    @Override
+    public long getProductsByNameOrModelContaining(String contains) {
+        if (contains == null || contains.isBlank()) {
+            throw new IllegalArgumentException("String with contains can't be null or blank!");
+        }
+        return productRepository.countAllByNameContainingOrModelContaining(contains, contains);
     }
 
     @Override

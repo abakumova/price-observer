@@ -68,17 +68,14 @@ public class ProductViewController {
     }
 
     private void prepareModel(ProductTypeEnum type, Model model, Integer selectedPage) {
-        int countOfPages = (int) Math.ceil(productService.getProductCountByType(type) / 9.0);
-        model.addAttribute("selectedPage", selectedPage.toString());
-        model.addAttribute("pageList", LayoutUtils.getPaginationList(selectedPage, countOfPages));
         model.addAttribute("productsAndPrices", productService.getProductsInfoPageableByType(
                 type,
                 selectedPage - 1,
                 NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME)
         );
         model.addAttribute("type", type.getName());
-        model.addAttribute("previousPage", selectedPage - 1 < 1 ? "" : String.valueOf(selectedPage - 1));
-        model.addAttribute("nextPage", selectedPage + 1 > countOfPages ? "" : String.valueOf(selectedPage + 1));
+        int countOfPages = (int) Math.ceil(productService.getProductsCountByType(type) / (float) NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME);
+        LayoutUtils.preparePagination(model, selectedPage, countOfPages);
     }
 
     private Map<String, String> getPropertiesMap(ProductDto product) {
