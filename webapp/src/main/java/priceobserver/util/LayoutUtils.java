@@ -10,6 +10,7 @@ public class LayoutUtils {
     public static final String PRODUCT_LIST_PAGE = "productsList";
     public static final String SEARCH_RESULT_LIST_PAGE = "searchResultList";
     public static final String PRODUCT_NOT_FOUND_MESSAGE = "Oops, the product you're looking for isn't found";
+    public static final byte NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME = 9;
 
     private LayoutUtils() {
         //prevent object of utils classes

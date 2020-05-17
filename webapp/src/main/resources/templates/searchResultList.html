@@ -42,8 +42,8 @@
     <th:block th:if="${productsAndPrices != null && !productsAndPrices.isEmpty()}">
         <th:block th:insert="fragments/productListing :: listing"/>
     </th:block>
-    <th:block th:unless="${pageList != null && pageList.isEmpty()}">
-        <h1 class="error-message">SORRY, NO RESULTS FOR "---" HAVE BEEN FOUND</h1>
+    <th:block th:unless="${productsAndPrices != null && !productsAndPrices.isEmpty()}">
+        <h1 class="error-message" th:text="${'Sorry, no results for &quot;' + query + '&quot; have been found'}"></h1>
     </th:block>
 </main>
 

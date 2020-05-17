@@ -59,6 +59,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductAndPricePresentation> getProductsByNameOrModelContaining(String contains,
+                                                                                int pageNumber,
+                                                                                int rowsOnPageCount) {
+        if (pageNumber < 0 || rowsOnPageCount < 1) {
+            throw new IllegalArgumentException(
+                    String.format("Invalid page number or rows on page count. Page number = %d, rowsOnPageCount = %d",
+                            pageNumber, rowsOnPageCount)
+            );
+        } else if (contains == null || contains.isBlank()) {
+            throw new IllegalArgumentException("String with contains can't be null or blank!");
+        }
+        List<ProductDto> products = productRepository.findAllByNameContainingOrModelContaining(
+                contains,
+                contains,
+                PageRequest.of(pageNumber, rowsOnPageCount)
+        ).stream().map(productConverter::convertToDto).collect(Collectors.toList());
+        prepareImageUrl(products);
+        return getProductAndPricePresentationList(products);
+    }
+
+    @Override
     public List<ProductAndPricePresentation> getProductsInfoPageableByType(ProductTypeEnum type, int pageNumber, int rowsOnPageCount) {
         if (pageNumber < 0 || rowsOnPageCount < 1) {
             throw new IllegalArgumentException(
@@ -69,17 +90,16 @@ public class ProductServiceImpl implements ProductService {
             throw new IllegalArgumentException("Type can't be null!");
         }
 
-        List<ProductDto> products = productRepository.findAllByProductTypeId(type.getId(), PageRequest.of(pageNumber, rowsOnPageCount))
-                                              .stream()
-                                              .map(productConverter::convertToDto)
-                                              .collect(Collectors.toList());
-        List<ShortProductPriceProjection> prices = priceRepository.findFreshPricesForProductsWithIds(
-                products.stream()
-                        .map(ProductDto::getId)
-                        .collect(Collectors.toList())
-        );
+        List<ProductDto> products = productRepository.findAllByProductTypeId(type.getId(),
+                PageRequest.of(pageNumber, rowsOnPageCount)).stream()
+                .map(productConverter::convertToDto)
+                .collect(Collectors.toList());
+        prepareImageUrl(products);
+        return getProductAndPricePresentationList(products);
+    }
+
+    private void prepareImageUrl(List<ProductDto> products) {
         products.forEach(this::prepareImageUrl);
-        return products.stream().map(p -> getPresentation(p, prices)).collect(Collectors.toList());
     }
 
     private void prepareImageUrl(ProductDto p) {
@@ -88,9 +108,17 @@ public class ProductServiceImpl implements ProductService {
 
     private ProductAndPricePresentation getPresentation(ProductDto product, List<ShortProductPriceProjection> prices) {
         return new ProductAndPricePresentation(product, prices.stream()
-                                                              .filter(pr -> Objects.equals(pr.getProductId(), product.getId()))
-                                                              .findFirst()
-                                                              .orElse(null));
+                .filter(pr -> Objects.equals(pr.getProductId(), product.getId()))
+                .findFirst()
+                .orElse(null));
     }
 
+    private List<ProductAndPricePresentation> getProductAndPricePresentationList(List<ProductDto> products) {
+        List<ShortProductPriceProjection> prices = priceRepository.findFreshPricesForProductsWithIds(
+                products.stream()
+                        .map(ProductDto::getId)
+                        .collect(Collectors.toList())
+        );
+        return products.stream().map(p -> getPresentation(p, prices)).collect(Collectors.toList());
+    }
 }

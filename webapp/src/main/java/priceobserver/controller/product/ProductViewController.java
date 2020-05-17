@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static priceobserver.util.LayoutUtils.NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME;
 import static priceobserver.util.LayoutUtils.PRODUCT_LIST_PAGE;
 import static priceobserver.util.LayoutUtils.PRODUCT_NOT_FOUND_MESSAGE;
 import static priceobserver.util.LayoutUtils.PRODUCT_PAGE;
@@ -70,7 +71,11 @@ public class ProductViewController {
         int countOfPages = (int) Math.ceil(productService.getProductCountByType(type) / 9.0);
         model.addAttribute("selectedPage", selectedPage.toString());
         model.addAttribute("pageList", LayoutUtils.getPaginationList(selectedPage, countOfPages));
-        model.addAttribute("productsAndPrices", productService.getProductsInfoPageableByType(type, selectedPage - 1, 9));
+        model.addAttribute("productsAndPrices", productService.getProductsInfoPageableByType(
+                type,
+                selectedPage - 1,
+                NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME)
+        );
         model.addAttribute("type", type.getName());
         model.addAttribute("previousPage", selectedPage - 1 < 1 ? "" : String.valueOf(selectedPage - 1));
         model.addAttribute("nextPage", selectedPage + 1 > countOfPages ? "" : String.valueOf(selectedPage + 1));
@@ -83,10 +88,10 @@ public class ProductViewController {
                 .orElse(Collections.emptyMap());
     }
 
-    private Map<String,String> convertMap(Map<String,Object> map) {
-        Map<String,String> newMap = new HashMap<>();
+    private Map<String, String> convertMap(Map<String, Object> map) {
+        Map<String, String> newMap = new HashMap<>();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            if(entry.getValue() instanceof String){
+            if (entry.getValue() instanceof String) {
                 newMap.put(entry.getKey(), (String) entry.getValue());
             }
         }
