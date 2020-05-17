@@ -42,13 +42,13 @@
     </label>
 </div>
 <main class="main-result">
-    <th:block th:if="${products != null}">
-        <th:block th:each="product : ${products}">
+    <th:block th:if="${productsAndPrices != null}">
+        <th:block th:each="productAndPrice : ${productsAndPrices}">
             <div class="border">
                 <div class="wrap">
-                    <a th:href="@{'/product/' + ${product.id}}">
+                    <a th:href="@{'/product/' + ${productAndPrice.product.id}}">
                         <div class="product-wrap">
-                            <img th:src="${product.image}" th:alt="${product.name}">
+                            <img th:src="${productAndPrice.product.image}" th:alt="${productAndPrice.product.name}">
                         </div>
                     </a>
                     <div class="product-button">
@@ -56,8 +56,10 @@
                         <a href="">Price history</a>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title" th:text="${product.name}"></h3>
-                        <div class="price">1999</div>
+                        <h3 class="product-title" th:text="${productAndPrice.product.name}"></h3>
+                        <div class="price"
+                             th:text="${productAndPrice.price != null && productAndPrice.price.price > 0 ?
+                             productAndPrice.price.price + ' UAH': 'price unavailable'}"></div>
                         <div class="history">
                             <p>01/01/2020 2500 Rozetka</p>
                             <p>01/09/2020 2700 Rozetka</p>

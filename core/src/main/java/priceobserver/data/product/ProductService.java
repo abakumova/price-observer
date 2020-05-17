@@ -10,5 +10,5 @@ public interface ProductService {
     List<ProductDto> getProductsByType(ProductTypeEnum type);
     Optional<ProductDto> getOneById(Long id);
     long getProductCountByType(ProductTypeEnum type);
-    List<ProductDto> getProductsPageableByType(ProductTypeEnum type, int pageNumber, int rowsOnPageCount);
+    List<ProductAndPricePresentation> getProductsInfoPageableByType(ProductTypeEnum type, int pageNumber, int rowsOnPageCount);
 }

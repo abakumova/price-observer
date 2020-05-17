@@ -3,24 +3,29 @@ package priceobserver.data.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+import priceobserver.data.productprice.ProductPriceRepository;
+import priceobserver.data.productprice.ShortProductPriceProjection;
 import priceobserver.dto.product.ProductDto;
 import priceobserver.dto.product.ProductDtoConverter;
 import priceobserver.dto.producttype.ProductTypeEnum;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository repository;
-    private final ProductDtoConverter converter;
+    private final ProductRepository productRepository;
+    private final ProductDtoConverter productConverter;
+    private final ProductPriceRepository priceRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository repository, ProductDtoConverter converter) {
-        this.repository = repository;
-        this.converter = converter;
+    public ProductServiceImpl(ProductRepository productRepository, ProductDtoConverter productConverter, ProductPriceRepository priceRepository) {
+        this.productRepository = productRepository;
+        this.productConverter = productConverter;
+        this.priceRepository = priceRepository;
     }
 
     @Override
@@ -28,8 +33,8 @@ public class ProductServiceImpl implements ProductService {
         if (type == null) {
             throw new IllegalArgumentException("ProductTypeEnum must not be null!");
         }
-        List<ProductDto> products = repository.findAllByProductTypeId(type.getId()).stream()
-                .map(converter::convertToDto)
+        List<ProductDto> products = productRepository.findAllByProductTypeId(type.getId()).stream()
+                .map(productConverter::convertToDto)
                 .collect(Collectors.toList());
         products.forEach(this::prepareImageUrl);
         return products;
@@ -40,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
         if (id == null || id < 1) {
             throw new IllegalArgumentException("Id can't be null or less than 1!");
         }
-        Optional<ProductDto> product = repository.findById(id).map(converter::convertToDto);
+        Optional<ProductDto> product = productRepository.findById(id).map(productConverter::convertToDto);
         product.ifPresent(this::prepareImageUrl);
         return product;
     }
@@ -50,11 +55,11 @@ public class ProductServiceImpl implements ProductService {
         if (type == null) {
             throw new IllegalArgumentException("Type can't be null!");
         }
-        return repository.countAllByProductTypeId(type.getId());
+        return productRepository.countAllByProductTypeId(type.getId());
     }
 
     @Override
-    public List<ProductDto> getProductsPageableByType(ProductTypeEnum type, int pageNumber, int rowsOnPageCount) {
+    public List<ProductAndPricePresentation> getProductsInfoPageableByType(ProductTypeEnum type, int pageNumber, int rowsOnPageCount) {
         if (pageNumber < 0 || rowsOnPageCount < 1) {
             throw new IllegalArgumentException(
                     String.format("Invalid page number or rows on page count. Page number = %d, rowsOnPageCount = %d",
@@ -63,15 +68,29 @@ public class ProductServiceImpl implements ProductService {
         } else if (type == null) {
             throw new IllegalArgumentException("Type can't be null!");
         }
-        List<ProductDto> products = repository.findAllByProductTypeId(type.getId(), PageRequest.of(pageNumber, rowsOnPageCount))
+
+        List<ProductDto> products = productRepository.findAllByProductTypeId(type.getId(), PageRequest.of(pageNumber, rowsOnPageCount))
                                               .stream()
-                                              .map(converter::convertToDto)
+                                              .map(productConverter::convertToDto)
                                               .collect(Collectors.toList());
+        List<ShortProductPriceProjection> prices = priceRepository.findFreshPricesForProductsWithIds(
+                products.stream()
+                        .map(ProductDto::getId)
+                        .collect(Collectors.toList())
+        );
         products.forEach(this::prepareImageUrl);
-        return products;
+        return products.stream().map(p -> getPresentation(p, prices)).collect(Collectors.toList());
     }
 
     private void prepareImageUrl(ProductDto p) {
         p.setImage(p.getImage().replace("webapp/src/main/resources/static", ""));
     }
+
+    private ProductAndPricePresentation getPresentation(ProductDto product, List<ShortProductPriceProjection> prices) {
+        return new ProductAndPricePresentation(product, prices.stream()
+                                                              .filter(pr -> Objects.equals(pr.getProductId(), product.getId()))
+                                                              .findFirst()
+                                                              .orElse(null));
+    }
+
 }

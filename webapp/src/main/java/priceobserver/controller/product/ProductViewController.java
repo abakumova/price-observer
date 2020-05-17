@@ -24,7 +24,7 @@ import java.util.Optional;
 public class ProductViewController {
 
     private static final String PRODUCT_PAGE = "product";
-    private static final String SEARCH_RESULT_PAGE = "productsList";
+    private static final String PRODUCT_LIST_PAGE = "productsList";
     private static final String PRODUCT_NOT_FOUND_MESSAGE = "Oops, the product you're looking for isn't found";
 
     private final ProductService productService;
@@ -63,19 +63,19 @@ public class ProductViewController {
         }
         Integer finalSelectedPage = selectedPage;
         ProductTypeEnum.getByName(typeStr).ifPresent(t -> prepareModel(t, model, finalSelectedPage));
-        return SEARCH_RESULT_PAGE;
+        return PRODUCT_LIST_PAGE;
     }
 
     @GetMapping("/search")
     public String viewSearchResult() {
-        return SEARCH_RESULT_PAGE;
+        return PRODUCT_LIST_PAGE;
     }
 
     private void prepareModel(ProductTypeEnum type, Model model, Integer selectedPage) {
         int countOfPages = (int) Math.ceil(productService.getProductCountByType(type) / 9.0);
         model.addAttribute("selectedPage", selectedPage.toString());
         model.addAttribute("pageList", LayoutUtils.getPaginationList(selectedPage, countOfPages));
-        model.addAttribute("products", productService.getProductsPageableByType(type, selectedPage - 1, 9));
+        model.addAttribute("productsAndPrices", productService.getProductsInfoPageableByType(type, selectedPage - 1, 9));
         model.addAttribute("type", type.getName());
         model.addAttribute("previousPage", selectedPage - 1 < 1 ? "" : String.valueOf(selectedPage - 1));
         model.addAttribute("nextPage", selectedPage + 1 > countOfPages ? "" : String.valueOf(selectedPage + 1));
