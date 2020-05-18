@@ -4,6 +4,7 @@
     <title>Search</title>
     <link th:href="@{/assets/css/productsList.css}" rel="stylesheet">
     <th:block th:insert="fragments/commonHead :: copy"/>
+    <link rel="stylesheet" th:href="@{/assets/css/error.css}">
 </head>
 <body th:with="areProductsPresent = ${productsAndPrices != null && !productsAndPrices.isEmpty()}">
 
@@ -45,7 +46,7 @@
         <th:block th:insert="fragments/productListing :: listing"/>
     </th:block>
     <th:block th:unless="${areProductsPresent}">
-        <h1 class="error-message" th:text="${'Sorry, no results for &quot;' + query + '&quot; have been found'}"></h1>
+        <h1 class="error text repair" th:text="${'Sorry, no results for &quot;' + query + '&quot; have been found'}"></h1>
     </th:block>
 </main>
 

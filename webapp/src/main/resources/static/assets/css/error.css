@@ -30,3 +30,12 @@
     text-decoration: none;
     color: #636363;
 }
+
+.repair {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    align-items: center;
+    top: 200px;
+    position: fixed;
+    margin-left: 50px;
+}
