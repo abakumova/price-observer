@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <header th:fragment="copy">
     <div class="wrapper">
@@ -14,8 +14,13 @@
                 <input id="search-field" name="query" placeholder="Search..." type="text">
                 <button id="search-button" type="submit"><em class="fa fa-search"></em></button>
             </form>
-            <div class="button-container">
+            <div class="button-container" sec:authorize="isAnonymous()">
                 <a id="index-button" class="btn header-button" th:href="@{/login}">Log in</a>
+            </div>
+            <div class="button-container" sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" th:method="post">
+                    <button th:type="submit" class="btn">Log out</button>
+                </form>
             </div>
         </div>
     </div>
