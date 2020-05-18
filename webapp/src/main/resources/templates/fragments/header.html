@@ -17,11 +17,16 @@
             <div class="button-container" sec:authorize="isAnonymous()">
                 <a id="index-button" class="btn header-button" th:href="@{/login}">Log in</a>
             </div>
-            <div class="button-container" sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}" th:method="post">
-                    <button th:type="submit" class="btn">Log out</button>
-                </form>
-            </div>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="button-container">
+                    <a id="profile-button" class="btn header-button" th:href="@{/profile}">Profile</a>
+                </div>
+                <div class="button-container">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button th:type="submit" class="btn">Log out</button>
+                    </form>
+                </div>
+            </th:block>
         </div>
     </div>
 </header>
