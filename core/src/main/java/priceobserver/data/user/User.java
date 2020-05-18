@@ -18,7 +18,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -45,10 +45,10 @@ public class User {
 
     @NotNull
     @PastOrPresent
-    private Date birth;
+    private LocalDate birth;
 
     @NotBlank
-    @Max(64)
+    @Max(68)
     @Column(name = "password")
     private String encryptedPassword;
 
@@ -60,7 +60,7 @@ public class User {
     private String password;
 
     @Version
-    private Integer version;
+    private Integer version = 0;
 
     private String profileImage;
 
@@ -101,11 +101,11 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirth() {
+    public LocalDate getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(LocalDate birth) {
         this.birth = birth;
     }
 

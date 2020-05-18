@@ -11,6 +11,9 @@ import priceobserver.dto.user.UserDto;
 import java.security.Principal;
 import java.util.Optional;
 
+import static priceobserver.util.LayoutUtils.LOGIN_PAGE;
+import static priceobserver.util.LayoutUtils.PROFILE_PAGE;
+
 @Controller
 public class UserManageController {
 
@@ -23,7 +26,7 @@ public class UserManageController {
 
     @GetMapping("/login")
     public String viewLoginPage() {
-        return "login";
+        return LOGIN_PAGE;
     }
 
     @GetMapping("/profile")
@@ -34,18 +37,19 @@ public class UserManageController {
                 .get()
                 .orElseThrow(SecurityException::new);
         model.addAttribute("user", user);
-        return "profile";
+        return PROFILE_PAGE;
     }
 
     @PostMapping("/registration")
     public String registration(UserDto dto) {
 
-        return "";
+        return LOGIN_PAGE;
     }
 
     @PostMapping("/updateUserInfo")
-    public String updateUserInfo(UserDto dto) {
-
-        return "/profile";
+    public String updateUserInfo(UserDto dto, Model model) {
+        userService.updateUser(dto);
+        model.addAttribute("user", userService.getByEmail(dto.getEmail()));
+        return PROFILE_PAGE;
     }
 }

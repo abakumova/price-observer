@@ -6,8 +6,6 @@ import priceobserver.data.user.UserBuilder;
 import priceobserver.data.userrole.UserRole;
 import priceobserver.dto.userrole.UserRoleEnum;
 
-import java.sql.Date;
-
 @Component
 public class UserDtoConverterImpl implements UserDtoConverter {
 
@@ -17,7 +15,7 @@ public class UserDtoConverterImpl implements UserDtoConverter {
                 .withFirstName(userEntity.getFirstName())
                 .withLastName(userEntity.getLastName())
                 .withEmail(userEntity.getEmail())
-                .withBirth(userEntity.getBirth().toLocalDate())
+                .withBirth(userEntity.getBirth())
                 .withUserRole(userEntity.getUserRole().getName())
                 .withEncryptedPassword(userEntity.getEncryptedPassword())
                 .withPassword(userEntity.getPassword())
@@ -32,7 +30,7 @@ public class UserDtoConverterImpl implements UserDtoConverter {
                 .withFirstName(userDto.getFirstName())
                 .withLastName(userDto.getLastName())
                 .withEmail(userDto.getEmail())
-                .withBirth(Date.valueOf(userDto.getBirth()))
+                .withBirth(userDto.getBirth())
                 .withUserRole(getUserRole(userDto.getUserRole()))
                 .withEncryptedPassword(userDto.getEncryptedPassword())
                 .withPassword(userDto.getPassword())

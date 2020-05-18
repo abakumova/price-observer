@@ -11,6 +11,8 @@ public class LayoutUtils {
     public static final String PRODUCT_PAGE = "product";
     public static final String PRODUCT_LIST_PAGE = "productsList";
     public static final String SEARCH_RESULT_LIST_PAGE = "searchResultList";
+    public static final String PROFILE_PAGE = "profile";
+    public static final String LOGIN_PAGE = "login";
     public static final String PRODUCT_NOT_FOUND_MESSAGE = "Oops, the product you're looking for isn't found";
     public static final byte NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME = 9;
 

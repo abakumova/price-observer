@@ -35,7 +35,7 @@
                     </div>
                     <div class="field">
                         <label>E-mail </label>
-                        <input id="email" name="email" th:field="*{email}" th:value="*{email}" required type="text" value="email">
+                        <input id="email" name="email" readonly  th:field="*{email}" th:value="*{email}" required type="text" value="email">
                     </div>
                     <div class="field">
                         <label>Birth Day </label>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="field">
                         <label>Password</label>
-                        <input id="password" th:field="*{lastName}" name="password" type="password">
+                        <input id="password" th:field="*{password}" name="password" type="password">
                     </div>
                     <div class="field">
                         <button type="submit">Save</button>

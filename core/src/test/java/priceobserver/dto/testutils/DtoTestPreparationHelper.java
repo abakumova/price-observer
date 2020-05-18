@@ -252,7 +252,7 @@ public final class DtoTestPreparationHelper {
                 .withEmail(EMAIL)
                 .withEncryptedPassword(ENCRYPTED_PASSWORD)
                 .withPassword(PASSWORD)
-                .withBirth(Date.valueOf(BIRTH))
+                .withBirth(BIRTH)
                 .withVersion(VERSION)
                 .withUserRole(USER_ROLE)
                 .build();

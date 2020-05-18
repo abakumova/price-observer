@@ -2,14 +2,14 @@ package priceobserver.data.user;
 
 import priceobserver.data.userrole.UserRole;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public final class UserBuilder {
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    private Date birth;
+    private LocalDate birth;
     private String encryptedPassword;
     private String password;
     private Integer version;
@@ -43,7 +43,7 @@ public final class UserBuilder {
         return this;
     }
 
-    public UserBuilder withBirth(Date birth) {
+    public UserBuilder withBirth(LocalDate birth) {
         this.birth = birth;
         return this;
     }
