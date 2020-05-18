@@ -10,9 +10,15 @@
 </head>
 <th:block th:insert="fragments/header :: copy"/>
 <main class="login-main">
-    <form class="box login-box">
+    <form class="box login-box" th:action="@{/login}" method="post">
         <p>If you have an account, please enter your email and password</p>
         <h1>Log in</h1>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
         <div class="textbox">
             <em class="fas fa-user"></em>
             <input id="login" name="email" placeholder="Username" type="text">
@@ -24,7 +30,7 @@
         </div>
         <div class="textbox-hint" id="pwd-hint"></div>
 
-        <button id="log-in-but" class="button-submit" onclick="validateAndLogIn()">Log in</button>
+        <button id="log-in-but" class="button-submit">Log in</button>
     </form>
 
     <div class="vl"></div>
