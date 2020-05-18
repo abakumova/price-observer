@@ -151,6 +151,8 @@ main {
     top: 350px;
     font-size: 40px;;
     padding: 15px 0;
+    text-align: center;
+    width: auto;
 }
 
 .error-picture {
