@@ -50,7 +50,7 @@
                         <input id="password" th:field="*{password}" name="password" type="password">
                     </div>
                     <div class="field">
-                        <button type="submit">Save</button>
+                        <button class="upload-button-picture" type="submit">Save</button>
                     </div>
                 </div>
             </form>
@@ -61,7 +61,8 @@
         <h1 class="title">Wish list</h1>
         <div class="wish wish-main">
             <th:block th:each="wishProduct : ${wishList}">
-                <a th:href="@{'/product/' + ${wishProduct.product.id}}"><p th:text="${wishProduct.product.name}"></p></a>
+<!--                <a th:href="@{'/product/' + ${wishProduct.product.id}}"><p th:text="${wishProduct.product.name}"></p></a>-->
+                <p th:text="${wishProduct.product.name}"> <a th:href="@{'/product/' + ${wishProduct.product.id}}"></a></p>
             </th:block>
         </div>
     </form>

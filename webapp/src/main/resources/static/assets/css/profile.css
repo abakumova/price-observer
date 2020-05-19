@@ -78,6 +78,10 @@ main {
     font-size: 18px;
 }
 
+.field input{
+    width: 280px;
+}
+
 .wish-list {
     position: absolute;
     left: 55%;
