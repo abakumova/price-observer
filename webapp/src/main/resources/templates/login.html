@@ -19,6 +19,9 @@
         <div th:if="${param.logout}">
             You have been logged out.
         </div>
+        <div th:if="${isSuccessfullyRegistered}">
+            Your account was successfully created. Please, sing in.
+        </div>
         <div class="textbox">
             <em class="fas fa-user"></em>
             <input id="login" name="email" placeholder="Username" type="text">
@@ -35,33 +38,42 @@
 
     <div class="vl"></div>
 
-    <form class="box signup-box">
+    <form class="box signup-box" th:action="@{/registration}" th:object="${user}" method="post">
         <p>If you have don't have an account, please fill this form to create it</p>
         <h1>Sign up</h1>
+        <div th:if="${isUsedEmail}">
+            Your email already in use.
+        </div>
         <div class="textbox">
-            <input id="first_name" name="firstName" placeholder="First name" type="text" value="">
+            <input id="first_name" th:field="*{firstName}" th:value="*{firstName}" name="firstName" placeholder="First name" type="text" required>
         </div>
         <div class="textbox-hint" id="reg-first-name-hint"></div>
 
         <div class="textbox">
-            <input id="last_name" name="lastName" placeholder="Last name" type="text" value="">
+            <input id="last_name" th:field="*{lastName}" th:value="*{lastName}" name="lastName" placeholder="Last name" type="text" required>
         </div>
         <div class="textbox-hint" id="reg-last-name-hint"></div>
+
         <div class="textbox">
-            <input id="reg-login" name="email" placeholder="E-mail" type="text">
+            <input id="birth" th:field="*{birth}" th:value="*{birth}" name="birth" placeholder="Birth" type="text" required>
+        </div>
+        <div class="textbox-hint" id="birth-last-name-hint"></div>
+
+        <div class="textbox">
+            <input id="reg-login" th:field="*{email}" th:value="*{email}" name="email" placeholder="E-mail" type="text" required>
         </div>
         <div class="textbox-hint" id="reg-login-hint"></div>
 
         <div class="textbox">
-            <input id="reg-pwd" name="password" placeholder="Password" type="password">
+            <input id="reg-pwd" name="password" placeholder="Password" type="password" required>
         </div>
         <div class="textbox-hint" id="reg-password-hint"></div>
 
         <div class="textbox">
-            <input id="reg-pwd-r" name="password_r" placeholder="Repeat password" type="password">
+            <input id="reg-pwd-r" th:field="*{password}" th:value="*{password}" name="password_r" placeholder="Repeat password" type="password" required>
         </div>
         <div class="textbox-hint" id="reg-password-r-hint"></div>
-        <button id="sign-up-but" class="button-submit" onclick="validateAndSignUp()">Sign Up</button>
+        <button id="sign-up-but" class="button-submit">Sign Up</button>
     </form>
 </main>
 <th:block th:insert="fragments/footer :: copy"/>

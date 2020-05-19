@@ -25,7 +25,8 @@ public class UserManageController {
     }
 
     @GetMapping("/login")
-    public String viewLoginPage() {
+    public String viewLoginPage(Model model) {
+        model.addAttribute("user", new UserDto());
         return LOGIN_PAGE;
     }
 
@@ -41,8 +42,17 @@ public class UserManageController {
     }
 
     @PostMapping("/registration")
-    public String registration(UserDto dto) {
+    public String registration(UserDto dto, Model model) {
+        Optional<String> email = Optional.ofNullable(dto).map(UserDto::getEmail);
 
+        if (email.isPresent() && !userService.isEmailUsed(email.get())) {
+            userService.saveNewUser(dto);
+            model.addAttribute("isSuccessfullyRegistered", true);
+        } else {
+            model.addAttribute("isUsedEmail", true);
+        }
+
+        model.addAttribute("user", new UserDto());
         return LOGIN_PAGE;
     }
 

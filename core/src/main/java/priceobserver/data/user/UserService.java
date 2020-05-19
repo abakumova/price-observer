@@ -9,4 +9,8 @@ public interface UserService {
     Optional<UserDto> getByEmail(String email);
 
     void updateUser(UserDto user);
+
+    void saveNewUser(UserDto user);
+
+    boolean isEmailUsed(String email);
 }
