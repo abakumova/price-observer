@@ -20,7 +20,7 @@
             You have been logged out.
         </div>
         <div th:if="${isSuccessfullyRegistered}">
-            Your account was successfully created. Please, sing in.
+            Your account was successfully created. Please, sign in.
         </div>
         <div class="textbox">
             <em class="fas fa-user"></em>
@@ -65,12 +65,12 @@
         <div class="textbox-hint" id="reg-login-hint"></div>
 
         <div class="textbox">
-            <input id="reg-pwd" name="password" placeholder="Password" type="password" required>
+            <input id="reg-pwd" th:field="*{password}" th:value="*{password}" name="password" placeholder="Password" type="password" required>
         </div>
         <div class="textbox-hint" id="reg-password-hint"></div>
 
         <div class="textbox">
-            <input id="reg-pwd-r" th:field="*{password}" th:value="*{password}" name="password_r" placeholder="Repeat password" type="password" required>
+            <input id="reg-pwd-r" name="password_r" placeholder="Repeat password" type="password" required>
         </div>
         <div class="textbox-hint" id="reg-password-r-hint"></div>
         <button id="sign-up-but" class="button-submit">Sign Up</button>
