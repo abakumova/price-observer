@@ -12,4 +12,8 @@ public interface ProductPriceRepository extends CrudRepository<ProductPrice, Lon
             "WHERE product_id IN (?1)GROUP BY productId",
             nativeQuery = true)
     List<ShortProductPriceProjection> findFreshPricesForProductsWithIds(List<Long> productsIds);
+
+    @Query(value = "SELECT * FROM product_price WHERE product_id = ?1 GROUP BY product_id, date ORDER BY date DESC",
+    nativeQuery = true)
+    List<ProductPrice> getPriceForProductWithId(Long id);
 }

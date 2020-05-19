@@ -2,6 +2,7 @@ package priceobserver.data.product;
 
 import priceobserver.data.wishproduct.WishProduct;
 import priceobserver.dto.product.ProductDto;
+import priceobserver.dto.productprice.ProductPriceDto;
 import priceobserver.dto.producttype.ProductTypeEnum;
 
 import java.security.Principal;
@@ -28,4 +29,6 @@ public interface ProductService {
     void removeFromWishList(Long productId, Long userId);
 
     List<WishProduct> getWishProductsListForUserWishId(Long id);
+
+    List<ProductPriceDto> getProductPrices(Long productId);
 }
