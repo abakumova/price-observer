@@ -169,8 +169,7 @@ main {
 
 .error-message {
     color: var(--main-color);
-    margin-left: 120px;
-    top: 350px;
+    /*top: 550px;*/
     font-size: 40px;;
     padding: 15px 0;
     text-align: center;
