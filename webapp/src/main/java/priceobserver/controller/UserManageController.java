@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import priceobserver.data.product.ProductService;
 import priceobserver.data.user.UserService;
 import priceobserver.dto.user.UserDto;
 
@@ -18,10 +20,12 @@ import static priceobserver.util.LayoutUtils.PROFILE_PAGE;
 public class UserManageController {
 
     private final UserService userService;
+    private final ProductService productService;
 
     @Autowired
-    public UserManageController(UserService userService) {
+    public UserManageController(UserService userService, ProductService productService) {
         this.userService = userService;
+        this.productService = productService;
     }
 
     @GetMapping("/login")
@@ -37,6 +41,7 @@ public class UserManageController {
                 .map(userService::getByEmail)
                 .get()
                 .orElseThrow(SecurityException::new);
+        model.addAttribute("wishList", productService.getWishProductsListForUserWishId(user.getId()));
         model.addAttribute("user", user);
         return PROFILE_PAGE;
     }
@@ -61,5 +66,27 @@ public class UserManageController {
         userService.updateUser(dto);
         model.addAttribute("user", userService.getByEmail(dto.getEmail()).get());
         return PROFILE_PAGE;
+    }
+
+    @GetMapping("/addToWishList/{id}")
+    public String addToWishList(@PathVariable Long id, Principal principal) {
+        UserDto user = Optional.ofNullable(principal)
+                .map(Principal::getName)
+                .map(userService::getByEmail)
+                .get()
+                .orElseThrow(SecurityException::new);
+        productService.addToWishList(id, user.getId());
+        return "redirect:/product/" + id;
+    }
+
+    @GetMapping("/removeFromWishList/{id}")
+    public String removeFromWishList(@PathVariable Long id, Principal principal) {
+        UserDto user = Optional.ofNullable(principal)
+                .map(Principal::getName)
+                .map(userService::getByEmail)
+                .get()
+                .orElseThrow(SecurityException::new);
+        productService.removeFromWishList(id, user.getId());
+        return "redirect:/product/" + id;
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <th:block th:each="productAndPrice : ${productsAndPrices}" th:fragment="listing">
     <div class="border">
@@ -10,7 +10,11 @@
                 </div>
             </a>
             <div class="product-button">
-                <a href="">Add to wish list</a>
+                <th:block sec:authorize="isAuthenticated()">
+                    <a th:if="${!productAndPrice.hasProductInWishList}" th:href="@{'/addToWishList/' + ${productAndPrice.product.id}}">Add to wish list</a>
+                    <a th:unless="${!productAndPrice.hasProductInWishList}" th:href="@{'/removeFromWishList/' + ${productAndPrice.product.id}}">Remove from wish list</a>
+                </th:block>
+                <a sec:authorize="isAnonymous()" th:href="@{/login}">Add to wish list</a>
                 <a th:href="@{'/product/' + ${productAndPrice.product.id} + '#section-price'}">Price history</a>
             </div>
             <div class="product-info">

@@ -3,13 +3,13 @@ package priceobserver.data.wishproduct;
 import priceobserver.data.product.Product;
 import priceobserver.data.user.User;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public final class WishProductBuilder {
-
     private Long id;
-    private Date dateAdded;
+    private LocalDate dateAdded;
     private Integer version;
+    private Boolean isDeleted;
     private User user;
     private Product product;
 
@@ -25,7 +25,12 @@ public final class WishProductBuilder {
         return this;
     }
 
-    public WishProductBuilder withDateAdded(Date dateAdded) {
+    public WishProductBuilder withIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+        return this;
+    }
+
+    public WishProductBuilder withDateAdded(LocalDate dateAdded) {
         this.dateAdded = dateAdded;
         return this;
     }

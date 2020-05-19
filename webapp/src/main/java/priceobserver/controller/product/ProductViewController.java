@@ -15,6 +15,7 @@ import priceobserver.dto.producttype.ProductTypeEnum;
 import priceobserver.util.LayoutUtils;
 
 import javax.servlet.RequestDispatcher;
+import java.security.Principal;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,16 +59,18 @@ public class ProductViewController {
     @GetMapping("/products/{type}")
     public String viewProductsByType(@PathVariable("type") String typeStr,
                                      @RequestParam(value = "page", required = false) Integer selectedPage,
-                                     Model model) {
+                                     Model model,
+                                     Principal principal) {
+
         if (selectedPage == null || selectedPage < 1) {
             selectedPage = 1;
         }
         Integer finalSelectedPage = selectedPage;
-        ProductTypeEnum.getByName(typeStr).ifPresent(t -> prepareModel(t, model, finalSelectedPage));
+        ProductTypeEnum.getByName(typeStr).ifPresent(t -> prepareModel(t, model, finalSelectedPage, principal));
         return PRODUCT_LIST_PAGE;
     }
 
-    private void prepareModel(ProductTypeEnum type, Model model, Integer selectedPage) {
+    private void prepareModel(ProductTypeEnum type, Model model, Integer selectedPage, Principal principal) {
         long countOfProducts = productService.getProductsCountByType(type);
         model.addAttribute("singleProductList", countOfProducts == 1);
         int countOfPages = (int) Math.ceil(countOfProducts / (float) NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME);
@@ -76,7 +79,8 @@ public class ProductViewController {
             model.addAttribute("productsAndPrices", productService.getProductsInfoPageableByType(
                     type,
                     selectedPage - 1,
-                    NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME)
+                    NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME,
+                    principal)
             );
         }
 
