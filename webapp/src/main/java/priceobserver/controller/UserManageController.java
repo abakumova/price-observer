@@ -49,7 +49,7 @@ public class UserManageController {
     @PostMapping("/updateUserInfo")
     public String updateUserInfo(UserDto dto, Model model) {
         userService.updateUser(dto);
-        model.addAttribute("user", userService.getByEmail(dto.getEmail()));
+        model.addAttribute("user", userService.getByEmail(dto.getEmail()).get());
         return PROFILE_PAGE;
     }
 }
