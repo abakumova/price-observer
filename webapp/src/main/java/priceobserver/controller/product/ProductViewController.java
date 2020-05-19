@@ -46,6 +46,7 @@ public class ProductViewController {
                 ProductDto product = productOpt.get();
                 modelAndView.addObject("product", product);
                 modelAndView.addObject("propertiesMap", getPropertiesMap(product));
+                modelAndView.addObject("prices", productService.getProductPrices(product.getId()));
                 return modelAndView;
             }
         }

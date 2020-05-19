@@ -13,6 +13,8 @@ import priceobserver.data.wishproduct.WishProductBuilder;
 import priceobserver.data.wishproduct.WishProductRepository;
 import priceobserver.dto.product.ProductDto;
 import priceobserver.dto.product.ProductDtoConverter;
+import priceobserver.dto.productprice.ProductPriceDto;
+import priceobserver.dto.productprice.ProductPriceDtoConverter;
 import priceobserver.dto.producttype.ProductTypeEnum;
 
 import java.security.Principal;
@@ -31,18 +33,21 @@ public class ProductServiceImpl implements ProductService {
     private final ProductPriceRepository priceRepository;
     private final WishProductRepository wishProductRepository;
     private final UserRepository userRepository;
+    private final ProductPriceDtoConverter priceConverter;
 
     @Autowired
     public ProductServiceImpl(ProductRepository productRepository,
                               ProductDtoConverter productConverter,
                               ProductPriceRepository priceRepository,
                               WishProductRepository wishProductRepository,
-                              UserRepository userRepository) {
+                              UserRepository userRepository,
+                              ProductPriceDtoConverter priceConverter) {
         this.productRepository = productRepository;
         this.productConverter = productConverter;
         this.priceRepository = priceRepository;
         this.wishProductRepository = wishProductRepository;
         this.userRepository = userRepository;
+        this.priceConverter = priceConverter;
     }
 
     @Override
@@ -146,6 +151,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<WishProduct> getWishProductsListForUserWishId(Long id) {
         return wishProductRepository.findAllByUserId(id);
+    }
+
+    @Override
+    public List<ProductPriceDto> getProductPrices(Long productId) {
+        return priceRepository.getPriceForProductWithId(productId).stream()
+                .map(priceConverter::convertToDto)
+                .collect(Collectors.toList());
     }
 
     private void prepareImageUrl(List<ProductDto> products) {
