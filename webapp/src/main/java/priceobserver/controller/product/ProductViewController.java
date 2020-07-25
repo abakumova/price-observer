@@ -21,6 +21,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static priceobserver.controller.ControllersConstants.PRICES;
+import static priceobserver.controller.ControllersConstants.PRODUCT;
+import static priceobserver.controller.ControllersConstants.PRODUCT_AND_PRICE_ATTR;
+import static priceobserver.controller.ControllersConstants.PROPERTIES_MAP;
+import static priceobserver.controller.ControllersConstants.SINGLE_PRODUCT_LIST_ATTR;
+import static priceobserver.controller.ControllersConstants.TYPE_ATTR;
 import static priceobserver.util.LayoutUtils.NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME;
 import static priceobserver.util.LayoutUtils.PRODUCT_LIST_PAGE;
 import static priceobserver.util.LayoutUtils.PRODUCT_NOT_FOUND_MESSAGE;
@@ -39,21 +45,18 @@ public class ProductViewController {
     @GetMapping("/product/{id}")
     public ModelAndView viewProducts(@PathVariable("id") String id) {
         ModelAndView modelAndView;
-        if (id != null) {
-            Optional<ProductDto> productOpt = productService.getOneById(Long.parseLong(id));
-            if (productOpt.isPresent()) {
-                modelAndView = new ModelAndView(PRODUCT_PAGE);
-                ProductDto product = productOpt.get();
-                modelAndView.addObject("product", product);
-                modelAndView.addObject("propertiesMap", getPropertiesMap(product));
-                modelAndView.addObject("prices", productService.getProductPrices(product.getId()));
-                return modelAndView;
-            }
+        Optional<ProductDto> productOpt = productService.getOneById(Long.parseLong(id));
+        if (productOpt.isEmpty()) {
+            modelAndView = new ModelAndView("forward:/error");
+            modelAndView.addObject(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.NOT_FOUND.value());
+            modelAndView.addObject(RequestDispatcher.ERROR_MESSAGE, PRODUCT_NOT_FOUND_MESSAGE);
+            return modelAndView;
         }
-
-        modelAndView = new ModelAndView("forward:/error");
-        modelAndView.addObject(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.NOT_FOUND.value());
-        modelAndView.addObject(RequestDispatcher.ERROR_MESSAGE, PRODUCT_NOT_FOUND_MESSAGE);
+        modelAndView = new ModelAndView(PRODUCT_PAGE);
+        ProductDto product = productOpt.get();
+        modelAndView.addObject(PRODUCT, product);
+        modelAndView.addObject(PROPERTIES_MAP, getPropertiesMap(product));
+        modelAndView.addObject(PRICES, productService.getProductPrices(product.getId()));
         return modelAndView;
     }
 
@@ -73,19 +76,18 @@ public class ProductViewController {
 
     private void prepareModel(ProductTypeEnum type, Model model, Integer selectedPage, Principal principal) {
         long countOfProducts = productService.getProductsCountByType(type);
-        model.addAttribute("singleProductList", countOfProducts == 1);
+        model.addAttribute(SINGLE_PRODUCT_LIST_ATTR, countOfProducts == 1);
         int countOfPages = (int) Math.ceil(countOfProducts / (float) NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME);
 
         if (countOfPages > 0) {
-            model.addAttribute("productsAndPrices", productService.getProductsInfoPageableByType(
+            model.addAttribute(PRODUCT_AND_PRICE_ATTR, productService.getProductsInfoPageableByType(
                     type,
                     selectedPage - 1,
                     NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME,
                     principal)
             );
         }
-
-        model.addAttribute("type", type.getName());
+        model.addAttribute(TYPE_ATTR, type.getName());
         LayoutUtils.preparePagination(model, selectedPage, countOfPages);
     }
 

@@ -10,6 +10,9 @@ import priceobserver.util.LayoutUtils;
 
 import java.security.Principal;
 
+import static priceobserver.controller.ControllersConstants.PRODUCT_AND_PRICE_ATTR;
+import static priceobserver.controller.ControllersConstants.QUERY_ATTR;
+import static priceobserver.controller.ControllersConstants.SINGLE_PRODUCT_LIST_ATTR;
 import static priceobserver.util.LayoutUtils.NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME;
 import static priceobserver.util.LayoutUtils.SEARCH_RESULT_LIST_PAGE;
 
@@ -32,7 +35,8 @@ public class SearchController {
             selectedPage = 1;
         }
         if (query == null || query.isBlank()) {
-            model.addAttribute("query", "");
+
+            model.addAttribute(QUERY_ATTR, "");
         } else {
             prepareModel(query.trim(), model, selectedPage, principal);
         }
@@ -42,15 +46,15 @@ public class SearchController {
 
     private void prepareModel(String query, Model model, Integer selectedPage, Principal principal) {
         long countOfProducts = productService.getProductsByNameOrModelContainingPageable(query);
-        model.addAttribute("singleProductList", countOfProducts == 1);
+        model.addAttribute(SINGLE_PRODUCT_LIST_ATTR, countOfProducts == 1);
         int countOfPages = (int) Math.ceil(countOfProducts / (float) NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME);
 
         if (countOfPages > 0) {
             LayoutUtils.preparePagination(model, selectedPage, countOfPages);
-            model.addAttribute("productsAndPrices", productService.getProductsByNameOrModelContainingPageable(
+            model.addAttribute(PRODUCT_AND_PRICE_ATTR, productService.getProductsByNameOrModelContainingPageable(
                     query, selectedPage - 1, NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME, principal));
         }
 
-        model.addAttribute("query", query);
+        model.addAttribute(QUERY_ATTR, query);
     }
 }
