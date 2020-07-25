@@ -1,6 +1,5 @@
 package priceobserver.controller.product;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -16,11 +15,9 @@ import priceobserver.util.LayoutUtils;
 
 import javax.servlet.RequestDispatcher;
 import java.security.Principal;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
+import static priceobserver.controller.ControllerUtils.getPropertiesMap;
 import static priceobserver.controller.ControllersConstants.PRICES;
 import static priceobserver.controller.ControllersConstants.PRODUCT;
 import static priceobserver.controller.ControllersConstants.PRODUCT_AND_PRICE_ATTR;
@@ -52,6 +49,7 @@ public class ProductViewController {
             modelAndView.addObject(RequestDispatcher.ERROR_MESSAGE, PRODUCT_NOT_FOUND_MESSAGE);
             return modelAndView;
         }
+
         modelAndView = new ModelAndView(PRODUCT_PAGE);
         ProductDto product = productOpt.get();
         modelAndView.addObject(PRODUCT, product);
@@ -69,6 +67,7 @@ public class ProductViewController {
         if (selectedPage == null || selectedPage < 1) {
             selectedPage = 1;
         }
+
         Integer finalSelectedPage = selectedPage;
         ProductTypeEnum.getByName(typeStr).ifPresent(t -> prepareModel(t, model, finalSelectedPage, principal));
         return PRODUCT_LIST_PAGE;
@@ -87,24 +86,8 @@ public class ProductViewController {
                     principal)
             );
         }
+
         model.addAttribute(TYPE_ATTR, type.getName());
         LayoutUtils.preparePagination(model, selectedPage, countOfPages);
-    }
-
-    private Map<String, String> getPropertiesMap(ProductDto product) {
-        return Optional.ofNullable(product.getProductProperties())
-                .map(p -> new JSONObject(p.getProperties()).toMap())
-                .map(this::convertMap)
-                .orElse(Collections.emptyMap());
-    }
-
-    private Map<String, String> convertMap(Map<String, Object> map) {
-        Map<String, String> newMap = new HashMap<>();
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            if (entry.getValue() instanceof String) {
-                newMap.put(entry.getKey(), (String) entry.getValue());
-            }
-        }
-        return newMap;
     }
 }
