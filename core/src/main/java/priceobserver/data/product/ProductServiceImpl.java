@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import priceobserver.data.productprice.ProductPriceRepository;
 import priceobserver.data.productprice.ShortProductPriceProjection;
 import priceobserver.data.user.User;
@@ -51,22 +52,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getProductsByType(ProductTypeEnum type) {
-        if (type == null) {
-            throw new IllegalArgumentException("ProductTypeEnum must not be null!");
-        }
-        List<ProductDto> products = productRepository.findAllByProductTypeId(type.getId()).stream()
-                .map(productConverter::convertToDto)
-                .collect(Collectors.toList());
-        products.forEach(this::prepareImageUrl);
-        return products;
-    }
-
-    @Override
     public Optional<ProductDto> getOneById(Long id) {
         if (id == null || id < 1) {
             throw new IllegalArgumentException("Id can't be null or less than 1!");
         }
+
         Optional<ProductDto> product = productRepository.findById(id).map(productConverter::convertToDto);
         product.ifPresent(this::prepareImageUrl);
         return product;
@@ -77,6 +67,7 @@ public class ProductServiceImpl implements ProductService {
         if (type == null) {
             throw new IllegalArgumentException("Type can't be null!");
         }
+
         return productRepository.countAllByProductTypeId(type.getId());
     }
 
@@ -85,6 +76,7 @@ public class ProductServiceImpl implements ProductService {
         if (contains == null || contains.isBlank()) {
             throw new IllegalArgumentException("String with contains can't be null or blank!");
         }
+
         return productRepository.countAllByNameContainingOrModelContaining(contains, contains);
     }
 
@@ -101,6 +93,7 @@ public class ProductServiceImpl implements ProductService {
         } else if (contains == null || contains.isBlank()) {
             throw new IllegalArgumentException("String with contains can't be null or blank!");
         }
+
         List<ProductDto> products = productRepository.findAllByNameContainingOrModelContaining(
                 contains,
                 contains,
@@ -137,8 +130,8 @@ public class ProductServiceImpl implements ProductService {
     public void addToWishList(Long productId, Long userId) {
         wishProductRepository.save(WishProductBuilder.aWishProduct()
                 .withDateAdded(LocalDate.now())
-                .withUser(userRepository.findById(userId).get())
-                .withProduct(productRepository.findById(productId).get())
+                .withUser(userRepository.findById(userId).orElseThrow(IllegalArgumentException::new))
+                .withProduct(productRepository.findById(productId).orElseThrow(IllegalArgumentException::new))
                 .build());
     }
 
@@ -165,7 +158,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void prepareImageUrl(ProductDto p) {
-        p.setImage(p.getImage().replace("webapp/src/main/resources/static", ""));
+        String image = p.getImage();
+        if (StringUtils.isEmpty(image)) {
+            return;
+        }
+
+        p.setImage(image.replace("webapp/src/main/resources/static", ""));
     }
 
     private ProductAndPricePresentation getPresentation(ProductDto product, List<ShortProductPriceProjection> prices, List<WishProduct> wishProducts) {
@@ -190,6 +188,7 @@ public class ProductServiceImpl implements ProductService {
                 wishProducts = wishProductRepository.findAllByUserIdAndProductIdIn(user.get().getId(), ids);
             }
         }
+
         List<ShortProductPriceProjection> prices = priceRepository.findFreshPricesForProductsWithIds(ids);
         List<WishProduct> finalWishProducts = wishProducts;
         return products.stream().map(p -> getPresentation(p, prices, finalWishProducts)).collect(Collectors.toList());

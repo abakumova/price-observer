@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import priceobserver.data.product.ProductAndPricePresentation;
 import priceobserver.data.product.ProductService;
 import priceobserver.util.LayoutUtils;
 
 import java.security.Principal;
+import java.util.List;
 
 import static priceobserver.controller.ControllersConstants.PRODUCT_AND_PRICE_ATTR;
 import static priceobserver.controller.ControllersConstants.QUERY_ATTR;
@@ -51,8 +53,10 @@ public class SearchController {
 
         if (countOfPages > 0) {
             LayoutUtils.preparePagination(model, selectedPage, countOfPages);
-            model.addAttribute(PRODUCT_AND_PRICE_ATTR, productService.getProductsByNameOrModelContainingPageable(
-                    query, selectedPage - 1, NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME, principal));
+            List<ProductAndPricePresentation> productsAndPrices =
+                    productService.getProductsByNameOrModelContainingPageable(
+                            query, selectedPage - 1, NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME, principal);
+            model.addAttribute(PRODUCT_AND_PRICE_ATTR, productsAndPrices);
         }
 
         model.addAttribute(QUERY_ATTR, query);

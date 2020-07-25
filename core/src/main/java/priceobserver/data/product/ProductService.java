@@ -10,10 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    List<ProductDto> getProductsByType(ProductTypeEnum type);
+
     Optional<ProductDto> getOneById(Long id);
+
     long getProductsCountByType(ProductTypeEnum type);
+
     long getProductsByNameOrModelContainingPageable(String contains);
+
     List<ProductAndPricePresentation> getProductsByNameOrModelContainingPageable(String contains,
                                                                                  int pageNumber,
                                                                                  int rowsOnPageCount,
