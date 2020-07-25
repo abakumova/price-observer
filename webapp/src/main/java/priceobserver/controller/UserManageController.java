@@ -40,11 +40,7 @@ public class UserManageController {
 
     @GetMapping("/profile")
     public String viewProfilePage(Principal principal, Model model) {
-        UserDto user = Optional.ofNullable(principal)
-                .map(Principal::getName)
-                .map(userService::getByEmail)
-                .get()
-                .orElseThrow(SecurityException::new);
+        UserDto user = userService.getUser(principal);
         model.addAttribute(WISH_LIST_ATTR, productService.getWishProductsListForUserWishId(user.getId()));
         model.addAttribute(USER_ATTR, user);
         return PROFILE_PAGE;
@@ -68,29 +64,19 @@ public class UserManageController {
     @PostMapping("/updateUserInfo")
     public String updateUserInfo(UserDto dto, Model model) {
         userService.updateUser(dto);
-        model.addAttribute(USER_ATTR, userService.getByEmail(dto.getEmail()).get());
+        model.addAttribute(USER_ATTR, userService.getUser(dto.getEmail()).orElseThrow(IllegalArgumentException::new));
         return PROFILE_PAGE;
     }
 
     @GetMapping("/addToWishList/{id}")
     public String addToWishList(@PathVariable Long id, Principal principal) {
-        UserDto user = Optional.ofNullable(principal)
-                .map(Principal::getName)
-                .map(userService::getByEmail)
-                .get()
-                .orElseThrow(SecurityException::new);
-        productService.addToWishList(id, user.getId());
+        productService.addToWishList(id, userService.getUser(principal).getId());
         return "redirect:/product/" + id;
     }
 
     @GetMapping("/removeFromWishList/{id}")
     public String removeFromWishList(@PathVariable Long id, Principal principal) {
-        UserDto user = Optional.ofNullable(principal)
-                .map(Principal::getName)
-                .map(userService::getByEmail)
-                .get()
-                .orElseThrow(SecurityException::new);
-        productService.removeFromWishList(id, user.getId());
+        productService.removeFromWishList(id, userService.getUser(principal).getId());
         return "redirect:/product/" + id;
     }
 }
