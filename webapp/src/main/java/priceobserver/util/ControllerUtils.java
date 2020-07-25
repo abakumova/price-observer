@@ -1,4 +1,4 @@
-package priceobserver.controller;
+package priceobserver.util;
 
 import org.json.JSONObject;
 import priceobserver.dto.product.ProductDto;

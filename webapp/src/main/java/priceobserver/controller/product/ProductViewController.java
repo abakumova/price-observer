@@ -17,13 +17,13 @@ import javax.servlet.RequestDispatcher;
 import java.security.Principal;
 import java.util.Optional;
 
-import static priceobserver.controller.ControllerUtils.getPropertiesMap;
 import static priceobserver.controller.ControllersConstants.PRICES;
 import static priceobserver.controller.ControllersConstants.PRODUCT;
 import static priceobserver.controller.ControllersConstants.PRODUCT_AND_PRICE_ATTR;
 import static priceobserver.controller.ControllersConstants.PROPERTIES_MAP;
 import static priceobserver.controller.ControllersConstants.SINGLE_PRODUCT_LIST_ATTR;
 import static priceobserver.controller.ControllersConstants.TYPE_ATTR;
+import static priceobserver.util.ControllerUtils.getPropertiesMap;
 import static priceobserver.util.LayoutUtils.NUMBER_OF_PRODUCTS_PER_PAGE_AT_A_TIME;
 import static priceobserver.util.LayoutUtils.PRODUCT_LIST_PAGE;
 import static priceobserver.util.LayoutUtils.PRODUCT_NOT_FOUND_MESSAGE;
