@@ -4,6 +4,9 @@
 
 ## Introduction
 
+Price Observer is a price monitoring web-application. The application is built using Java programming language, Spring
+Boot, and MySQL database.
+
 The application itself is a pretty and clear tool to monitor the price of popular products. In the current version the
 application support only the products made by Apple company. <br>
 Price Observer supports Sign-In/Sign-Up possibility implemented with Spring Security. Authorized users can add products
