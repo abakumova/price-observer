@@ -14,7 +14,7 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -27,11 +27,11 @@ public class WishProduct {
     private Long id;
 
     @NotNull
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 
     @NotNull
     @PastOrPresent
-    private Date dateAdded;
+    private LocalDate dateAdded;
 
     @Version
     private Integer version;
@@ -66,11 +66,11 @@ public class WishProduct {
         isDeleted = deleted;
     }
 
-    public Date getDateAdded() {
+    public LocalDate getDateAdded() {
         return dateAdded;
     }
 
-    public void setDateAdded(Date dateAdded) {
+    public void setDateAdded(LocalDate dateAdded) {
         this.dateAdded = dateAdded;
     }
 

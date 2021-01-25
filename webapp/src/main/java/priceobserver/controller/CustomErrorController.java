@@ -15,10 +15,13 @@ import static javax.servlet.RequestDispatcher.ERROR_STATUS_CODE;
 @Controller
 public class CustomErrorController implements ErrorController {
 
+    private static final String ERROR_PATH = "/error";
     private static final String ERROR_PAGE = "error/errorPage";
     private static final String MAIN_PAGE = "index";
+    private static final String ERROR_CODE_ATTR = "errorCode";
+    private static final String ERROR_TEXT_ATTR = "errorText";
 
-    @GetMapping("/error")
+    @GetMapping(ERROR_PATH)
     public String handleError(HttpServletRequest request, Model model) {
         Optional<HttpStatus> status = Optional.ofNullable(request.getAttribute(ERROR_STATUS_CODE))
                 .map(Object::toString)
@@ -35,26 +38,14 @@ public class CustomErrorController implements ErrorController {
 
     @Override
     public String getErrorPath() {
-        return "/error";
+        return ERROR_PATH;
     }
 
     private void populateModel(HttpStatus status, Model model, HttpServletRequest request) {
-        String errorText;
-        switch (status) {
-            case NOT_FOUND:
-                errorText = "Page not found";
-                break;
-            case INTERNAL_SERVER_ERROR:
-                errorText = "Page temporary unavailable";
-                break;
-            default:
-                errorText = status.getReasonPhrase();
-                break;
-        }
         Optional<String> customMessage = Optional.ofNullable(request.getAttribute(ERROR_MESSAGE))
-                                                 .map(m -> (String) m)
-                                                 .filter(m -> !m.isBlank());
-        model.addAttribute("errorCode", status.value());
-        model.addAttribute("errorText", customMessage.orElse(errorText));
+                .map(m -> (String) m)
+                .filter(m -> !m.isBlank());
+        model.addAttribute(ERROR_CODE_ATTR, status.value());
+        model.addAttribute(ERROR_TEXT_ATTR, customMessage.orElse(status.getReasonPhrase()));
     }
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<th:block th:each="productAndPrice : ${productsAndPrices}" th:fragment="listing">
+    <div class="border">
+        <div class="wrap">
+            <a th:href="@{'/product/' + ${productAndPrice.product.id}}">
+                <div class="product-wrap">
+                    <img th:src="${productAndPrice.product.image}" th:alt="${productAndPrice.product.name}">
+                </div>
+            </a>
+            <div class="product-button">
+                <th:block sec:authorize="isAuthenticated()">
+                    <a th:if="${!productAndPrice.hasProductInWishList}" th:href="@{'/addToWishList/' + ${productAndPrice.product.id}}">Add to wish list</a>
+                    <a th:unless="${!productAndPrice.hasProductInWishList}" th:href="@{'/removeFromWishList/' + ${productAndPrice.product.id}}">Remove from wish list</a>
+                </th:block>
+                <a sec:authorize="isAnonymous()" th:href="@{/login}">Add to wish list</a>
+                <a th:href="@{'/product/' + ${productAndPrice.product.id} + '#section-price'}">Price history</a>
+            </div>
+            <div class="product-info">
+                <h3 class="product-title" th:text="${productAndPrice.product.name}"></h3>
+                <div class="price"
+                     th:text="${productAndPrice.price != null && productAndPrice.price.price > 0 ?
+                             T(java.lang.Math).round(productAndPrice.price.price) + ' UAH': 'price unavailable'}"></div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

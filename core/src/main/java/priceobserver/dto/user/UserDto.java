@@ -1,5 +1,6 @@
 package priceobserver.dto.user;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import priceobserver.dto.userrole.UserRoleEnum;
 
 import java.io.Serializable;
@@ -12,6 +13,8 @@ public class UserDto implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth;
     private String encryptedPassword;
     private String password;

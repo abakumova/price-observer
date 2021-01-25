@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <header th:fragment="copy">
     <div class="wrapper">
@@ -10,13 +10,23 @@
                         <img id="logo" alt="logo" class="logo-picture" th:src="@{/assets/img/logo.png}"></a>
                 </p>
             </div>
-            <form action="" class="search-field">
-                <input id="search-field" name="search" placeholder="Search..." type="text">
+            <form th:action="@{/search}" class="search-field" method="get">
+                <input id="search-field" name="query" placeholder="Search..." type="text">
                 <button id="search-button" type="submit"><em class="fa fa-search"></em></button>
             </form>
-            <div class="button-container">
+            <div class="button-container" sec:authorize="isAnonymous()">
                 <a id="index-button" class="btn header-button" th:href="@{/login}">Log in</a>
             </div>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="button-container">
+                    <a id="profile-button" class="btn header-button" th:href="@{/profile}">Profile</a>
+                </div>
+                <div class="button-container">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button th:type="submit" class="btn-log-out logout-button">Log out</button>
+                    </form>
+                </div>
+            </th:block>
         </div>
     </div>
 </header>

@@ -34,7 +34,6 @@ import priceobserver.dto.user.UserDtoBuilder;
 import priceobserver.dto.wishproduct.WishProductDto;
 import priceobserver.dto.wishproduct.WishProductDtoBuilder;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Year;
 
@@ -221,7 +220,7 @@ public final class DtoTestPreparationHelper {
         return WishProductBuilder.aWishProduct()
                 .withId(WISH_PRODUCT_ID)
                 .withVersion(WISH_PRODUCT_VERSION)
-                .withDateAdded(Date.valueOf(DATE_NOW))
+                .withDateAdded(DATE_NOW)
                 .withProduct(getPreparedProductEntity())
                 .withUser(getPreparedUserEntity())
                 .build();
@@ -252,7 +251,7 @@ public final class DtoTestPreparationHelper {
                 .withEmail(EMAIL)
                 .withEncryptedPassword(ENCRYPTED_PASSWORD)
                 .withPassword(PASSWORD)
-                .withBirth(Date.valueOf(BIRTH))
+                .withBirth(BIRTH)
                 .withVersion(VERSION)
                 .withUserRole(USER_ROLE)
                 .build();

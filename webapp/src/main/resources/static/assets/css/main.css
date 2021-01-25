@@ -31,7 +31,7 @@ header {
 }
 
 .row {
-    height: 90px;
+    height: 75px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -65,10 +65,32 @@ header {
     text-decoration: none;
 }
 
+.btn-log-out {
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+    border: 0;
+}
+
 .header-button {
     position: fixed;
     top: 10px;
     right: 150px;
+    background-image: linear-gradient(to right, var(--left) 0%, var(--middle) 51%, var(--left) 100%);
+}
+
+.logout-button {
+    position: fixed;
+    top: 10px;
+    right: 30px;
+    font-family: 'Montserrat', sans-serif;
     background-image: linear-gradient(to right, var(--left) 0%, var(--middle) 51%, var(--left) 100%);
 }
 
@@ -147,10 +169,11 @@ main {
 
 .error-message {
     color: var(--main-color);
-    margin-left: 120px;
-    top: 350px;
+    /*top: 550px;*/
     font-size: 40px;;
     padding: 15px 0;
+    text-align: center;
+    width: auto;
 }
 
 .error-picture {

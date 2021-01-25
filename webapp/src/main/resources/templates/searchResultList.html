@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${type}"></title>
+    <title>Search</title>
     <link th:href="@{/assets/css/productsList.css}" rel="stylesheet">
     <th:block th:insert="fragments/commonHead :: copy"/>
+    <link rel="stylesheet" th:href="@{/assets/css/error.css}">
 </head>
 <body th:with="areProductsPresent = ${productsAndPrices != null && !productsAndPrices.isEmpty()}">
 
@@ -13,13 +14,13 @@
     <div class="pagination">
         <a class="button-arrow pagination-direction left-arrow"
            th:with="isPrevPagePresent=${previousPage != null && !previousPage.isEmpty()}"
-           th:href="@{${isPrevPagePresent ? '/products/' + type + '?page=' + previousPage : ''}}"
+           th:href="@{${isPrevPagePresent ? '/search?page=' + previousPage + '&query=' + query: ''}}"
            th:classappend="${isPrevPagePresent ? '' : 'not-clickable'}">
             <em class="fa fa-angle-left" aria-hidden="true"></em>
         </a>
         <a class="button-arrow pagination-direction right-arrow"
            th:with="isNextPagePresent=${nextPage != null && !nextPage.isEmpty()}"
-           th:href="@{${isNextPagePresent ? '/products/' + type + '?page=' + nextPage : ''}}"
+           th:href="@{${isNextPagePresent ? '/search?page=' + nextPage + '&query=' + query: ''}}"
            th:classappend="${isNextPagePresent ? '' : 'not-clickable'}">
             <em class="fa fa-angle-right" aria-hidden="true"></em>
         </a>
@@ -30,7 +31,7 @@
                     <a class="pagination-link"
                        th:classappend="${(pageNumber.equals(selectedPage) ? 'pagination-active-link not-clickable' : '') +
                                      (isNumberStub ? 'not-clickable' : '')}"
-                       th:href="@{${isNumberStub ? '' : '/products/' + type + '?page=' + pageNumber}}"
+                       th:href="@{${isNumberStub ? '' : '/search?page=' + pageNumber + '&query=' + query}}"
                        th:text="${pageNumber}"></a>
                 </li>
             </th:block>
@@ -41,8 +42,11 @@
 </th:block>
 
 <main class="main-result">
-    <th:block th:if="${productsAndPrices != null && !productsAndPrices.isEmpty()}">
+    <th:block th:if="${areProductsPresent}">
         <th:block th:insert="fragments/productListing :: listing"/>
+    </th:block>
+    <th:block th:unless="${areProductsPresent}">
+        <h1 class="error text repair" th:text="${'Sorry, no results for &quot;' + query + '&quot; have been found'}"></h1>
     </th:block>
 </main>
 

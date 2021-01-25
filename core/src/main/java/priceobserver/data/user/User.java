@@ -13,12 +13,12 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
-import java.sql.Date;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -31,36 +31,36 @@ public class User {
     private Long id;
 
     @NotBlank
-    @Max(50)
+    @Size(max = 50)
     private String firstName;
 
     @NotBlank
-    @Max(50)
+    @Size(max = 50)
     private String lastName;
 
     @Email
     @NotBlank
-    @Max(70)
+    @Size(max = 70)
     private String email;
 
     @NotNull
     @PastOrPresent
-    private Date birth;
+    private LocalDate birth;
 
     @NotBlank
-    @Max(64)
+    @Size(max = 68)
     @Column(name = "password")
     private String encryptedPassword;
 
     /**
      * We store only encrypted password.
      */
-    @Max(50)
+    @Size(max = 50)
     @Transient
     private String password;
 
     @Version
-    private Integer version;
+    private Integer version = 0;
 
     private String profileImage;
 
@@ -101,11 +101,11 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirth() {
+    public LocalDate getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(LocalDate birth) {
         this.birth = birth;
     }
 

@@ -3,11 +3,12 @@
 <head>
     <title>Find</title>
     <th:block th:insert="fragments/commonHead :: copy"/>
+    <link rel="stylesheet" th:href="@{/assets/css/error.css}">
 </head>
 <body>
 <th:block th:insert="fragments/header :: copy"/>
 <main>
-    <h1 class="error-message">SORRY, NO RESULTS FOR "---" HAVE BEEN FOUND</h1>
+    <h1 class="error text">SORRY, NO RESULTS FOR "---" HAVE BEEN FOUND</h1>
 </main>
 <th:block th:insert="fragments/footer :: copy"/>
 </body>
