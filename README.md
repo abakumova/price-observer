@@ -20,6 +20,8 @@ below:
 - Sign In using your account and add products to the wishlist;
 - Change account information.
 
+## User Interface
+
 Price Observer has a very smooth and useful User Interface. The main page of the application looks in a next way:
 
 ![Price Observer main page](docs/poMainPage.png)
@@ -41,6 +43,26 @@ Also, I need to show you how nice our Sign-in/Sign-Up page looks like.
 
 ![Price Observer Sign-In/Sign-up page](docs/poSignInSignUpPage.png)
 
+## Getting started
+
+### Prerequisites
+
+To run the application you need such things installed on your machine:
+
+- Java 11
+- Maven
+
+### Build and run
+
+1. Clone the project to your machine using git;
+2. Open the root directory of the project;
+3. Open a terminal and run the next command ```cd webapp```. You will be moved to the webapp module directory;
+4. Run the Spring Boot Application by the ```mvn spring-boot:run``` command;
+5. Wait till the Maven builds and runs the project;
+6. Open http://localhost:8080 to verify the application running.
+
+That's it.
+
 ## Documentation
 
 ### Use case diagram
@@ -55,6 +77,9 @@ The project represents Maven multi-module project. It has four main modules:
 - [core](core) module, which contains business logic and logic to interact with a database;
 - [parser](parser) module, which contains logic to parse store sites;
 - [webapp](webapp) module, which contains web-application layer logic (controllers, etc).
+
+To run the application from your IDE use [Application](webapp/src/main/java/priceobserver/Application.java) class
+located in [webapp](webapp) module.
 
 ### Database structure
 
